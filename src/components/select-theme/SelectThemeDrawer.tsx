@@ -1,5 +1,5 @@
-import { Button, Drawer, Stack } from "@mantine/core";
-import type { Theme } from "./theme";
+import { Drawer, NavLink, Stack } from "@mantine/core";
+import { THEME_VALUES, getThemeLabel, type Theme } from "./theme";
 
 type SelectThemeDrawerProps = {
   theme: Theme;
@@ -9,12 +9,13 @@ type SelectThemeDrawerProps = {
 };
 
 export const SelectThemeDrawer = ({
+  theme,
   opened,
   onClose,
   onSelect,
 }: SelectThemeDrawerProps) => {
-  const handleOnClick = (theme: Theme) => {
-    onSelect(theme);
+  const handleOnClick = (value: Theme) => {
+    onSelect(value);
     onClose();
   };
 
@@ -26,8 +27,14 @@ export const SelectThemeDrawer = ({
       title="Select Theme"
     >
       <Stack>
-        <Button onClick={() => handleOnClick("wayflyer")}>Wayflyer</Button>
-        <Button onClick={() => handleOnClick("whiteLabel")}>Whitelabel</Button>
+        {THEME_VALUES.map((value) => (
+          <NavLink
+            key={value}
+            label={getThemeLabel(value)}
+            active={theme === value}
+            onClick={() => handleOnClick(value)}
+          />
+        ))}
       </Stack>
     </Drawer>
   );

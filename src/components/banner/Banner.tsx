@@ -24,9 +24,7 @@ export const Banner = ({
   const isMockedMode = getIsMockedMode();
 
   useEffect(() => {
-    const cancelled = false;
-
-    (async () => {
+    const loadAndMountCta = async () => {
       const partnerCallback: PartnerCallbackType = () => {}; // TODO add correct link
       const mockedMode: MockedModeType = {
         isMockedMode,
@@ -42,11 +40,9 @@ export const Banner = ({
       )) as IWayflyerUiCtaSdk;
 
       sdk.mountCta();
+    };
 
-      if (!cancelled && sdk) {
-        sdk.mountCta();
-      }
-    })();
+    loadAndMountCta();
   }, [scenario, isMockedMode, partnerDesignId, companyToken, targetId]);
 
   return (
