@@ -1,10 +1,11 @@
-# Wayflyer Embedded Finance Headless SDK reference app
+# Wayflyer Embedded Finance UI SDK reference app
 
 This is a React Vite app that demonstrates some of the features of [@wayflyer/sdk](https://www.npmjs.com/package/@wayflyer/sdk)
 
-You can see a live example at [https://sdk-cta-reference-app.vercel.app/](https://sdk-cta-reference-app.vercel.app/)
+You can see a live example at [https://sdk-cta-ui-reference-app.vercel.app/](https://sdk-cta-ui-reference-app.vercel.app/)
 
 Use the `Select Scenario` button to choose a scenario and see how the UI reacts.
+Use the `Select Theme` button to choose a theme and see how the UI reacts. The `partnerDesignId` prop applies a visual theme to the banner.
 
 ## Quickstart
 
@@ -29,48 +30,57 @@ You should now be able to access the app at http://localhost:5173
 
 This is a Vite application, and the dev mode can be quite slow. You can build and preview the app by running `pnpm build && pnpm preview`. Just make sure to run `pnpm build` again after making any changes.
 
-## SDK Usage Examples
+## UI SDK Usage Examples
 
-### SDK Initialization
+### UI SDK Initialization
 
-The Wayflyer CTA SDK is initialized in `src/pages/dashboard.tsx`. From there, you can see how to:
+The Wayflyer CTA UI SDK is initialized in `src/components/banner/Banner.tsx`. From there, you can see how to:
 
-- Create a new SDK instance with your company token
-  - In production this would be minted from the API by exchanging your partner token; consult the documentation at [https://docs.wayflyer.com](https://docs.wayflyer.com) for more instructions.
-- Mock responses for `getCta()` and `startHostedApplication()`
-- Use the `continueHostedApplication()` method to resume an in-progress application
+- Create a new UI SDK instance with your company token
+- In production this would be minted from the API by exchanging your partner token; consult the documentation at [https://docs.wayflyer.com](https://docs.wayflyer.com) for more instructions.
+- Builds a mockedMode object:
+  `const mockedMode: MockedModeType = { isMockedMode, sdkScenario: scenario};`
+  - isMockedMode: When true, the SDK uses mock responses instead of calling the real API.
+  - sdkScenario: One of the predefined SdkScenarios that determines the type of banner to display.
+- Calls:
+  ```ts
+  const sdk = await WayflyerUiSdk.loadSdkMode(
+    targetId,
+    partnerDesignId,
+    partnerCallback,
+    companyToken,
+    mockedMode
+  );
+
+  sdk.mountCta();
+  ```
+
+### Target container
+
+The banner is mounted into the DOM element with the targetId provided to the component. By default, this is `ui-banner-container`:
+```ts
+  <div id="ui-banner-container"></div>
+```
+
 
 ### Mocking API calls
 
-The SDK is currently still under active development and is configured to always intercept requests to the Wayflyer API and return mocked responses.
+The UI SDK is currently still under active development and is configured to always intercept requests to the Wayflyer API and return mocked responses.
 
-#### Mocking getCta() calls
+#### Available scenarios
 
-Use the `setCtaResponse()` method to mock the `getCta()` method. The response from `getCta()` contains a payload that should be used to render different kinds of banner components. In the dashboard component, you can see examples of:
+When running in mocked mode, you can preview different banner states by changing the scenario prop.
+These scenarios are defined in the SdkScenarios enum and typically include:
 
-- **Indicative Offer**: Shows a financing banner with specific offer details
-- **Generic Offer**: Displays a general financing banner without specific terms
-- **Continue Application**: Shows a banner to continue an existing application
-- **No CTA**: Returns no call-to-action data
-- Simulate auth errors
-
-### Mocking startHostedApplication() calls
-
-Use the `setStartHostedApplicationResponse()` method to mock the `startHostedApplication()` method. It can be configured to:
-
-- Return a success response
-- Simulate auth errors
-
-### Mocking continueHostedApplication() calls
-
-Use the `setContinueHostedApplicationResponse()` method to mock the `continueHostedApplication()` method. It can be configured to:
-
-- Return a success response with a url to redirect the user to
+- **Indicative Offer**: Simulates a customer who hasn`t started an application but has an indicative offer based on partner data. Displays a personalized offer and CTA to apply.
+- **Generic New Application**: Simulates a customer who hasn't started an application and lacks sufficient data for an indicative offer. Shows a generic invitation to apply for financing.
+- **Continue Application**: Simulates a customer with an incomplete application. Shows progress-related messaging and CTAs encouraging them to finish applying.
+- **No CTA**: Simulates a customer who sees no banner, either due to ineligibility or no relevant CTAs at this time.
 - Simulate auth errors
 
 ## Using it with real credentials
 
-The repo comes with a `.env` file in the root that starts the SDK in mocked mode with a fake company token. You can override the values in this file by creating a `.env.local` file. Any keys in `.env.local` will be used instead of the values from `.env`. The `.gitignore` is configured to ignore `.env.local`
+The repo comes with a `.env` file in the root that starts the UI SDK in mocked mode with a fake company token. You can override the values in this file by creating a `.env.local` file. Any keys in `.env.local` will be used instead of the values from `.env`. The `.gitignore` is configured to ignore `.env.local`
 
 To use it for real
 
