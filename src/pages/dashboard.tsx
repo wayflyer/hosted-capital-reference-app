@@ -1,5 +1,5 @@
 import { Container, Skeleton, Stack } from "@mantine/core";
-import type { SdkScenarios } from "@wf-financing/ui-entry";
+import type { SdkScenarios } from "@wf-financing/ui-sdk";
 import { Banner } from "../components/banner/Banner";
 import type { Theme } from "../components/select-theme/theme";
 

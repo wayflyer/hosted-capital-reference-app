@@ -4,7 +4,7 @@ import {
   type IWayflyerUiCtaSdk,
   type MockedModeType,
   type PartnerCallbackType,
-} from "@wf-financing/ui-entry";
+} from "@wf-financing/ui-sdk";
 import { useEffect } from "react";
 import { getCompanyToken, getIsMockedMode } from "../../lib/utils";
 import type { Theme } from "../select-theme/theme";
@@ -31,7 +31,7 @@ export const Banner = ({
         sdkScenario: scenario,
       };
 
-      const sdk = (await WayflyerUiSdk.loadSdkMode(
+      const sdk = (await WayflyerUiSdk.loadSdk(
         targetId,
         partnerDesignId,
         partnerCallback,

@@ -43,13 +43,14 @@ The Wayflyer CTA UI SDK is initialized in `src/components/banner/Banner.tsx`. Fr
   - isMockedMode: When true, the SDK uses mock responses instead of calling the real API.
   - sdkScenario: One of the predefined SdkScenarios that determines the type of banner to display.
 - Calls:
+
   ```ts
-  const sdk = await WayflyerUiSdk.loadSdkMode(
+  const sdk = await WayflyerUiSdk.loadSdk(
     targetId,
     partnerDesignId,
     partnerCallback,
     companyToken,
-    mockedMode
+    mockedMode,
   );
 
   sdk.mountCta();
@@ -58,10 +59,10 @@ The Wayflyer CTA UI SDK is initialized in `src/components/banner/Banner.tsx`. Fr
 ### Target container
 
 The banner is mounted into the DOM element with the targetId provided to the component. By default, this is `ui-banner-container`:
+
 ```ts
   <div id="ui-banner-container"></div>
 ```
-
 
 ### Mocking API calls
 

@@ -1,4 +1,4 @@
-import { SdkScenarios } from "@wf-financing/ui-entry";
+import { SdkScenarios } from "@wf-financing/ui-sdk";
 
 type ScenariosType = {
   value: SdkScenarios;

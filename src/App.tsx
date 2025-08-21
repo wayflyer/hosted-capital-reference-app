@@ -1,6 +1,6 @@
 import { AppShell } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
-import { SdkScenarios } from "@wf-financing/ui-entry";
+import { SdkScenarios } from "@wf-financing/ui-sdk";
 import { useState } from "react";
 import { Header } from "./components/header/Header";
 import { Navigation } from "./components/navigation/Navigation";

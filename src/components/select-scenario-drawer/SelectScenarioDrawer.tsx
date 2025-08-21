@@ -1,5 +1,5 @@
 import { Drawer, NavLink, Stack } from "@mantine/core";
-import type { SdkScenarios } from "@wf-financing/ui-entry";
+import type { SdkScenarios } from "@wf-financing/ui-sdk";
 import { scenarios } from "./scenarios";
 
 type SelectScenarioDrawerProps = {
