@@ -5,7 +5,7 @@ import { SelectThemeDrawer } from "../select-theme/SelectThemeDrawer";
 
 import { Burger, Button, Group, Image } from "@mantine/core";
 import { IconMovie } from "@tabler/icons-react";
-import type { SdkScenarios } from "@wf-financing/ui-entry";
+import type { SdkScenarios } from "@wf-financing/ui-sdk";
 import type { Dispatch, SetStateAction } from "react";
 import type { Theme } from "../select-theme/theme";
 

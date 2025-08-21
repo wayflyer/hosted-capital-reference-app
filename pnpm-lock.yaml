@@ -23,9 +23,9 @@ importers:
       '@tabler/icons-react':
         specifier: ^3.34.0
         version: 3.34.1(react@19.1.1)
-      '@wf-financing/ui-entry':
-        specifier: ^0.1.1
-        version: 0.1.1
+      '@wf-financing/ui-sdk':
+        specifier: ^0.1.0
+        version: 0.1.0
       react:
         specifier: ^19.1.0
         version: 19.1.1
@@ -669,11 +669,11 @@ packages:
     peerDependencies:
       vite: ^4.2.0 || ^5.0.0 || ^6.0.0 || ^7.0.0
 
-  '@wf-financing/embedded-types@0.2.5':
-    resolution: {integrity: sha512-5+sYgPEHTaENEoFc4uOe3be12mJUccZOSf8db0A6JDZmb5AEA40W4TM1c9WRIHo6n81G+PMkrxyY7n38ItJj/Q==}
+  '@wf-financing/embedded-types@0.2.6':
+    resolution: {integrity: sha512-vMj/yGXTcG8CZ8AO7uTAMP8cS9wClAuqz8VmT8Q/DkVnso+qsnbJEzcE6eXBC1fBeKWpcDI32wN0KkwXpjCl7Q==}
 
-  '@wf-financing/ui-entry@0.1.1':
-    resolution: {integrity: sha512-bzlkMu+XMDTwSUo0SWW7PVYWiSeGBvo9DI2MDUVz++SbA9C1B9io4XuzlhS+/cUQct6Pvu660coCk7qleaarpw==}
+  '@wf-financing/ui-sdk@0.1.0':
+    resolution: {integrity: sha512-N8WChDpX+BJGhAyZEp6KXHoyLfGlx7flylQWitWhn6xxjGAKGhv56QwmIPYjVZnMY5ApwUh/KQrRbD4lyqe4rw==}
 
   acorn-jsx@5.3.2:
     resolution: {integrity: sha512-rq9s+JNhf0IChjtDXxllJ7g41oZk5SlXtp0LHwyA5cejwn7vKmKp4pPri6YEePv2PU65sAsegbXtIinmDFDXgQ==}
@@ -2014,11 +2014,11 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@wf-financing/embedded-types@0.2.5': {}
+  '@wf-financing/embedded-types@0.2.6': {}
 
-  '@wf-financing/ui-entry@0.1.1':
+  '@wf-financing/ui-sdk@0.1.0':
     dependencies:
-      '@wf-financing/embedded-types': 0.2.5
+      '@wf-financing/embedded-types': 0.2.6
 
   acorn-jsx@5.3.2(acorn@8.15.0):
     dependencies:
