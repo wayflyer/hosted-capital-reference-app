@@ -1,13 +1,13 @@
 import { useDisclosure } from "@mantine/hooks";
-import logo from "../../assets/logo.svg";
 import { SelectScenarioDrawer } from "../select-scenario-drawer/SelectScenarioDrawer";
 import { SelectThemeDrawer } from "../select-theme/SelectThemeDrawer";
 
-import { Burger, Button, Group, Image } from "@mantine/core";
-import { IconMovie } from "@tabler/icons-react";
+import { ActionIcon, Burger, Button, Group, Menu } from "@mantine/core";
+import { IconDotsVertical, IconMovie, IconPalette } from "@tabler/icons-react";
 import type { SdkScenarios } from "@wf-financing/ui-sdk";
 import type { Dispatch, SetStateAction } from "react";
 import type { Theme } from "../select-theme/theme";
+import { Logo } from "./logo/Logo";
 
 type HeaderPropsp = {
   theme: Theme;
@@ -33,52 +33,76 @@ export const Header = ({
     { toggle: toggleUISelectScenarioDrawer },
   ] = useDisclosure();
 
-  return (
-    <Group h="100%" px="md" justify="space-between">
-      <Group>
-        <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
-        <div style={{ width: 150 }}>
-          <Image src={logo} alt="Wayflyer" fit="contain" />
-        </div>
-      </Group>
+  const mocked = import.meta.env.VITE_WF_MOCKED_MODE === "true";
 
-      <Group>
-        <Group>
-          {import.meta.env.VITE_WF_MOCKED_MODE === "true" && (
+  return (
+    <Group h="100%" px="md" justify="space-between" wrap="nowrap">
+      <Group gap="sm" wrap="nowrap">
+        <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
+        <Logo theme={theme} />
+      </Group>
+      {mocked && (
+        <Group gap="xs" wrap="nowrap">
+          <Group gap="xs" visibleFrom="sm" wrap="nowrap">
             <Button
-              onClick={toggleUISelectScenarioDrawer}
+              size="xs"
               variant="outline"
-              leftSection={<IconMovie />}
+              leftSection={<IconMovie size={16} />}
+              onClick={toggleUISelectScenarioDrawer}
             >
               Select Scenario
             </Button>
-          )}
-          <SelectScenarioDrawer
-            scenario={scenario}
-            opened={selectUIScenarioDrawerOpened}
-            onClose={toggleUISelectScenarioDrawer}
-            onSelect={setScenario}
-          />
-        </Group>
-
-        <Group>
-          {import.meta.env.VITE_WF_MOCKED_MODE === "true" && (
             <Button
-              onClick={toggleSelectScenarioDrawer}
+              size="xs"
               variant="outline"
-              leftSection={<IconMovie />}
+              leftSection={<IconPalette size={16} />}
+              onClick={toggleSelectScenarioDrawer}
             >
               Select Theme
             </Button>
-          )}
-          <SelectThemeDrawer
-            theme={theme}
-            onSelect={setTheme}
-            opened={selectScenarioDrawerOpened}
-            onClose={toggleSelectScenarioDrawer}
-          />
+          </Group>
+          <Group hiddenFrom="sm">
+            <Menu position="bottom-end" withinPortal>
+              <Menu.Target>
+                <ActionIcon
+                  variant="light"
+                  size="lg"
+                  aria-label="More actions"
+                  radius="md"
+                >
+                  <IconDotsVertical size={18} />
+                </ActionIcon>
+              </Menu.Target>
+              <Menu.Dropdown>
+                <Menu.Item
+                  leftSection={<IconMovie size={16} />}
+                  onClick={toggleUISelectScenarioDrawer}
+                >
+                  Select Scenario
+                </Menu.Item>
+                <Menu.Item
+                  leftSection={<IconPalette size={16} />}
+                  onClick={toggleSelectScenarioDrawer}
+                >
+                  Select Theme
+                </Menu.Item>
+              </Menu.Dropdown>
+            </Menu>
+          </Group>
         </Group>
-      </Group>
+      )}
+      <SelectScenarioDrawer
+        scenario={scenario}
+        opened={selectUIScenarioDrawerOpened}
+        onClose={toggleUISelectScenarioDrawer}
+        onSelect={setScenario}
+      />
+      <SelectThemeDrawer
+        theme={theme}
+        onSelect={setTheme}
+        opened={selectScenarioDrawerOpened}
+        onClose={toggleSelectScenarioDrawer}
+      />
     </Group>
   );
 };
