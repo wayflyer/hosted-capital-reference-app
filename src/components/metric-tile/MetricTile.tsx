@@ -1,0 +1,29 @@
+import { Badge, Card, Group, Text } from "@mantine/core";
+import type { KpiTile } from "./data";
+
+export const MetricTile = ({ label, value, delta }: KpiTile) => {
+  return (
+    <Card radius="lg" p="lg">
+      {delta !== undefined && (
+        <Group justify="end">
+          <Badge
+            radius="xl"
+            px="sm"
+            variant="filled"
+            bg="#EAE9DE"
+            c="var(--mantine-color-dark-9)"
+            style={{ border: "none" }}
+          >
+            {delta > 0 ? `+${delta}%` : `${delta}%`}
+          </Badge>
+        </Group>
+      )}
+      <Text ta="center" c="dimmed" size="sm">
+        {label}
+      </Text>
+      <Text ta="center" fz={30} fw={500}>
+        {value}
+      </Text>
+    </Card>
+  );
+};
