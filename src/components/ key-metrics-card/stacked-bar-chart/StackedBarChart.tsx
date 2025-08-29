@@ -1,11 +1,6 @@
 import { useElementSize } from "@mantine/hooks";
-import { useMemo } from "react";
-
-export type StackedBarDatum = {
-  label: string;
-  first: number;
-  repeat: number;
-};
+import type { StackedBarDatum } from "../data";
+import { useStackedBarLayout } from "./hooks/useStackedBarLayout";
 
 type StackedBarChartProps = {
   data: StackedBarDatum[];
@@ -32,50 +27,14 @@ export const StackedBarChart = ({
 
   const margin = { top: 10, right: 12, bottom: 28, left: 12 };
 
-  const { svgWidth, bars, labelsY } = useMemo(() => {
-    const W = Math.max(containerWidth || 0, 360);
-    const innerW = Math.max(0, W - margin.left - margin.right);
-
-    const step = data.length > 0 ? innerW / data.length : 0;
-
-    const bw = Math.max(2, Math.min(barPx, Math.max(2, step - minGapPx)));
-
-    const maxY = Math.max(
-      1,
-      ...data.map((d) => (d.first || 0) + (d.repeat || 0)),
-    );
-    const innerH = height - margin.top - margin.bottom;
-
-    const bars = data.map((d, i) => {
-      const xCenter = margin.left + i * step + step / 2;
-      const x = xCenter - bw / 2;
-
-      const hFirst = ((d.first || 0) / maxY) * innerH;
-      const hRepeat = ((d.repeat || 0) / maxY) * innerH;
-
-      const yBottom = height - margin.bottom;
-      const yFirst = yBottom - hFirst;
-      const yRepeat = yBottom - (hFirst + hRepeat);
-
-      return { x, bw, yFirst, hFirst, yRepeat, hRepeat, label: d.label };
-    });
-
-    return {
-      svgWidth: W,
-      bars,
-      labelsY: height - 8,
-    };
-  }, [
-    containerWidth,
+  const { svgWidth, bars, labelsY } = useStackedBarLayout({
     data,
+    containerWidth,
     height,
+    margin,
     barPx,
     minGapPx,
-    margin.bottom,
-    margin.left,
-    margin.right,
-    margin.top,
-  ]);
+  });
 
   return (
     <div ref={ref} style={{ width: "100%" }}>
@@ -98,7 +57,7 @@ export const StackedBarChart = ({
                 x2={svgWidth - margin.right}
                 y1={y}
                 y2={y}
-                stroke="EAE9DE"
+                stroke="#EAE9DE"
                 strokeWidth={1}
               />
             );

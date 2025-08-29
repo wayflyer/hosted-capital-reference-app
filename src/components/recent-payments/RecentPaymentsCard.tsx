@@ -1,5 +1,5 @@
 import { Card, Stack, Table, Text, Title } from "@mantine/core";
-import { Fragment } from "react";
+import { Fragment, useMemo, type CSSProperties } from "react";
 import type { PaymentRow } from "./data";
 import { MethodCell } from "./MethodCell";
 import { Money } from "./Money";
@@ -11,12 +11,25 @@ export type RecentPaymentsCardProps = {
   fullHeight?: boolean;
 };
 
+const BORDER = "var(--mantine-color-gray-3)";
+const cardFlexColumn: CSSProperties = {
+  display: "flex",
+  flexDirection: "column",
+};
+
+const buildTableCss = (border: string) => `
+  .rp-table { border-collapse: separate; border-spacing: 0; width: 100%; }
+  .rp-table thead th { border-bottom: 1px solid ${border}; }
+  .rp-separator td { padding: 0; height: 0; }
+  .rp-divider { height: 1px; width: 100%; background: ${border}; }
+`;
+
 export const RecentPaymentsCard = ({
   period = "Apr - Mar 2025",
   rows,
   fullHeight,
 }: RecentPaymentsCardProps) => {
-  const BORDER = "var(--mantine-color-gray-3)";
+  const tableCss = useMemo(() => buildTableCss(BORDER), []);
 
   const groups = rows.reduce<Record<string, PaymentRow[]>>((acc, r) => {
     (acc[r.date] ||= []).push(r);
@@ -31,14 +44,9 @@ export const RecentPaymentsCard = ({
       shadow="sm"
       h={fullHeight ? "100%" : undefined}
       w="100%"
-      style={{ display: "flex", flexDirection: "column" }}
+      style={cardFlexColumn}
     >
-      <style>{`
-        .rp-table { border-collapse: separate; border-spacing: 0; width: 100%; }
-        .rp-table thead th { border-bottom: 1px solid ${BORDER}; }
-        .rp-separator td { padding: 0; height: 0; }
-        .rp-divider { height: 1px; width: 100%; background: ${BORDER}; }
-      `}</style>
+      <style>{tableCss}</style>
 
       <Stack gap="md">
         <div>
