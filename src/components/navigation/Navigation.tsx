@@ -11,9 +11,9 @@ export const Navigation = () => {
           key={item.label}
           style={{ marginBottom: "24px" }}
         >
-          <item.icon size={20} style={{ color: "#98A2B3" }} />
+          <item.icon size={20} style={{ color: "#161517" }} />
           <Group style={{ width: "70%" }}>
-            <Text key={item.label} style={{ color: "#98A2B3", cursor: "auto" }}>
+            <Text key={item.label} style={{ color: "#161517", cursor: "auto" }}>
               {item.label}
             </Text>
           </Group>
