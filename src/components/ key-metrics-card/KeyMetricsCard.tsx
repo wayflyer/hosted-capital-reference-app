@@ -1,4 +1,4 @@
-import { Card, Stack, Text, Title } from "@mantine/core";
+import { Card, Stack, Text, Title, useMantineTheme } from "@mantine/core";
 import type { StackedBarDatum } from "./data";
 import { Legend } from "./legend/Legend";
 import { StackedBarChart } from "./stacked-bar-chart/StackedBarChart";
@@ -15,8 +15,8 @@ export const KeyMetricsCard = ({
   periodLabel = "Apr 2024 – Mar 2025",
   totals = { customers: "4,909", returning: "1,921", avgSpend: "$18.32" },
 }: KeyMetricsCardProps) => {
-  const colorFirst = "#BFEAD6";
-  const colorRepeat = "#2c645c";
+  const theme = useMantineTheme();
+  const { lightColor, darkColor } = theme.other.app;
 
   return (
     <Card
@@ -37,8 +37,8 @@ export const KeyMetricsCard = ({
         </div>
         <Legend
           items={[
-            { label: "First time customers", color: colorFirst },
-            { label: "Repeat customers", color: colorRepeat },
+            { label: "First time customers", color: lightColor },
+            { label: "Repeat customers", color: darkColor },
           ]}
           dotSize={12}
           gap="xl"
@@ -51,8 +51,8 @@ export const KeyMetricsCard = ({
           minGapPx={6}
           showGrid
           gridLines={5}
-          colorFirst={colorFirst}
-          colorRepeat={colorRepeat}
+          colorFirst={lightColor}
+          colorRepeat={darkColor}
         />
         <div style={{ marginTop: 4 }}>
           <StatRow label="Total customers" value={totals.customers} />

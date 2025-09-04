@@ -1,15 +1,19 @@
 import { FONT_PARAMS, type FontParams } from "../../fonts";
 
 export const THEME_CONFIG = {
-  wayflyer: {
-    label: "Wayflyer",
-    font: FONT_PARAMS.merrionSans, // Merrion Sans
-    appBg: "#f8f6f3",
-  },
   whiteLabel: {
     label: "Whitelabel",
     font: FONT_PARAMS.dmSans, // DM Sans
     appBg: "#f8f6f3",
+    lightColor: "#c3edd6",
+    darkColor: "#245048",
+  },
+  wayflyer: {
+    label: "Wayflyer",
+    font: FONT_PARAMS.merrionSans, // Merrion Sans
+    appBg: "#f5f5fa",
+    lightColor: "#cff8fe",
+    darkColor: "#018394",
   },
 } as const;
 
@@ -20,4 +24,6 @@ export type ThemeTokens = {
   label: string;
   font: FontParams;
   appBg: string;
+  lightColor: string;
+  darkColor: string;
 };
