@@ -15,6 +15,7 @@ const BORDER = "var(--mantine-color-gray-3)";
 const cardFlexColumn: CSSProperties = {
   display: "flex",
   flexDirection: "column",
+  marginBottom: "80px",
 };
 
 const buildTableCss = (border: string) => `
@@ -75,9 +76,10 @@ export const RecentPaymentsCard = ({
           </Table.Thead>
 
           <Table.Tbody>
-            {orderedDates.map((date) => {
+            {orderedDates.map((date, groupIdx) => {
               const items = groups[date];
               const rowSpan = items.length;
+              const isLastGroup = groupIdx === orderedDates.length - 1;
 
               return (
                 <Fragment key={date}>
@@ -114,11 +116,13 @@ export const RecentPaymentsCard = ({
                     </Table.Tr>
                   ))}
 
-                  <Table.Tr className="rp-separator">
-                    <Table.Td colSpan={5}>
-                      <div className="rp-divider" />
-                    </Table.Td>
-                  </Table.Tr>
+                  {!isLastGroup && (
+                    <Table.Tr className="rp-separator">
+                      <Table.Td colSpan={5}>
+                        <div className="rp-divider" />
+                      </Table.Td>
+                    </Table.Tr>
+                  )}
                 </Fragment>
               );
             })}
