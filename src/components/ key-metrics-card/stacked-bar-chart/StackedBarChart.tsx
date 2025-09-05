@@ -1,6 +1,9 @@
 import { useElementSize } from "@mantine/hooks";
-import React, { useMemo } from "react";
-import { topRoundedRectPath } from "./utils";
+import { useMemo } from "react";
+import {
+  StackedBarColumn,
+  type ComputedBar,
+} from "./stacked-bar-column/StackedBarColumn";
 
 export type StackedBarDatum = {
   label: string;
@@ -23,7 +26,7 @@ export type StackedBarChartProps = {
   margin?: Margin;
 };
 
-export const StackedBarChart: React.FC<StackedBarChartProps> = ({
+export const StackedBarChart = ({
   data,
   height = 200,
   barPx = 8,
@@ -34,7 +37,7 @@ export const StackedBarChart: React.FC<StackedBarChartProps> = ({
   colorRepeat = "#91A7FF",
   roundedRadius = 2,
   margin = { top: 10, right: 12, bottom: 28, left: 12 },
-}) => {
+}: StackedBarChartProps) => {
   const { ref, width: containerWidth } = useElementSize();
 
   const { svgWidth, bars, labelsY } = useMemo(() => {
@@ -52,7 +55,7 @@ export const StackedBarChart: React.FC<StackedBarChartProps> = ({
     const innerH = Math.max(0, height - margin.top - margin.bottom);
     const yBottom = height - margin.bottom;
 
-    const bars = data.map((d, i) => {
+    const bars: ComputedBar[] = data.map((d, i) => {
       const xCenter = margin.left + i * step + step / 2;
       const x = xCenter - bw / 2;
 
@@ -70,7 +73,7 @@ export const StackedBarChart: React.FC<StackedBarChartProps> = ({
       bars,
       labelsY: height - 8,
     };
-  }, [containerWidth, data, height, barPx, minGapPx, margin]);
+  }, [containerWidth, data, height, barPx, minGapPx]);
 
   return (
     <div ref={ref} style={{ width: "100%" }}>
@@ -99,38 +102,15 @@ export const StackedBarChart: React.FC<StackedBarChartProps> = ({
             );
           })}
 
-        {bars.map((b, i) => {
-          const hasRepeat = b.hRepeat > 0.0001;
-
-          const topH = hasRepeat ? b.hRepeat : b.hFirst;
-          const topY = hasRepeat ? b.yRepeat : b.yFirst;
-          const topFill = hasRepeat ? colorRepeat : colorFirst;
-
-          const bottomH = hasRepeat ? b.hFirst : 0;
-          const bottomY = hasRepeat ? b.yFirst : 0;
-          const bottomFill = hasRepeat ? colorFirst : undefined;
-
-          return (
-            <g key={i}>
-              {bottomH > 0 && (
-                <rect
-                  x={b.x}
-                  y={bottomY}
-                  width={b.bw}
-                  height={bottomH}
-                  fill={bottomFill}
-                />
-              )}
-
-              {topH > 0 && (
-                <path
-                  d={topRoundedRectPath(b.x, topY, b.bw, topH, roundedRadius)}
-                  fill={topFill}
-                />
-              )}
-            </g>
-          );
-        })}
+        {bars.map((b, i) => (
+          <StackedBarColumn
+            key={i}
+            bar={b}
+            colorFirst={colorFirst}
+            colorRepeat={colorRepeat}
+            roundedRadius={roundedRadius}
+          />
+        ))}
 
         {bars.map((b, i) => (
           <text
