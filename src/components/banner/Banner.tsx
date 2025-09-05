@@ -25,7 +25,7 @@ export const Banner = ({
 
   useEffect(() => {
     const loadAndMountCta = async () => {
-      const partnerCallback: PartnerCallbackType = () => {}; // TODO add correct link
+      const partnerCallback: PartnerCallbackType = () => {};
       const mockedMode: MockedModeType = {
         isMockedMode,
         sdkScenario: scenario,

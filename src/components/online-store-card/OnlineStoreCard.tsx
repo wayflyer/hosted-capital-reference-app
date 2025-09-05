@@ -1,5 +1,5 @@
 import { Button, Card, Group, Image, Title } from "@mantine/core";
-import product from "../../assets/product.svg";
+import product from "../../assets/product.jpg";
 import {
   SalesByProduct,
   type ProductRow,
@@ -30,15 +30,11 @@ export const OnlineStoreCard = ({ rows }: OnlineStoreCardProps) => {
           display: "flex",
           justifyContent: "center",
           alignItems: "flex-end",
-          height: "186px",
+          height: "100%",
+          marginTop: "20px",
         }}
       >
-        <Image
-          src={product}
-          alt="Store preview"
-          fit="contain"
-          style={{ width: "330px", borderRadius: "8px" }}
-        />
+        <Image src={product} alt="Store preview" fit="contain" />
       </div>
 
       <Title order={4} mt="lg" mb="md" fw={500}>

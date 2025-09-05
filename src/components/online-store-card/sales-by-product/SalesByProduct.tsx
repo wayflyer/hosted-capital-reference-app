@@ -12,7 +12,7 @@ type Props = {
 
 export const SalesByProduct = ({
   rows,
-  barColor = "#EAE9DE",
+  barColor = "#F0F0F0",
   barHeight = 12,
   nameMinWidthPx = 132,
   reserveRightPx = 96,
