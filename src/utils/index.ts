@@ -1,0 +1,1 @@
+export { getPartnerId } from './getPartnerId';
