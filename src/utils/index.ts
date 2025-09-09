@@ -1,1 +1,1 @@
-export { getPartnerId } from './getPartnerId';
+export { getPartnerCredentials } from './getPartnerId';
