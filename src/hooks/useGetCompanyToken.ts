@@ -2,16 +2,14 @@ import { useEffect, useState, useMemo } from "react";
 
 import { getPartnerCredentials } from '../utils';
 import { getPartnerToken, getCompanyToken as requestCompanyToken } from "../services";
+import type { CompanyCredentialsType } from "../types";
 
-export const useGetCompanyToken = () => {
+export const useGetCompanyToken = (companyCredentials: CompanyCredentialsType) => {
   const [isLoading, setIsLoading] = useState(false);
   const [companyToken, setCompanyToken] = useState('');
   const [isCredentialsMissing, setIsCredentialsMissing] = useState(false);
 
-  const partnerCredentials = useMemo(() => {
-
-    return getPartnerCredentials();
-  }, [isCredentialsMissing]);
+  const partnerCredentials = useMemo(() => getPartnerCredentials(), [isCredentialsMissing]);
 
   useEffect(() => {
     if (partnerCredentials) {
@@ -20,9 +18,11 @@ export const useGetCompanyToken = () => {
           setIsLoading(true);
           const { partnerId, partnerSecret } = partnerCredentials;
           const partnerToken = await getPartnerToken(partnerId, partnerSecret);
-          const requestedCompanyToken = await requestCompanyToken(partnerToken);
+          const requestedCompanyToken = await requestCompanyToken(companyCredentials, partnerToken);
 
-          setCompanyToken(requestedCompanyToken);
+          if (requestedCompanyToken) {
+            setCompanyToken(requestedCompanyToken);
+          }
         } catch (error) {
           console.error(error);
         } finally {
@@ -34,7 +34,7 @@ export const useGetCompanyToken = () => {
     } else {
       setIsCredentialsMissing(true);
     }
-  }, [partnerCredentials]);
+  }, [partnerCredentials, companyCredentials]);
 
   return {
     isLoading,

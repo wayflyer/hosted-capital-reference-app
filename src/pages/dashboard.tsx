@@ -1,7 +1,6 @@
 import { Container, Stack } from "@mantine/core";
 
 import { Grid } from "@mantine/core";
-import type { SdkScenarios } from "@wf-financing/ui-sdk";
 import { KeyMetricsCard } from "../components/ key-metrics-card/KeyMetricsCard";
 import { KEY_METRICS_FIXTURES } from "../components/ key-metrics-card/data";
 import { Banner } from "../components/banner/Banner";
@@ -12,17 +11,18 @@ import { PRODUCTS_FIXTURES } from "../components/online-store-card/data";
 import { RecentPaymentsCard } from "../components/recent-payments/RecentPaymentsCard";
 import { RECENT_PAYMENTS_FIXTURES } from "../components/recent-payments/data";
 import type { Theme } from "../components/select-theme/theme";
+import { type CompanyCredentialsType } from '../types';
 
 type DashboardProps = {
-  scenario: SdkScenarios;
+  companyCredentials: CompanyCredentialsType;
   partnerDesignId: Theme;
 };
 
-export const Dashboard = ({ scenario, partnerDesignId }: DashboardProps) => {
+export const Dashboard = ({ companyCredentials, partnerDesignId }: DashboardProps) => {
   return (
     <Container size="xl" mt="xl">
       <Stack gap="xl" style={{ marginBottom: 40 }}>
-        <Banner scenario={scenario} partnerDesignId={partnerDesignId} />
+        <Banner companyCredentials={companyCredentials} partnerDesignId={partnerDesignId} />
       </Stack>
       <Stack gap="lg">
         <KpiGrid items={KPI_FIXTURES} />

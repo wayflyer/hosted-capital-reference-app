@@ -1,26 +1,25 @@
-import { SdkScenarios, } from "@wf-financing/ui-sdk";
-
 import { PartnerCredentials } from "../partner-credentials/PartnerCredentials.tsx";
 import { useEmbedCta, useGetCompanyToken } from '../../hooks';
 import type { Theme } from "../select-theme/theme";
+import { type CompanyCredentialsType } from '../../types';
 
 type BannerProps = {
   targetId?: string;
   partnerDesignId: Theme;
-  scenario: SdkScenarios;
+  companyCredentials: CompanyCredentialsType;
 };
 
 export const Banner = ({
   targetId = "ui-banner-container",
   partnerDesignId,
+  companyCredentials,
 }: BannerProps) => {
   const {
     companyToken,
     isLoading,
     setIsCredentialsMissing,
-    isCredentialsMissing
-  } = useGetCompanyToken();
-
+    isCredentialsMissing,
+  } = useGetCompanyToken(companyCredentials);
   useEmbedCta(companyToken, targetId, partnerDesignId, isLoading);
 
   return (

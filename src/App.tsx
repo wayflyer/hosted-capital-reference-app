@@ -1,7 +1,6 @@
 import { AppShell, MantineProvider } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { ModalsProvider } from "@mantine/modals";
-import { SdkScenarios } from "@wf-financing/ui-sdk";
 import { useEffect, useState } from "react";
 
 import { Header } from "./components/header/Header";
@@ -14,12 +13,11 @@ import {
   type ThemeTokens,
 } from "./components/select-theme/theme";
 import { ensureFontLoaded } from "./fonts";
+import { type CompanyCredentialsType } from './types';
 
 export const App = () => {
   const [theme, setTheme] = useState<Theme>("whiteLabel");
-  const [scenario, setScenario] = useState<SdkScenarios>(
-    SdkScenarios.GENERIC_NEW_APPLICATION,
-  );
+  const [companyCredentials, setCompanyCredentials] = useState<CompanyCredentialsType>(null);
   const [opened, { toggle }] = useDisclosure();
 
   const tokens: ThemeTokens = THEME_CONFIG[theme];
@@ -54,8 +52,8 @@ export const App = () => {
             <Header
               theme={theme}
               setTheme={setTheme}
-              scenario={scenario}
-              setScenario={setScenario}
+              companyCredentials={companyCredentials}
+              setCompanyCredentials={setCompanyCredentials}
               opened={opened}
               toggle={toggle}
             />
@@ -64,7 +62,7 @@ export const App = () => {
             <Navigation />
           </AppShell.Navbar>
           <AppShell.Main bg={tokens.appBg}>
-            <Dashboard scenario={scenario} partnerDesignId={theme} />
+            <Dashboard companyCredentials={companyCredentials} partnerDesignId={theme} />
           </AppShell.Main>
         </AppShell>
       </ModalsProvider>
