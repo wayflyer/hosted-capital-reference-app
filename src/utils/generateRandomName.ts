@@ -1,11 +1,11 @@
 import { uniqueNamesGenerator } from "unique-names-generator";
 
 import { adjectives, companyNouns, lastNames, firstNames } from '../config';
-import type { CredentialSelectorType } from "../types";
+import type { CredentialSelector } from "../types";
 
 export const generateRandomName = (
   id: number,
-  selectorType: CredentialSelectorType,
+  selectorType: CredentialSelector,
   companyName?: string
 ) => {
   const SALT = "your-fixed-app-salt-v1";
