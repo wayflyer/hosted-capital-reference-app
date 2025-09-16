@@ -4,24 +4,29 @@ import {
   PARTNER_TOKEN_CREDENTIALS_KEY,
 } from '../config';
 
-type PartnerCredentialsType = {
+type PartnerCredentials = {
   partnerId: string;
   partnerSecret: string;
 };
 
-type ExtractPartnerCredentialsCallbackType = () => PartnerCredentialsType | null;
-type ExtractPartnerCredentialsType = (getPartnerIdCallback: ExtractPartnerCredentialsCallbackType) => PartnerCredentialsType | false;
+type ExtractPartnerCredentialsCallback = () => PartnerCredentials | null;
+type ExtractPartnerCredentials = (getPartnerIdCallback: ExtractPartnerCredentialsCallback) => PartnerCredentials | false;
 
-export const extractPartnerCredentialsFromLocalStorage: ExtractPartnerCredentialsCallbackType = ()=> {
+export const extractPartnerCredentialsFromLocalStorage: ExtractPartnerCredentialsCallback = ()=> {
   const partnerCredentials = localStorage.getItem(PARTNER_TOKEN_CREDENTIALS_KEY);
 
   if (partnerCredentials) {
-    return JSON.parse(partnerCredentials);
+    try {
+      return JSON.parse(partnerCredentials);
+    } catch (error) {
+      console.error(error);
+    }
   }
 
-  return partnerCredentials;
+  return null;
 };
-export const extractPartnerCredentialsFromSearchParams: ExtractPartnerCredentialsCallbackType = ()=> {
+
+export const extractPartnerCredentialsFromSearchParams: ExtractPartnerCredentialsCallback = ()=> {
   const searchParams = new URLSearchParams(window.location.search);
   const partnerCredentials = {
     partnerId: searchParams.get(PARTNER_ID_KEY),
@@ -31,21 +36,21 @@ export const extractPartnerCredentialsFromSearchParams: ExtractPartnerCredential
   if (Object.values(partnerCredentials).every(partnerCredential => partnerCredential !== null)) {
     localStorage.setItem(PARTNER_TOKEN_CREDENTIALS_KEY, JSON.stringify(partnerCredentials));
 
-    return partnerCredentials as PartnerCredentialsType;
+    return partnerCredentials as PartnerCredentials;
   }
 
   return null;
 };
 
-export const extractPartnerCredentials: ExtractPartnerCredentialsType = (extractPartnerIdCallback) => {
+export const extractPartnerCredentials: ExtractPartnerCredentials = (extractPartnerIdCallback) => {
   const partnerId = extractPartnerIdCallback();
 
-  if (partnerId === null) return false
+  if (partnerId === null) return false;
 
   return partnerId;
 };
 
-export const getPartnerCredentials = (): PartnerCredentialsType | null => {
+export const getPartnerCredentials = (): PartnerCredentials | null => {
   const extractors = [extractPartnerCredentialsFromLocalStorage, extractPartnerCredentialsFromSearchParams];
 
   return extractors.map((extractor) => extractPartnerCredentials(extractor))
