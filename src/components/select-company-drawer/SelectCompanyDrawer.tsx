@@ -53,10 +53,10 @@ export const SelectCompanyDrawer = ({
     }
   };
 
-  const someVar = selectorType === 'company_id' ? 'Company' : 'User';
+  const selectorLabel = selectorType === 'company_id' ? 'Company' : 'User';
   const addComponent = (
     <div style={{ alignItems: 'center', display: 'flex', gap: '5px' }}>
-      <p>Add {someVar}</p>
+      <p>Add {selectorLabel}</p>
       <CiCirclePlus />
     </div>
   );
@@ -66,7 +66,7 @@ export const SelectCompanyDrawer = ({
       opened={opened}
       onClose={onClose}
       position="right"
-      title={`Select ${someVar}`}
+      title={`Select ${selectorLabel}`}
     >
       <Stack>
         {selectorType === 'company_id' && companyValues.map((company) => (
