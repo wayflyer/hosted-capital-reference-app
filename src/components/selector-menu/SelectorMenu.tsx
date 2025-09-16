@@ -1,15 +1,24 @@
 import { ActionIcon, Group, Menu } from "@mantine/core";
 import { IconDotsVertical } from "@tabler/icons-react";
+import type { CompanyCredentialsType } from "../../types";
 
 type SelectorMenuProps = {
   toggleUserDrawer: () => void;
   toggleCompanyDrawer: () => void;
+  companyCredentials: CompanyCredentialsType;
 }
 
-export const SelectorMenu = ({ toggleUserDrawer, toggleCompanyDrawer }: SelectorMenuProps) => {
+export const SelectorMenu = ({
+  toggleUserDrawer,
+  toggleCompanyDrawer,
+  companyCredentials,
+}: SelectorMenuProps) => {
+  const usersLabel = companyCredentials?.user_id ? companyCredentials.user_id : "Select Company";
+  const companyLabel = companyCredentials?.company_id ? companyCredentials.company_id : "Select Company";
+
   const menuItemsConfig = [
-    { handler: toggleCompanyDrawer, text: 'Select Company', id: 'company' },
-    { handler: toggleUserDrawer, text: 'Select User', id: 'user' },
+    { handler: toggleCompanyDrawer, text: companyLabel, id: 'company' },
+    { handler: toggleUserDrawer, text: usersLabel, id: 'user' },
   ];
 
   return (

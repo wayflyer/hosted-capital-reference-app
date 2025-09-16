@@ -1,8 +1,9 @@
-import { type Dispatch, type SetStateAction, useEffect, useState } from "react";
+import type { Dispatch, SetStateAction } from "react";
 import { Drawer, NavLink, Stack } from "@mantine/core";
 import { CiCirclePlus } from "react-icons/ci";
 
-import { useGetRandomNames } from '../../hooks';
+import { useManageCredentials } from "../../hooks";
+import { generateRandomName } from '../../utils';
 import type { CompanyCredentialsType, CredentialSelectorType } from "../../types";
 
 type SelectCompanyDrawerProps = {
@@ -11,6 +12,7 @@ type SelectCompanyDrawerProps = {
   credentials: CompanyCredentialsType;
   setCredentials: Dispatch<SetStateAction<CompanyCredentialsType>>;
   selectorType: CredentialSelectorType;
+  authToken: string;
 };
 
 export const SelectCompanyDrawer = ({
@@ -19,15 +21,14 @@ export const SelectCompanyDrawer = ({
   credentials,
   setCredentials,
   selectorType,
+  authToken,
 }: SelectCompanyDrawerProps) => {
-  const [companiesCount, setCompaniesCount] = useState(3);
-  const [usersCount, setUsersCount] = useState(3);
-  const companyValues = useGetRandomNames(companiesCount, selectorType);
-  const userValues = useGetRandomNames(usersCount, selectorType);
-
-  useEffect(() => {
-    if (!credentials) setCredentials({ company_id: companyValues[0], user_id: userValues[0] });
-  }, []);
+  const [credentialsList, setCredentialsList] = useManageCredentials(
+    authToken,
+    credentials,
+    selectorType,
+    setCredentials,
+  );
 
   const handleSelectCredential = (credential: string) => {
     setCredentials((previousState) => {
@@ -40,17 +41,21 @@ export const SelectCompanyDrawer = ({
     });
     onClose();
   };
+
   const handleAddCredential = () => {
-    switch (selectorType) {
-      case 'company_id':
-        setCompaniesCount(prev => prev + 1);
-        break;
-      case 'user_id':
-        setUsersCount(prev => prev + 1);
-        break;
-      default:
-        break;
-    }
+    setCredentialsList((prevState) => {
+      if (!prevState) return [generateRandomName(0, selectorType)];
+
+      const newCredentialId = prevState.length + 1;
+
+      if (selectorType === 'user_id') {
+        const companyName = credentials?.company_id;
+
+        return [...prevState, generateRandomName(newCredentialId, selectorType, companyName)];
+      }
+
+      return [...prevState, generateRandomName(newCredentialId, selectorType)];
+    });
   };
 
   const selectorLabel = selectorType === 'company_id' ? 'Company' : 'User';
@@ -69,22 +74,13 @@ export const SelectCompanyDrawer = ({
       title={`Select ${selectorLabel}`}
     >
       <Stack>
-        {selectorType === 'company_id' && companyValues.map((company) => (
+        {credentialsList && credentialsList.map((externalId) => (
           <NavLink
-            key={company}
-            label={company}
-            active={company === credentials?.[selectorType]}
-            onClick={() => handleSelectCredential(company)}
-          />
-        ))}
-        {selectorType === 'user_id' && userValues.map((user) => (
-          <NavLink
-            key={user}
-            label={user}
-            active={user === credentials?.[selectorType]}
-            onClick={() => handleSelectCredential(user)}
-          />
-        ))}
+            key={externalId}
+            label={externalId}
+            active={externalId === credentials?.[selectorType]}
+            onClick={() => handleSelectCredential(externalId)}
+          />))}
         <NavLink label={addComponent} onClick={handleAddCredential} />
       </Stack>
     </Drawer>

@@ -7,20 +7,25 @@ import type { CompanyCredentialsType } from "../types";
 export const useGetCompanyToken = (companyCredentials: CompanyCredentialsType) => {
   const [isLoading, setIsLoading] = useState(false);
   const [companyToken, setCompanyToken] = useState('');
+  const [partnerToken, setPartnerToken] = useState('');
   const [isCredentialsMissing, setIsCredentialsMissing] = useState(false);
 
   const partnerCredentials = useMemo(() => getPartnerCredentials(), [isCredentialsMissing]);
 
   useEffect(() => {
     if (partnerCredentials) {
-      const getCompanyToken = async () => {
+      const getAuthTokens = async () => {
         try {
           setIsLoading(true);
-          const { partnerId, partnerSecret } = partnerCredentials;
-          const partnerToken = await getPartnerToken(partnerId, partnerSecret);
-          const requestedCompanyToken = await requestCompanyToken(companyCredentials, partnerToken);
+          if (partnerCredentials && !partnerToken) {
+            const { partnerId, partnerSecret } = partnerCredentials;
+            const partnerToken = await getPartnerToken(partnerId, partnerSecret);
 
-          if (requestedCompanyToken) {
+            setPartnerToken(partnerToken);
+          }
+
+          if (partnerToken && companyCredentials?.company_id && companyCredentials?.user_id) {
+            const requestedCompanyToken = await requestCompanyToken(companyCredentials, partnerToken);
             setCompanyToken(requestedCompanyToken);
           }
         } catch (error) {
@@ -30,14 +35,15 @@ export const useGetCompanyToken = (companyCredentials: CompanyCredentialsType) =
         }
       };
 
-      getCompanyToken();
+      getAuthTokens();
     } else {
       setIsCredentialsMissing(true);
     }
-  }, [partnerCredentials, companyCredentials]);
+  }, [partnerToken, partnerCredentials, companyCredentials]);
 
   return {
     isLoading,
+    partnerToken,
     companyToken,
     isCredentialsMissing,
     setIsCredentialsMissing,

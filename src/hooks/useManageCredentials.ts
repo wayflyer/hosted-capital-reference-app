@@ -36,7 +36,7 @@ export const useManageCredentials: ManageCredentialsType = (
 
         setCredentials((previousState)=> ({
           ...(previousState ?? {}),
-          [selectorType]: users?.[0],
+          [selectorType]: users[0],
         }));
       }
     }

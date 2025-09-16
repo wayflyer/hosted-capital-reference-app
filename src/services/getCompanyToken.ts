@@ -7,9 +7,7 @@ type CompanyTokenResponseType = {
   expires_in: number;
 }
 
-export const getCompanyToken = async (companyCredentials: CompanyTokenRequestType, token: string): Promise<string | void> => {
-  if (!companyCredentials) return;
-
+export const getCompanyToken = async (companyCredentials: CompanyTokenRequestType, token: string): Promise<string> => {
   const companyTokenResponse = await fetchWithAuth<CompanyTokenRequestType, CompanyTokenResponseType>(COMPANY_TOKEN_URL, companyCredentials, token, POST_METHOD);
 
   return companyTokenResponse.token;

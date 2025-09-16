@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { Header } from "./components/header/Header";
 import { Navigation } from "./components/navigation/Navigation";
 import { Dashboard } from "./pages/dashboard";
+import { useGetCompanyToken } from "./hooks";
 
 import {
   THEME_CONFIG,
@@ -14,11 +15,19 @@ import {
 } from "./components/select-theme/theme";
 import { ensureFontLoaded } from "./fonts";
 import { type CompanyCredentialsType } from './types';
+import { PartnerCredentials } from "./components/partner-credentials/PartnerCredentials.tsx";
 
 export const App = () => {
   const [theme, setTheme] = useState<Theme>("whiteLabel");
   const [companyCredentials, setCompanyCredentials] = useState<CompanyCredentialsType>(null);
   const [opened, { toggle }] = useDisclosure();
+  const {
+    isLoading,
+    companyToken,
+    partnerToken,
+    isCredentialsMissing,
+    setIsCredentialsMissing
+  } = useGetCompanyToken(companyCredentials);
 
   const tokens: ThemeTokens = THEME_CONFIG[theme];
 
@@ -48,12 +57,14 @@ export const App = () => {
           }}
           padding="md"
         >
+          <PartnerCredentials isCredentialsMissing={isCredentialsMissing} setIsCredentialsMissing={setIsCredentialsMissing} />
           <AppShell.Header>
             <Header
               theme={theme}
               setTheme={setTheme}
               companyCredentials={companyCredentials}
               setCompanyCredentials={setCompanyCredentials}
+              partnerToken={partnerToken}
               opened={opened}
               toggle={toggle}
             />
@@ -62,7 +73,13 @@ export const App = () => {
             <Navigation />
           </AppShell.Navbar>
           <AppShell.Main bg={tokens.appBg}>
-            <Dashboard companyCredentials={companyCredentials} partnerDesignId={theme} />
+            <Dashboard
+              setIsCredentialsMissing={setIsCredentialsMissing}
+              isCredentialsMissing={isCredentialsMissing}
+              companyToken={companyToken}
+              isLoading={isLoading}
+              partnerDesignId={theme}
+            />
           </AppShell.Main>
         </AppShell>
       </ModalsProvider>

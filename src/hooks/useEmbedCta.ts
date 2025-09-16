@@ -20,7 +20,8 @@ export const useEmbedCta = (
           targetId,
           partnerDesignId,
           partnerCallback,
-          companyToken
+          companyToken,
+          { isSandbox: true },
         )) as IWayflyerUiCtaSdk;
 
         sdk.mountCta();

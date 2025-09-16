@@ -1,14 +1,23 @@
 import { Button, Group } from "@mantine/core";
+import type { CompanyCredentialsType } from "../../types";
 
 type SelectTogglersProps = {
   toggleCompanyDrawer: () => void;
   toggleUserDrawer: () => void;
+  companyCredentials: CompanyCredentialsType;
 };
 
-export const SelectTogglers = ({ toggleCompanyDrawer, toggleUserDrawer }: SelectTogglersProps) => {
+export const SelectTogglers = ({
+  toggleCompanyDrawer,
+  toggleUserDrawer,
+  companyCredentials,
+}: SelectTogglersProps) => {
+  const usersLabel = companyCredentials?.user_id ? companyCredentials.user_id : "Select Company";
+  const companyLabel = companyCredentials?.company_id ? companyCredentials.company_id : "Select Company";
+
   const togglersConfig = [
-    { text: "Select Company", handler: toggleCompanyDrawer, id: "company" },
-    { text: "Select User", handler: toggleUserDrawer, id: "user" },
+    { text: companyLabel, handler: toggleCompanyDrawer, id: "company" },
+    { text: usersLabel, handler: toggleUserDrawer, id: "user" },
   ];
 
   return (

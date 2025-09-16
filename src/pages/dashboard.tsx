@@ -1,6 +1,7 @@
+import type { Dispatch, SetStateAction } from 'react';
 import { Container, Stack } from "@mantine/core";
-
 import { Grid } from "@mantine/core";
+
 import { KeyMetricsCard } from "../components/ key-metrics-card/KeyMetricsCard";
 import { KEY_METRICS_FIXTURES } from "../components/ key-metrics-card/data";
 import { Banner } from "../components/banner/Banner";
@@ -11,18 +12,32 @@ import { PRODUCTS_FIXTURES } from "../components/online-store-card/data";
 import { RecentPaymentsCard } from "../components/recent-payments/RecentPaymentsCard";
 import { RECENT_PAYMENTS_FIXTURES } from "../components/recent-payments/data";
 import type { Theme } from "../components/select-theme/theme";
-import { type CompanyCredentialsType } from '../types';
 
 type DashboardProps = {
-  companyCredentials: CompanyCredentialsType;
   partnerDesignId: Theme;
+  companyToken: string;
+  isLoading: boolean;
+  isCredentialsMissing: boolean;
+  setIsCredentialsMissing: Dispatch<SetStateAction<boolean>>;
 };
 
-export const Dashboard = ({ companyCredentials, partnerDesignId }: DashboardProps) => {
+export const Dashboard = ({
+  companyToken,
+  partnerDesignId,
+  isLoading,
+  isCredentialsMissing,
+  setIsCredentialsMissing,
+}: DashboardProps) => {
   return (
     <Container size="xl" mt="xl">
       <Stack gap="xl" style={{ marginBottom: 40 }}>
-        <Banner companyCredentials={companyCredentials} partnerDesignId={partnerDesignId} />
+        <Banner
+          companyToken={companyToken}
+          partnerDesignId={partnerDesignId}
+          isLoading={isLoading}
+          isCredentialsMissing={isCredentialsMissing}
+          setIsCredentialsMissing={setIsCredentialsMissing}
+        />
       </Stack>
       <Stack gap="lg">
         <KpiGrid items={KPI_FIXTURES} />

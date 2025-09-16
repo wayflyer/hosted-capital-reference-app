@@ -16,6 +16,7 @@ type HeaderProps = {
   toggle: () => void;
   companyCredentials: CompanyCredentialsType;
   setCompanyCredentials: Dispatch<SetStateAction<CompanyCredentialsType>>;
+  partnerToken: string;
 };
 
 export const Header = ({
@@ -24,6 +25,7 @@ export const Header = ({
   toggle,
   setCompanyCredentials,
   companyCredentials,
+  partnerToken,
 }: HeaderProps) => {
   const [selectCompanyDrawerOpened, { toggle: toggleCompanyDrawer }] =
     useDisclosure();
@@ -40,15 +42,18 @@ export const Header = ({
       </Group>
       <Group gap="xs" wrap="nowrap">
         <SelectTogglers
+          companyCredentials={companyCredentials}
           toggleCompanyDrawer={toggleCompanyDrawer}
           toggleUserDrawer={toggleUserDrawer}
         />
         <SelectorMenu
+          companyCredentials={companyCredentials}
           toggleUserDrawer={toggleUserDrawer}
           toggleCompanyDrawer={toggleCompanyDrawer}
         />
       </Group>
       <SelectCompanyDrawer
+        authToken={partnerToken}
         credentials={companyCredentials}
         setCredentials={setCompanyCredentials}
         opened={selectCompanyDrawerOpened}
@@ -56,6 +61,7 @@ export const Header = ({
         selectorType="company_id"
       />
       <SelectCompanyDrawer
+        authToken={partnerToken}
         credentials={companyCredentials}
         setCredentials={setCompanyCredentials}
         opened={selectUserDrawerOpened}
