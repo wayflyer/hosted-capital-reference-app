@@ -1,0 +1,1 @@
+export { getPartnerCredentials } from './getPartnerCredentials';
