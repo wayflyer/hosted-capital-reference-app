@@ -1,4 +1,11 @@
 export {
+  adjectives,
+  companyNouns,
+  lastNames,
+  firstNames,
+} from './namesDictionaries';
+
+export {
   PARTNER_ID_KEY,
   PARTNER_SECRET_KEY,
   PARTNER_TOKEN_CREDENTIALS_KEY,
