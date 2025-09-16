@@ -6,14 +6,14 @@ import {
 } from 'react';
 
 import { getPartnerCompanies, getPartnerCompanyUsers } from "../services";
-import type { CompanyCredentials } from "../types";
+import type { CompanyCredentials, CredentialSelector } from "../types";
 
 type CredentialList = string[] | null;
 
 type ManageCredentials = (
   authToken: string,
   credentials: CompanyCredentials,
-  selectorType: string,
+  selectorType: CredentialSelector,
   setCredentials: Dispatch<SetStateAction<CompanyCredentials>>
 ) => [
   credentialsList: CredentialList,
@@ -31,13 +31,17 @@ export const useManageCompanyCredentials: ManageCredentials = (
   useEffect(() => {
     const getCompanyUsersList = async () => {
       if (authToken && credentials?.company_id && selectorType === "user_id") {
-        const users = await getPartnerCompanyUsers(authToken, credentials?.company_id);
-        setCredentialsList(users);
+        try {
+          const users = await getPartnerCompanyUsers(authToken, credentials?.company_id);
+          setCredentialsList(users);
 
-        setCredentials((previousState)=> ({
-          ...(previousState ?? {}),
-          [selectorType]: users[0],
-        }));
+          setCredentials((previousState)=> ({
+            ...(previousState ?? {}),
+            [selectorType]: users[0],
+          }));
+        } catch (error) {
+          console.error(error);
+        }
       }
     }
 
