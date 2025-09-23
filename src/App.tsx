@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { Header } from "./components/header/Header";
 import { Navigation } from "./components/navigation/Navigation";
 import { Dashboard } from "./pages/dashboard";
-import { useGetCompanyToken } from "./hooks";
+import { useGetCompanyToken, useManageCompanyCredentials } from "./hooks";
 
 import {
   THEME_CONFIG,
@@ -14,19 +14,19 @@ import {
   type ThemeTokens,
 } from "./components/select-theme/theme";
 import { ensureFontLoaded } from "./fonts";
-import { type CompanyCredentialsType } from './types';
-import { PartnerCredentials } from "./components/partner-credentials/PartnerCredentials.tsx";
+import { PartnerCredentials } from "./components/partner-credentials/PartnerCredentials";
 
 export const App = () => {
   const [theme, setTheme] = useState<Theme>("whiteLabel");
-  const [companyCredentials, setCompanyCredentials] = useState<CompanyCredentialsType>(null);
+  const { companyCredentials, setAndCacheCompanyCredentials } = useManageCompanyCredentials();
   const [opened, { toggle }] = useDisclosure();
   const {
     isLoading,
     companyToken,
     partnerToken,
     isCredentialsMissing,
-    setIsCredentialsMissing
+    setIsCredentialsMissing,
+    updateAuthTokens,
   } = useGetCompanyToken(companyCredentials);
 
   const tokens: ThemeTokens = THEME_CONFIG[theme];
@@ -63,7 +63,7 @@ export const App = () => {
               theme={theme}
               setTheme={setTheme}
               companyCredentials={companyCredentials}
-              setCompanyCredentials={setCompanyCredentials}
+              setCompanyCredentials={setAndCacheCompanyCredentials}
               partnerToken={partnerToken}
               opened={opened}
               toggle={toggle}
@@ -79,6 +79,9 @@ export const App = () => {
               companyToken={companyToken}
               isLoading={isLoading}
               partnerDesignId={theme}
+              partnerToken={partnerToken}
+              updateAuthTokens={updateAuthTokens}
+              companyCredentials={companyCredentials}
             />
           </AppShell.Main>
         </AppShell>

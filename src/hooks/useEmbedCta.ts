@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useCallback } from "react";
 import {
   WayflyerUiSdk,
   type IWayflyerUiCtaSdk,
@@ -11,23 +11,26 @@ export const useEmbedCta = (
   partnerDesignId: string,
   isLoading: boolean,
 ) => {
+  const options = { isSandbox: true };
+
+  const triggerCta = useCallback(async () => {
+    if (!isLoading && companyToken) {
+      const partnerCallback: PartnerCallbackType = () => {}; // TODO add correct link
+
+      const sdk = (await WayflyerUiSdk.loadSdk(
+        targetId,
+        partnerCallback,
+        companyToken,
+        options,
+      )) as IWayflyerUiCtaSdk;
+
+      sdk.mountCta();
+    }
+  }, [partnerDesignId, companyToken, targetId, isLoading, options]);
+
   useEffect(() => {
-    const loadAndMountCta = async () => {
-      if (!isLoading && companyToken) {
-        const partnerCallback: PartnerCallbackType = () => {}; // TODO add correct link
+    triggerCta();
+  }, [triggerCta]);
 
-        const sdk = (await WayflyerUiSdk.loadSdk(
-          targetId,
-          partnerDesignId,
-          partnerCallback,
-          companyToken,
-          { isSandbox: true },
-        )) as IWayflyerUiCtaSdk;
-
-        sdk.mountCta();
-      }
-    };
-
-    loadAndMountCta();
-  }, [partnerDesignId, companyToken, targetId, isLoading]);
+  return triggerCta;
 }

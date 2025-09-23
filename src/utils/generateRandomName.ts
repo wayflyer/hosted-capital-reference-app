@@ -4,7 +4,7 @@ import { adjectives, companyNouns, lastNames, firstNames } from '../config';
 import type { CredentialSelectorType } from "../types";
 
 export const generateRandomName = (
-  id: number,
+  id: string,
   selectorType: CredentialSelectorType,
   companyName?: string
 ) => {

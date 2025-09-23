@@ -1,16 +1,15 @@
-import type { Dispatch, SetStateAction } from "react";
 import { Drawer, NavLink, Stack } from "@mantine/core";
 import { CiCirclePlus } from "react-icons/ci";
 
 import { useManageCredentials } from "../../hooks";
-import { generateRandomName } from '../../utils';
-import type { CompanyCredentialsType, CredentialSelectorType } from "../../types";
+import { generateRandomName } from "../../utils";
+import type { CompanyCredentialsType, CredentialSelectorType, SetAndCacheCompanyCredentials } from "../../types";
 
 type SelectCompanyDrawerProps = {
   opened: boolean;
   onClose: () => void;
   credentials: CompanyCredentialsType;
-  setCredentials: Dispatch<SetStateAction<CompanyCredentialsType>>;
+  setCredentials: SetAndCacheCompanyCredentials;
   selectorType: CredentialSelectorType;
   authToken: string;
 };
@@ -31,31 +30,18 @@ export const SelectCompanyDrawer = ({
   );
 
   const handleSelectCredential = (credential: string) => {
-    setCredentials((previousState) => {
-      if (!previousState) return previousState;
-
-      return {
-        ...previousState,
-        [selectorType]: credential,
-      }
-    });
-    onClose();
+    console.log(credential, 'drawer');
+    setCredentials(credential, selectorType);
   };
 
   const handleAddCredential = () => {
-    setCredentialsList((prevState) => {
-      if (!prevState) return [generateRandomName(0, selectorType)];
+    const newCredentialId = crypto.randomUUID();
+    const companyName = credentials?.company_id;
 
-      const newCredentialId = prevState.length + 1;
-
-      if (selectorType === 'user_id') {
-        const companyName = credentials?.company_id;
-
-        return [...prevState, generateRandomName(newCredentialId, selectorType, companyName)];
-      }
-
-      return [...prevState, generateRandomName(newCredentialId, selectorType)];
-    });
+    setCredentialsList((prevState) => ([{
+      externalId: newCredentialId,
+      displayName: generateRandomName(newCredentialId, selectorType, companyName)
+    }, ...(prevState ?? [])]));
   };
 
   const selectorLabel = selectorType === 'company_id' ? 'Company' : 'User';
@@ -74,14 +60,14 @@ export const SelectCompanyDrawer = ({
       title={`Select ${selectorLabel}`}
     >
       <Stack>
-        {credentialsList && credentialsList.map((externalId) => (
+        <NavLink label={addComponent} onClick={handleAddCredential} />
+        {credentialsList && credentialsList.map(({ externalId, displayName }) => (
           <NavLink
             key={externalId}
-            label={externalId}
+            label={displayName}
             active={externalId === credentials?.[selectorType]}
             onClick={() => handleSelectCredential(externalId)}
           />))}
-        <NavLink label={addComponent} onClick={handleAddCredential} />
       </Stack>
     </Drawer>
   );

@@ -7,7 +7,7 @@ import { SelectTogglers } from '../select-togglers/SelectTogglers';
 import { SelectCompanyDrawer } from "../select-company-drawer/SelectCompanyDrawer";
 import type { Theme } from "../select-theme/theme";
 import { Logo } from "./logo/Logo";
-import { type CompanyCredentialsType } from '../../types';
+import type { CompanyCredentialsType, SetAndCacheCompanyCredentials } from '../../types';
 
 type HeaderProps = {
   theme: Theme;
@@ -15,7 +15,7 @@ type HeaderProps = {
   opened: boolean;
   toggle: () => void;
   companyCredentials: CompanyCredentialsType;
-  setCompanyCredentials: Dispatch<SetStateAction<CompanyCredentialsType>>;
+  setCompanyCredentials: SetAndCacheCompanyCredentials;
   partnerToken: string;
 };
 

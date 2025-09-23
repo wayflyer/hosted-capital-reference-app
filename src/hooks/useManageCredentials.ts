@@ -5,19 +5,24 @@ import {
   type SetStateAction,
 } from 'react';
 
+import { generateRandomName, buildCredentialsList } from "../utils";
 import { getPartnerCompanies, getPartnerCompanyUsers } from "../services";
-import type { CompanyCredentialsType } from "../types";
+import type { CompanyCredentialsType, CredentialSelectorType, SetAndCacheCompanyCredentials } from "../types";
 
-type CredentialListType = string[] | null;
+type Credential = {
+  externalId: string;
+  displayName?: string;
+};
+type CredentialList = Credential[] | null;
 
 type ManageCredentialsType = (
   authToken: string,
   credentials: CompanyCredentialsType,
-  selectorType: string,
-  setCredentials: Dispatch<SetStateAction<CompanyCredentialsType>>
+  selectorType: CredentialSelectorType,
+  setCredentials: SetAndCacheCompanyCredentials,
 ) => [
-  credentialsList: CredentialListType,
-  setCredentialsList: Dispatch<SetStateAction<CredentialListType>>
+  credentialsList: CredentialList,
+  setCredentialsList: Dispatch<SetStateAction<CredentialList>>
 ];
 
 export const useManageCredentials: ManageCredentialsType = (
@@ -26,39 +31,80 @@ export const useManageCredentials: ManageCredentialsType = (
   selectorType,
   setCredentials,
 ) => {
-  const [credentialsList, setCredentialsList] = useState<CredentialListType>(null);
+  const [credentialsList, setCredentialsList] = useState<CredentialList>(null);
+
+  useEffect(() => {
+    if (credentialsList) {
+      const companyId = credentials?.company_id;
+      const userId = credentials?.user_id;
+
+      const setFirstCredentialFromList = () => {
+        const firstCredential = credentialsList[0];
+
+        setCredentials(firstCredential.externalId, selectorType);
+      };
+
+      if (!companyId) {
+        setFirstCredentialFromList();
+      }
+
+      if (!userId) {
+        setFirstCredentialFromList();
+      }
+    }
+  }, [credentialsList, selectorType]);
 
   useEffect(() => {
     const getCompanyUsersList = async () => {
       if (authToken && credentials?.company_id && selectorType === "user_id") {
-        const users = await getPartnerCompanyUsers(authToken, credentials?.company_id);
-        setCredentialsList(users);
+        setCredentialsList(null);
 
-        setCredentials((previousState)=> ({
-          ...(previousState ?? {}),
-          [selectorType]: users[0],
-        }));
+        try {
+          const users = await getPartnerCompanyUsers(authToken, credentials?.company_id);
+
+          setCredentialsList((previousCredentials) => buildCredentialsList(
+            previousCredentials,
+            users,
+            selectorType,
+            credentials?.company_id,
+          ));
+        } catch {
+          const newUserId = crypto.randomUUID();
+          const newUserName = generateRandomName(newUserId, selectorType, credentials?.company_id);
+          const user = {
+            externalId: newUserId,
+            displayName: newUserName,
+          };
+
+          setCredentialsList((previousCredentials) => (
+            [
+              ...(previousCredentials ?? []),
+              user,
+            ]
+          ));
+        }
       }
     }
 
     getCompanyUsersList();
-  }, [authToken, credentials?.company_id, selectorType, setCredentials]);
+  }, [authToken, credentials?.company_id, selectorType]);
 
   useEffect(() => {
     const getCredentialsList = async () => {
       if (authToken && selectorType === "company_id") {
         const companies = await getPartnerCompanies(authToken);
-        setCredentialsList(companies);
 
-        setCredentials((previousState)=> ({
-          ...(previousState ?? {}),
-          [selectorType]: companies?.[0],
-        }));
+        setCredentialsList((previousCredentials) => buildCredentialsList(
+          previousCredentials,
+          companies,
+          selectorType,
+          credentials?.company_id,
+        ));
       }
     }
 
     getCredentialsList();
-  }, [authToken, selectorType, setCredentials]);
+  }, [authToken, selectorType]);
 
   return [credentialsList, setCredentialsList];
 };

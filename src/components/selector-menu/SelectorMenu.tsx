@@ -13,7 +13,7 @@ export const SelectorMenu = ({
   toggleCompanyDrawer,
   companyCredentials,
 }: SelectorMenuProps) => {
-  const usersLabel = companyCredentials?.user_id ? companyCredentials.user_id : "Select Company";
+  const usersLabel = companyCredentials?.user_id ? companyCredentials.user_id : "Select User";
   const companyLabel = companyCredentials?.company_id ? companyCredentials.company_id : "Select Company";
 
   const menuItemsConfig = [
