@@ -1,5 +1,5 @@
 import type { Dispatch, SetStateAction } from "react";
-import { SandboxController } from '@wf-financing/sandbox-ui';
+// import { SandboxController } from '@wf-financing/sandbox-ui';
 
 import { PartnerCredentials } from "../partner-credentials/PartnerCredentials.tsx";
 import { useEmbedCta } from '../../hooks';
@@ -39,12 +39,12 @@ export const Banner = ({
         isCredentialsMissing={isCredentialsMissing}
         setIsCredentialsMissing={setIsCredentialsMissing}
       />
-      <SandboxController
-        companyToken={companyToken}
-        partnerToken={partnerToken}
-        rerenderCta={updateAuthTokens}
-        companyId={companyId}
-      />
+      {/*<SandboxController*/}
+      {/*  companyToken={companyToken}*/}
+      {/*  partnerToken={partnerToken}*/}
+      {/*  rerenderCta={updateAuthTokens}*/}
+      {/*  companyId={companyId}*/}
+      {/*/>*/}
     </>
   );
 };
