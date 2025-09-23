@@ -22,15 +22,15 @@ export const Banner = ({
   targetId = "ui-banner-container",
   partnerDesignId,
   companyToken,
-  partnerToken,
+  // partnerToken,
   isCredentialsMissing,
   setIsCredentialsMissing,
   isLoading,
-  updateAuthTokens,
-  companyCredentials,
+  // updateAuthTokens,
+  // companyCredentials,
 }: BannerProps) => {
   useEmbedCta(companyToken, targetId, partnerDesignId, isLoading);
-  const companyId = companyCredentials?.company_id as string;
+  // const companyId = companyCredentials?.company_id as string;
 
   return (
     <>
