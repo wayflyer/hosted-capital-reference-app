@@ -3,6 +3,7 @@ import {
   WayflyerUiSdk,
   type IWayflyerUiCtaSdk,
   type PartnerCallbackType,
+  type SdkOptionsType,
 } from "@wf-financing/ui-sdk";
 
 export const useEmbedCta = (
@@ -10,7 +11,7 @@ export const useEmbedCta = (
   targetId: string,
   isLoading: boolean,
 ) => {
-  const options = { isSandbox: true };
+  const options: SdkOptionsType = { isSandbox: true };
 
   const triggerCta = useCallback(async () => {
     if (!isLoading && companyToken) {

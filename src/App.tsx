@@ -6,7 +6,7 @@ import { useState } from "react";
 import { Header } from "./components/header/Header";
 import { Navigation } from "./components/navigation/Navigation";
 import { Dashboard } from "./pages/dashboard";
-import { useGetCompanyToken, useManageCompanyCredentials } from "./hooks";
+import { useGetAuthTokens, useManageCompanyCredentials } from "./hooks";
 
 import {
   THEME_CONFIG,
@@ -26,7 +26,7 @@ export const App = () => {
     isCredentialsMissing,
     setIsCredentialsMissing,
     getCompanyToken,
-  } = useGetCompanyToken(companyCredentials);
+  } = useGetAuthTokens(companyCredentials);
 
   const tokens: ThemeTokens = THEME_CONFIG[theme];
 
