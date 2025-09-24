@@ -2,9 +2,9 @@ import { useEffect, useState, useMemo } from "react";
 
 import { getPartnerCredentials } from "../utils";
 import { getPartnerToken, getCompanyToken as requestCompanyToken } from "../services";
-import type { CompanyCredentials } from "../types";
+import type { CompanyCredentialsType } from "../types";
 
-export const useGetAuthTokens = (companyCredentials: CompanyCredentials) => {
+export const useGetAuthTokens = (companyCredentials: CompanyCredentialsType) => {
   const [isLoading, setIsLoading] = useState(false);
   const [companyToken, setCompanyToken] = useState('');
   const [partnerToken, setPartnerToken] = useState('');
