@@ -44,11 +44,7 @@ export const useManageCredentials: ManageCredentialsType = (
         setCredentials(firstCredential.externalId, selectorType);
       };
 
-      if (!companyId) {
-        setFirstCredentialFromList();
-      }
-
-      if (!userId) {
+      if (!companyId || !userId) {
         setFirstCredentialFromList();
       }
     }
