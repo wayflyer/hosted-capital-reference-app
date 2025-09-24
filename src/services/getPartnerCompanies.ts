@@ -1,25 +1,19 @@
 import { fetchWithAuth } from "../api";
 import { GET_METHOD, PARTNER_COMPANIES_LIST_URL } from "../config";
 
-type PartnerCompany = {
+type PartnerCompanyType = {
   external_id: string;
 };
 
-type CompaniesExternalIdList = {
-  companies: PartnerCompany[]
+type CompaniesExternalIdListType = {
+  companies: PartnerCompanyType[]
 };
 
-type CompaniesIdList = string[];
+type CompaniesIdListType = string[];
 
-type GetPartnerCompanies = (token: string) => Promise<CompaniesIdList>;
-
-export const getPartnerCompanies: GetPartnerCompanies = async (token) => {
-  const companyExternalIdList: CompaniesExternalIdList = await fetchWithAuth<null, CompaniesExternalIdList>(
-    PARTNER_COMPANIES_LIST_URL,
-    null, token,
-    GET_METHOD
-  );
-  const companyIdList: CompaniesIdList = companyExternalIdList.companies.map(({ external_id }) => external_id);
+export const getPartnerCompanies = async (token: string) => {
+  const companyExternalIdList: CompaniesExternalIdListType = await fetchWithAuth<null, CompaniesExternalIdListType>(PARTNER_COMPANIES_LIST_URL, null, token, GET_METHOD);
+  const companyIdList: CompaniesIdListType = companyExternalIdList.companies.map(({ external_id }) => external_id);
 
   return companyIdList;
 };

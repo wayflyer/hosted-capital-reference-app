@@ -1,2 +1,3 @@
+export { getPartnerCredentials } from './getPartnerId';
 export { generateRandomName } from "./generateRandomName";
-export { getPartnerCredentials } from './getPartnerCredentials';
+export { buildCredentialsList } from "./buildCredentialsList";

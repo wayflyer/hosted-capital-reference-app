@@ -1,32 +1,34 @@
 import { AppShell, MantineProvider } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { ModalsProvider } from "@mantine/modals";
-import { SdkScenarios } from "@wf-financing/ui-sdk";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import { Header } from "./components/header/Header";
 import { Navigation } from "./components/navigation/Navigation";
 import { Dashboard } from "./pages/dashboard";
+import { useGetAuthTokens, useManageCompanyCredentials } from "./hooks";
 
 import {
   THEME_CONFIG,
   type Theme,
   type ThemeTokens,
 } from "./components/select-theme/theme";
-import { ensureFontLoaded } from "./fonts";
+import { PartnerCredentials } from "./components/partner-credentials/PartnerCredentials";
 
 export const App = () => {
   const [theme, setTheme] = useState<Theme>("whiteLabel");
-  const [scenario, setScenario] = useState<SdkScenarios>(
-    SdkScenarios.GENERIC_NEW_APPLICATION,
-  );
+  const { companyCredentials, setAndCacheCompanyCredentials } = useManageCompanyCredentials();
   const [opened, { toggle }] = useDisclosure();
+  const {
+    isLoading,
+    companyToken,
+    partnerToken,
+    isCredentialsMissing,
+    setIsCredentialsMissing,
+    getCompanyToken,
+  } = useGetAuthTokens(companyCredentials);
 
   const tokens: ThemeTokens = THEME_CONFIG[theme];
-
-  useEffect(() => {
-    ensureFontLoaded(tokens.font);
-  }, [tokens.font]);
 
   return (
     <MantineProvider
@@ -58,12 +60,14 @@ export const App = () => {
           }}
           padding="md"
         >
+          <PartnerCredentials isCredentialsMissing={isCredentialsMissing} setIsCredentialsMissing={setIsCredentialsMissing} />
           <AppShell.Header>
             <Header
               theme={theme}
               setTheme={setTheme}
-              scenario={scenario}
-              setScenario={setScenario}
+              companyCredentials={companyCredentials}
+              setCompanyCredentials={setAndCacheCompanyCredentials}
+              partnerToken={partnerToken}
               opened={opened}
               toggle={toggle}
             />
@@ -72,7 +76,14 @@ export const App = () => {
             <Navigation />
           </AppShell.Navbar>
           <AppShell.Main bg={tokens.appBg}>
-            <Dashboard scenario={scenario} partnerDesignId={theme} />
+            <Dashboard
+              companyToken={companyToken}
+              isLoading={isLoading}
+              partnerDesignId={theme}
+              partnerToken={partnerToken}
+              updateAuthTokens={getCompanyToken}
+              companyCredentials={companyCredentials}
+            />
           </AppShell.Main>
         </AppShell>
       </ModalsProvider>

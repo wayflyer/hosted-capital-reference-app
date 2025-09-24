@@ -1,30 +1,23 @@
 import { fetchWithAuth } from "../api";
 import { GET_METHOD, PARTNER_USERS_LIST_URL } from "../config";
 
-type CompanyUser = {
+type CompanyUserType = {
   external_id: string;
   partner_id: string;
 };
 
-type CompanyUsersListResponse = {
-  users: CompanyUser[];
+type CompanyUsersListResponseType = {
+  users: CompanyUserType[];
 };
 
 type CompanyUsersListRequestType = string;
 
-type CompanyUsersIdList = string[];
+type CompanyUsersIdListType = string[];
 
-type GetPartnerCompanyUsers = (token: string, companyId: string) => Promise<CompanyUsersIdList>;
-
-export const getPartnerCompanyUsers: GetPartnerCompanyUsers = async (token: string, companyId: string ) => {
+export const getPartnerCompanyUsers = async (token: string, companyId: string ) => {
   const urlWithCompanyId = PARTNER_USERS_LIST_URL.replace(":id", companyId);
-  const usersListResponse = await fetchWithAuth<CompanyUsersListRequestType, CompanyUsersListResponse>(
-    urlWithCompanyId,
-    companyId,
-    token,
-    GET_METHOD,
-  );
-  const usersList: CompanyUsersIdList = usersListResponse.users.map(({ external_id }) => external_id);
+  const usersListResponse = await fetchWithAuth<CompanyUsersListRequestType, CompanyUsersListResponseType>(urlWithCompanyId, companyId, token, GET_METHOD);
+  const usersList: CompanyUsersIdListType = usersListResponse.users.map(({ external_id }) => external_id);
 
   return usersList;
 };

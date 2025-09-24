@@ -4,25 +4,67 @@ export const adjectives = [
   "Secure", "Trusted", "Happy", "Mega", "Ultra", "Hyper", "Next",
   "Virtual", "Digital", "Cloud", "Mobile", "Urban", "Smartest",
   "Infinite", "Everyday", "Value", "Super", "Pure", "True", "Brightest",
-  "Local", "Freshest", "Better", "Best"
+  "Local", "Freshest", "Better", "Best",
+  "Bold", "Epic", "Elite", "Top", "Clear", "Sharp", "Nova", "Peak",
+  "Max", "Opti", "Nova", "Alpha", "Omega", "Core", "Vision", "Flex",
+  "Pro", "PrimeX", "Zeno", "Pulse", "Edge", "Turbo", "Quantum", "Flash",
+  "NextGen", "Ace", "UltraBright", "Summit", "First", "TrueBlue",
+  "Solid", "Luxe", "Globe", "Wide", "Omni", "Eterna", "Swiftest",
+  "Fusion", "Radiant", "Velocity", "Ignite", "Orbit",
+  "Strive", "Momentum", "Vivid", "Horizon", "Ascend",
 ];
 
 export const companyNouns = [
   "Cart", "Shop", "Market", "Store", "Bazaar", "Outlet", "Mall",
   "Depot", "Mart", "Commerce", "Trade", "Deals", "Goods", "Supply",
   "Basket", "Shelf", "Checkout", "Plaza", "Exchange", "Hub",
-  "Collective", "Warehouse", "Vendor", "Retail", "Channel"
+  "Collective", "Warehouse", "Vendor", "Retail", "Channel",
+  "Lane", "Square", "Corner", "Point", "Stop", "Spot", "Center", "Bay",
+  "Avenue", "Circle", "Station", "Arena", "Port", "Harbor", "Domain",
+  "Tower", "World", "Network", "Stream", "Flow", "Line", "Link",
+  "Node", "Station", "Grid", "Empire", "Village", "Valley", "Fair",
+  "District", "Park", "Court", "Union", "Terrace", "Arcade", "Hall",
+  "Front", "Place", "Cornerstone",
+  "Harborfront", "Marketplace", "Pavilion", "Atrium", "Forum",
+  "Dock", "Crossing", "Outpost", "DepotX", "HarborBay",
+  "Platinum", "Commons", "Vault", "Terminal", "Concourse", "Showroom",
+  "ArenaX", "Gallery", "Sphere", "Cluster", "DomainX", "HarborPoint"
 ];
 
 
 export const lastNames = [
   "Smith", "Johnson", "Brown", "Davis", "Miller", "Wilson", "Anderson",
   "Clark", "Lewis", "Walker", "Young", "King", "Wright", "Green",
-  "Baker", "Hall", "Rivera", "Mitchell", "Carter", "Morgan"
+  "Baker", "Hall", "Rivera", "Mitchell", "Carter", "Morgan",
+  "Roberts", "Cook", "Bell", "Adams", "Nelson", "Perez", "Campbell", "Evans",
+  "Turner", "Torres", "Parker", "Collins", "Edwards", "Stewart", "Morris",
+  "Rogers", "Reed", "Cooper", "Ward", "Peterson", "Gray", "Ramirez", "James",
+  "Watson", "Brooks", "Kelly", "Sanders", "Price", "Bennett", "Wood", "Barnes",
+  "Ross", "Henderson", "Coleman", "Jenkins", "Perry", "Powell", "Long", "Patterson",
+  "Hughes", "Flores", "Washington", "Butler", "Simmons", "Foster", "Gonzalez",
+  "Bryant", "Alexander", "Russell", "Griffin", "Diaz", "Hayes", "Myers", "Ford",
+  "Hamilton", "Graham", "Sullivan", "Wallace", "Woods", "Cole", "West", "Jordan",
+  "Owens", "Reynolds", "Fisher", "Ellis", "Harrison", "Gibson", "Mcdonald",
+  "Cruz", "Marshall", "Ortiz", "Gomez", "Murray", "Freeman", "Wells", "Webb",
+  "Simpson", "Stevens", "Tucker", "Porter", "Hunter", "Hicks", "Crawford", "Henry",
+  "Boyd", "Mason", "Morales", "Kennedy", "Warren", "Dixon", "Ramos", "Burns",
+  "Gordon", "Shaw", "Holmes", "Rice", "Robertson", "Hunt", "Black", "Daniels",
 ];
 
 export const firstNames = [
   "Alex", "Jordan", "Taylor", "Casey", "Riley", "Morgan", "Sam", "Chris",
   "Jamie", "Avery", "Cameron", "Drew", "Logan", "Skyler", "Quinn", "Rowan",
-  "Harper", "Emery", "Kai", "Parker"
+  "Harper", "Emery", "Kai", "Parker",
+  "Mason", "Ethan", "Liam", "Noah", "James", "William", "Benjamin", "Lucas",
+  "Henry", "Jack", "Oliver", "Elijah", "Daniel", "Michael", "Matthew", "Joseph",
+  "David", "Andrew", "Charles", "Thomas", "Sophia", "Emma", "Olivia", "Isabella",
+  "Ava", "Mia", "Charlotte", "Amelia", "Abigail", "Ella", "Grace", "Chloe",
+  "Lily", "Madison", "Emily", "Hannah", "Scarlett", "Victoria", "Zoe", "Aria",
+  "Evelyn", "Nora", "Stella", "Luna", "Aurora", "Savannah", "Brooklyn", "Leah",
+  "Hazel", "Ellie", "Violet", "Claire", "Naomi", "Penelope", "Elena", "Sophie",
+  "Alice", "Lucy", "Ivy", "Bella", "Mila", "Peyton", "Reese", "Sierra", "Dakota",
+  "Sydney", "Willow", "Autumn", "Nova", "Phoenix", "Indigo", "Sage", "Aspen",
+  "Briar", "Jade", "Skye", "Marley", "Journey", "Lyric", "True", "River", "Ocean",
+  "Hunter", "Finn", "Asher", "Leo", "Miles", "Owen", "Caleb", "Elias", "Julian",
+  "Nathan",
 ];

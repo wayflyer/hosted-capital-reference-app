@@ -1,4 +1,4 @@
-export { getPartnerCompanies } from './getPartnerCompanies';
-export { getCompanyToken } from './getCompanyToken';
-export { getPartnerCompanyUsers } from './getPartnerCompanyUsers';
 export { getPartnerToken } from './getPartnerToken';
+export { getCompanyToken } from './getCompanyToken';
+export { getPartnerCompanies } from './getPartnerCompanies';
+export { getPartnerCompanyUsers } from './getPartnerCompanyUsers';

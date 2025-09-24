@@ -1,7 +1,7 @@
 import { Container, Stack } from "@mantine/core";
-
 import { Grid } from "@mantine/core";
-import type { SdkScenarios } from "@wf-financing/ui-sdk";
+
+import { type CompanyCredentialsType } from '../types';
 import { KeyMetricsCard } from "../components/ key-metrics-card/KeyMetricsCard";
 import { KEY_METRICS_FIXTURES } from "../components/ key-metrics-card/data";
 import { Banner } from "../components/banner/Banner";
@@ -14,15 +14,31 @@ import { RECENT_PAYMENTS_FIXTURES } from "../components/recent-payments/data";
 import type { Theme } from "../components/select-theme/theme";
 
 type DashboardProps = {
-  scenario: SdkScenarios;
   partnerDesignId: Theme;
+  companyToken: string;
+  isLoading: boolean;
+  partnerToken: string;
+  updateAuthTokens: () => Promise<void>;
+  companyCredentials: CompanyCredentialsType;
 };
 
-export const Dashboard = ({ scenario, partnerDesignId }: DashboardProps) => {
+export const Dashboard = ({
+  companyToken,
+  isLoading,
+  partnerToken,
+  updateAuthTokens,
+  companyCredentials,
+}: DashboardProps) => {
   return (
     <Container size="xl" mt="xl">
       <Stack gap="xl" style={{ marginBottom: 40 }}>
-        <Banner scenario={scenario} partnerDesignId={partnerDesignId} />
+        <Banner
+          companyToken={companyToken}
+          partnerToken={partnerToken}
+          isLoading={isLoading}
+          updateAuthTokens={updateAuthTokens}
+          companyCredentials={companyCredentials}
+        />
       </Stack>
       <Stack gap="lg">
         <KpiGrid items={KPI_FIXTURES} />

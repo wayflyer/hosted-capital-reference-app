@@ -1,53 +1,37 @@
-import {
-  SdkScenarios,
-  WayflyerUiSdk,
-  type IWayflyerUiCtaSdk,
-  type MockedModeType,
-  type PartnerCallbackType,
-} from "@wf-financing/ui-sdk";
-import { useEffect } from "react";
-import { getCompanyToken, getIsMockedMode } from "../../lib/utils";
-import type { Theme } from "../select-theme/theme";
+import { SandboxController } from '@wf-financing/sandbox-ui';
+
+import { useEmbedCta } from '../../hooks';
+import type { CompanyCredentialsType } from "../../types";
 
 type BannerProps = {
   targetId?: string;
-  partnerDesignId: Theme;
-  scenario: SdkScenarios;
+  companyToken: string;
+  partnerToken: string;
+  isLoading: boolean;
+  updateAuthTokens: () => Promise<void>;
+  companyCredentials: CompanyCredentialsType;
 };
 
 export const Banner = ({
   targetId = "ui-banner-container",
-  partnerDesignId,
-  scenario,
+  companyToken,
+  partnerToken,
+  isLoading,
+  updateAuthTokens,
+  companyCredentials,
 }: BannerProps) => {
-  const companyToken = getCompanyToken();
-  const isMockedMode = getIsMockedMode();
-
-  useEffect(() => {
-    const loadAndMountCta = async () => {
-      const partnerCallback: PartnerCallbackType = () => {};
-      const mockedMode: MockedModeType = {
-        isMockedMode,
-        sdkScenario: scenario,
-      };
-
-      const sdk = (await WayflyerUiSdk.loadSdk(
-        targetId,
-        partnerDesignId,
-        partnerCallback,
-        companyToken,
-        mockedMode,
-      )) as IWayflyerUiCtaSdk;
-
-      sdk.mountCta();
-    };
-
-    loadAndMountCta();
-  }, [scenario, isMockedMode, partnerDesignId, companyToken, targetId]);
+  useEmbedCta(companyToken, targetId, isLoading);
+  const companyId = companyCredentials?.company_id as string;
 
   return (
     <>
       <div id={targetId} />
+      <SandboxController
+        companyToken={companyToken}
+        partnerToken={partnerToken}
+        rerenderCta={updateAuthTokens}
+        companyId={companyId}
+      />
     </>
   );
 };

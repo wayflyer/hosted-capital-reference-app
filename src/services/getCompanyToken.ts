@@ -1,21 +1,14 @@
-import { fetchWithAuth } from '../api';
+import { fetchWithAuth } from "../api";
 import { POST_METHOD, COMPANY_TOKEN_URL } from '../config';
-import { type CompanyCredentials as CompanyTokenRequest } from '../types';
+import { type CompanyCredentialsType as CompanyTokenRequestType } from "../types";
 
-type CompanyTokenResponse = {
+type CompanyTokenResponseType = {
   token: string;
   expires_in: number;
 }
 
-type GetCompanyToken = (companyCredentials: CompanyTokenRequest, token: string) => Promise<string>;
-
-export const getCompanyToken: GetCompanyToken = async (companyCredentials, token) => {
-  const companyTokenResponse = await fetchWithAuth<CompanyTokenRequest, CompanyTokenResponse>(
-    COMPANY_TOKEN_URL,
-    companyCredentials,
-    token,
-    POST_METHOD
-  );
+export const getCompanyToken = async (companyCredentials: CompanyTokenRequestType, token: string): Promise<string> => {
+  const companyTokenResponse = await fetchWithAuth<CompanyTokenRequestType, CompanyTokenResponseType>(COMPANY_TOKEN_URL, companyCredentials, token, POST_METHOD);
 
   return companyTokenResponse.token;
 };

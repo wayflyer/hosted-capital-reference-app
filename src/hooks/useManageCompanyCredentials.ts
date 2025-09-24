@@ -1,68 +1,47 @@
-import {
-  useEffect,
-  useState,
-  type Dispatch,
-  type SetStateAction,
-} from 'react';
+import { useState, useEffect } from "react";
 
-import { getPartnerCompanies, getPartnerCompanyUsers } from "../services";
-import type { CompanyCredentials, CredentialSelector } from "../types";
+import { COMPANY_TOKEN_CREDENTIALS_KEY } from '../config';
+import type { CompanyCredentialsType, SetAndCacheCompanyCredentials } from '../types';
 
-type CredentialList = string[] | null;
+export const useManageCompanyCredentials = () => {
+  const [companyCredentials, setCompanyCredentials] = useState<CompanyCredentialsType>(null);
 
-type ManageCredentials = (
-  authToken: string,
-  credentials: CompanyCredentials,
-  selectorType: CredentialSelector,
-  setCredentials: Dispatch<SetStateAction<CompanyCredentials>>
-) => [
-  credentialsList: CredentialList,
-  setCredentialsList: Dispatch<SetStateAction<CredentialList>>
-];
-
-export const useManageCompanyCredentials: ManageCredentials = (
-  authToken,
-  credentials,
-  selectorType,
-  setCredentials,
-) => {
-  const [credentialsList, setCredentialsList] = useState<CredentialList>(null);
-
-  useEffect(() => {
-    const getCompanyUsersList = async () => {
-      if (authToken && credentials?.company_id && selectorType === "user_id") {
-        try {
-          const users = await getPartnerCompanyUsers(authToken, credentials?.company_id);
-          setCredentialsList(users);
-
-          setCredentials((previousState)=> ({
-            ...(previousState ?? {}),
-            [selectorType]: users[0],
-          }));
-        } catch (error) {
-          console.error(error);
-        }
-      }
-    }
-
-    getCompanyUsersList();
-  }, [authToken, credentials?.company_id, selectorType, setCredentials]);
-
-  useEffect(() => {
-    const getCredentialsList = async () => {
-      if (authToken && selectorType === "company_id") {
-        const companies = await getPartnerCompanies(authToken);
-        setCredentialsList(companies);
-
-        setCredentials((previousState)=> ({
+  const setAndCacheCompanyCredentials: SetAndCacheCompanyCredentials = (credential, credentialSelector) => {
+    if (credentialSelector === 'user_id') {
+      setCompanyCredentials((previousState) => {
+        const newState = {
           ...(previousState ?? {}),
-          [selectorType]: companies?.[0],
-        }));
-      }
+          [credentialSelector]: credential,
+        };
+
+        const cachedCredentials = JSON.stringify(newState);
+
+        localStorage.setItem(COMPANY_TOKEN_CREDENTIALS_KEY, cachedCredentials);
+
+        return newState;
+      });
+    } else {
+      const newCredential = { company_id: credential };
+      const cachedCredentials = JSON.stringify(newCredential);
+
+      localStorage.setItem(COMPANY_TOKEN_CREDENTIALS_KEY, cachedCredentials);
+      setCompanyCredentials(() => newCredential);
     }
+  };
 
-    getCredentialsList();
-  }, [authToken, selectorType, setCredentials]);
+  useEffect(() => {
+    const cachedCredentials = localStorage.getItem(COMPANY_TOKEN_CREDENTIALS_KEY);
 
-  return [credentialsList, setCredentialsList];
+    if (!cachedCredentials) return;
+
+    try {
+      const credentials = JSON.parse(cachedCredentials);
+
+      setCompanyCredentials(credentials);
+    } catch {
+      console.error('Failed to parse JSON company credentials.');
+    }
+  }, []);
+
+  return { companyCredentials, setAndCacheCompanyCredentials };
 };

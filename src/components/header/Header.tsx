@@ -1,39 +1,38 @@
-import { useDisclosure } from "@mantine/hooks";
-import { SelectScenarioDrawer } from "../select-scenario-drawer/SelectScenarioDrawer";
-import { SelectThemeDrawer } from "../select-theme/SelectThemeDrawer";
-
-import { ActionIcon, Burger, Button, Group, Menu } from "@mantine/core";
-import { IconDotsVertical, IconMovie, IconPalette } from "@tabler/icons-react";
-import type { SdkScenarios } from "@wf-financing/ui-sdk";
 import type { Dispatch, SetStateAction } from "react";
+import { useDisclosure } from "@mantine/hooks";
+import { Burger, Group } from "@mantine/core";
+
+import { SelectorMenu } from '../selector-menu/SelectorMenu';
+import { SelectTogglers } from '../select-togglers/SelectTogglers';
+import { SelectCompanyDrawer } from "../select-company-drawer/SelectCompanyDrawer";
 import type { Theme } from "../select-theme/theme";
 import { Logo } from "./logo/Logo";
+import type { CompanyCredentialsType, SetAndCacheCompanyCredentials } from '../../types';
 
-type HeaderPropsp = {
+type HeaderProps = {
   theme: Theme;
   setTheme: Dispatch<SetStateAction<Theme>>;
-  scenario: SdkScenarios;
-  setScenario: Dispatch<SetStateAction<SdkScenarios>>;
   opened: boolean;
   toggle: () => void;
+  companyCredentials: CompanyCredentialsType;
+  setCompanyCredentials: SetAndCacheCompanyCredentials;
+  partnerToken: string;
 };
 
 export const Header = ({
   theme,
-  setTheme,
-  scenario,
-  setScenario,
   opened,
   toggle,
-}: HeaderPropsp) => {
-  const [selectScenarioDrawerOpened, { toggle: toggleSelectScenarioDrawer }] =
+  setCompanyCredentials,
+  companyCredentials,
+  partnerToken,
+}: HeaderProps) => {
+  const [selectCompanyDrawerOpened, { toggle: toggleCompanyDrawer }] =
     useDisclosure();
   const [
-    selectUIScenarioDrawerOpened,
-    { toggle: toggleUISelectScenarioDrawer },
+    selectUserDrawerOpened,
+    { toggle: toggleUserDrawer },
   ] = useDisclosure();
-
-  const mocked = import.meta.env.VITE_WF_MOCKED_MODE === "true";
 
   return (
     <Group h="100%" px="md" justify="space-between" wrap="nowrap">
@@ -41,67 +40,33 @@ export const Header = ({
         <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
         <Logo theme={theme} />
       </Group>
-      {mocked && (
-        <Group gap="xs" wrap="nowrap">
-          <Group gap="xs" visibleFrom="sm" wrap="nowrap">
-            <Button
-              size="xs"
-              variant="outline"
-              leftSection={<IconMovie size={16} />}
-              onClick={toggleUISelectScenarioDrawer}
-            >
-              Select Scenario
-            </Button>
-            <Button
-              size="xs"
-              variant="outline"
-              leftSection={<IconPalette size={16} />}
-              onClick={toggleSelectScenarioDrawer}
-            >
-              Select Theme
-            </Button>
-          </Group>
-          <Group hiddenFrom="sm">
-            <Menu position="bottom-end" withinPortal>
-              <Menu.Target>
-                <ActionIcon
-                  variant="light"
-                  size="lg"
-                  aria-label="More actions"
-                  radius="md"
-                >
-                  <IconDotsVertical size={18} />
-                </ActionIcon>
-              </Menu.Target>
-              <Menu.Dropdown>
-                <Menu.Item
-                  leftSection={<IconMovie size={16} />}
-                  onClick={toggleUISelectScenarioDrawer}
-                >
-                  Select Scenario
-                </Menu.Item>
-                <Menu.Item
-                  leftSection={<IconPalette size={16} />}
-                  onClick={toggleSelectScenarioDrawer}
-                >
-                  Select Theme
-                </Menu.Item>
-              </Menu.Dropdown>
-            </Menu>
-          </Group>
-        </Group>
-      )}
-      <SelectScenarioDrawer
-        scenario={scenario}
-        opened={selectUIScenarioDrawerOpened}
-        onClose={toggleUISelectScenarioDrawer}
-        onSelect={setScenario}
+      <Group gap="xs" wrap="nowrap">
+        <SelectTogglers
+          companyCredentials={companyCredentials}
+          toggleCompanyDrawer={toggleCompanyDrawer}
+          toggleUserDrawer={toggleUserDrawer}
+        />
+        <SelectorMenu
+          companyCredentials={companyCredentials}
+          toggleUserDrawer={toggleUserDrawer}
+          toggleCompanyDrawer={toggleCompanyDrawer}
+        />
+      </Group>
+      <SelectCompanyDrawer
+        authToken={partnerToken}
+        credentials={companyCredentials}
+        setCredentials={setCompanyCredentials}
+        opened={selectCompanyDrawerOpened}
+        onClose={toggleCompanyDrawer}
+        selectorType="company_id"
       />
-      <SelectThemeDrawer
-        theme={theme}
-        onSelect={setTheme}
-        opened={selectScenarioDrawerOpened}
-        onClose={toggleSelectScenarioDrawer}
+      <SelectCompanyDrawer
+        authToken={partnerToken}
+        credentials={companyCredentials}
+        setCredentials={setCompanyCredentials}
+        opened={selectUserDrawerOpened}
+        onClose={toggleUserDrawer}
+        selectorType="user_id"
       />
     </Group>
   );

@@ -1,2 +1,2 @@
-export type { CredentialSelector } from "./credentialSelector.ts";
-export type { CompanyCredentials } from "./companyCredentials";
+export type { CompanyCredentialsType, SetAndCacheCompanyCredentials } from './companyCredentials';
+export type { CredentialSelectorType } from './credentialSelectorType';
