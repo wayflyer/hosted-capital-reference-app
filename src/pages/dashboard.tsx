@@ -1,4 +1,3 @@
-import type { Dispatch, SetStateAction } from 'react';
 import { Container, Stack } from "@mantine/core";
 import { Grid } from "@mantine/core";
 
@@ -18,8 +17,6 @@ type DashboardProps = {
   partnerDesignId: Theme;
   companyToken: string;
   isLoading: boolean;
-  isCredentialsMissing: boolean;
-  setIsCredentialsMissing: Dispatch<SetStateAction<boolean>>;
   partnerToken: string;
   updateAuthTokens: () => Promise<void>;
   companyCredentials: CompanyCredentialsType;
@@ -27,10 +24,7 @@ type DashboardProps = {
 
 export const Dashboard = ({
   companyToken,
-  partnerDesignId,
   isLoading,
-  isCredentialsMissing,
-  setIsCredentialsMissing,
   partnerToken,
   updateAuthTokens,
   companyCredentials,
@@ -41,10 +35,7 @@ export const Dashboard = ({
         <Banner
           companyToken={companyToken}
           partnerToken={partnerToken}
-          partnerDesignId={partnerDesignId}
           isLoading={isLoading}
-          isCredentialsMissing={isCredentialsMissing}
-          setIsCredentialsMissing={setIsCredentialsMissing}
           updateAuthTokens={updateAuthTokens}
           companyCredentials={companyCredentials}
         />

@@ -30,7 +30,6 @@ export const SelectCompanyDrawer = ({
   );
 
   const handleSelectCredential = (credential: string) => {
-    console.log(credential, 'drawer');
     setCredentials(credential, selectorType);
   };
 

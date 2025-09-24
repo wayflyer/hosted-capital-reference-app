@@ -1,7 +1,7 @@
 import { AppShell, MantineProvider } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { ModalsProvider } from "@mantine/modals";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import { Header } from "./components/header/Header";
 import { Navigation } from "./components/navigation/Navigation";
@@ -13,7 +13,6 @@ import {
   type Theme,
   type ThemeTokens,
 } from "./components/select-theme/theme";
-import { ensureFontLoaded } from "./fonts";
 import { PartnerCredentials } from "./components/partner-credentials/PartnerCredentials";
 
 export const App = () => {
@@ -30,10 +29,6 @@ export const App = () => {
   } = useGetCompanyToken(companyCredentials);
 
   const tokens: ThemeTokens = THEME_CONFIG[theme];
-
-  useEffect(() => {
-    ensureFontLoaded(tokens.font);
-  }, [tokens.font]);
 
   return (
     <MantineProvider
@@ -74,8 +69,6 @@ export const App = () => {
           </AppShell.Navbar>
           <AppShell.Main bg={tokens.appBg}>
             <Dashboard
-              setIsCredentialsMissing={setIsCredentialsMissing}
-              isCredentialsMissing={isCredentialsMissing}
               companyToken={companyToken}
               isLoading={isLoading}
               partnerDesignId={theme}

@@ -23,6 +23,9 @@ importers:
       '@tabler/icons-react':
         specifier: ^3.34.0
         version: 3.35.0(react@19.1.1)
+      '@wf-financing/sandbox-ui':
+        specifier: 0.1.1
+        version: 0.1.1(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@wf-financing/ui-sdk':
         specifier: 1.0.0
         version: 1.0.0
@@ -589,6 +592,14 @@ packages:
   '@tabler/icons@3.35.0':
     resolution: {integrity: sha512-yYXe+gJ56xlZFiXwV9zVoe3FWCGuZ/D7/G4ZIlDtGxSx5CGQK110wrnT29gUj52kEZoxqF7oURTk97GQxELOFQ==}
 
+  '@tanstack/query-core@5.81.5':
+    resolution: {integrity: sha512-ZJOgCy/z2qpZXWaj/oxvodDx07XcQa9BF92c0oINjHkoqUPsmm3uG08HpTaviviZ/N9eP1f9CM7mKSEkIo7O1Q==}
+
+  '@tanstack/react-query@5.81.5':
+    resolution: {integrity: sha512-lOf2KqRRiYWpQT86eeeftAGnjuTR35myTP8MXyvHa81VlomoAWNEd8x5vkcAfQefu0qtYCvyqLropFZqgI2EQw==}
+    peerDependencies:
+      react: ^18 || ^19
+
   '@types/babel__core@7.20.5':
     resolution: {integrity: sha512-qoQprZvz5wQFJwMDqeseRXWv3rqMvhgpbXFfVyWhbx9X47POIA6i/+dXefEmZKoAgOaTdaIgNSMqMIU61yRyzA==}
 
@@ -682,6 +693,9 @@ packages:
 
   '@wf-financing/embedded-types@0.4.0':
     resolution: {integrity: sha512-fKkjLhfoZ1VGlX87Xc5CY8eTEMkzcc/AM6a1gzIchj/RLKPyhatwVzeT1Jz7L2jTeYpVwqST/AxHixMLFzpW2g==}
+
+  '@wf-financing/sandbox-ui@0.1.1':
+    resolution: {integrity: sha512-zoze/76TFwoWb5m3PMEr1tTAt9r7UnLUROwNgbmWeX3MC5YFyRMOTkepcZPM82A3qJuKou4QmeY6vkifCfpcjg==}
 
   '@wf-financing/ui-sdk@1.0.0':
     resolution: {integrity: sha512-/jwucn+3rvUXgFIrZmcDCqBXU07ozXcT2eKy4ZGOjBvI0XIhyOuxdGQ+5DwVDuHM5a0pCdedeSICFYyfHau4MQ==}
@@ -1905,6 +1919,13 @@ snapshots:
 
   '@tabler/icons@3.35.0': {}
 
+  '@tanstack/query-core@5.81.5': {}
+
+  '@tanstack/react-query@5.81.5(react@19.1.1)':
+    dependencies:
+      '@tanstack/query-core': 5.81.5
+      react: 19.1.1
+
   '@types/babel__core@7.20.5':
     dependencies:
       '@babel/parser': 7.28.4
@@ -2044,6 +2065,18 @@ snapshots:
       - supports-color
 
   '@wf-financing/embedded-types@0.4.0': {}
+
+  '@wf-financing/sandbox-ui@0.1.1(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@mantine/core': 8.3.1(@mantine/hooks@8.3.1(react@19.1.1))(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@mantine/hooks': 8.3.1(react@19.1.1)
+      '@mantine/modals': 8.3.1(@mantine/core@8.3.1(@mantine/hooks@8.3.1(react@19.1.1))(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(@mantine/hooks@8.3.1(react@19.1.1))(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@tanstack/react-query': 5.81.5(react@19.1.1)
+      '@wf-financing/embedded-types': 0.4.0
+    transitivePeerDependencies:
+      - '@types/react'
+      - react
+      - react-dom
 
   '@wf-financing/ui-sdk@1.0.0':
     dependencies:

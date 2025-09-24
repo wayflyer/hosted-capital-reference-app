@@ -8,7 +8,6 @@ import {
 export const useEmbedCta = (
   companyToken: string,
   targetId: string,
-  partnerDesignId: string,
   isLoading: boolean,
 ) => {
   const options = { isSandbox: true };
@@ -26,7 +25,7 @@ export const useEmbedCta = (
 
       sdk.mountCta();
     }
-  }, [partnerDesignId, companyToken, targetId, isLoading, options]);
+  }, [companyToken, targetId, isLoading, options]);
 
   useEffect(() => {
     triggerCta();

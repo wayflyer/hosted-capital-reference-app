@@ -1,16 +1,10 @@
-import type { Dispatch, SetStateAction } from "react";
-// import { SandboxController } from '@wf-financing/sandbox-ui';
+import { SandboxController } from '@wf-financing/sandbox-ui';
 
-import { PartnerCredentials } from "../partner-credentials/PartnerCredentials.tsx";
 import { useEmbedCta } from '../../hooks';
-import type { Theme } from "../select-theme/theme";
 import type { CompanyCredentialsType } from "../../types";
 
 type BannerProps = {
   targetId?: string;
-  partnerDesignId: Theme;
-  isCredentialsMissing: boolean;
-  setIsCredentialsMissing: Dispatch<SetStateAction<boolean>>;
   companyToken: string;
   partnerToken: string;
   isLoading: boolean;
@@ -20,31 +14,24 @@ type BannerProps = {
 
 export const Banner = ({
   targetId = "ui-banner-container",
-  partnerDesignId,
   companyToken,
-  // partnerToken,
-  isCredentialsMissing,
-  setIsCredentialsMissing,
+  partnerToken,
   isLoading,
-  // updateAuthTokens,
-  // companyCredentials,
+  updateAuthTokens,
+  companyCredentials,
 }: BannerProps) => {
-  useEmbedCta(companyToken, targetId, partnerDesignId, isLoading);
-  // const companyId = companyCredentials?.company_id as string;
+  useEmbedCta(companyToken, targetId, isLoading);
+  const companyId = companyCredentials?.company_id as string;
 
   return (
     <>
       <div id={targetId} />
-      <PartnerCredentials
-        isCredentialsMissing={isCredentialsMissing}
-        setIsCredentialsMissing={setIsCredentialsMissing}
+      <SandboxController
+        companyToken={companyToken}
+        partnerToken={partnerToken}
+        rerenderCta={updateAuthTokens}
+        companyId={companyId}
       />
-      {/*<SandboxController*/}
-      {/*  companyToken={companyToken}*/}
-      {/*  partnerToken={partnerToken}*/}
-      {/*  rerenderCta={updateAuthTokens}*/}
-      {/*  companyId={companyId}*/}
-      {/*/>*/}
     </>
   );
 };

@@ -9,7 +9,6 @@ export const useManageCompanyCredentials = () => {
   const setAndCacheCompanyCredentials: SetAndCacheCompanyCredentials = (credential, credentialSelector) => {
     if (credentialSelector === 'user_id') {
       setCompanyCredentials((previousState) => {
-        // console.log(previousState, 'first case');
         const newState = {
           ...(previousState ?? {}),
           [credentialSelector]: credential,
@@ -24,7 +23,6 @@ export const useManageCompanyCredentials = () => {
     } else {
       const newCredential = { company_id: credential };
       const cachedCredentials = JSON.stringify(newCredential);
-      console.log(newCredential, 'second case');
 
       localStorage.setItem(COMPANY_TOKEN_CREDENTIALS_KEY, cachedCredentials);
       setCompanyCredentials(() => newCredential);

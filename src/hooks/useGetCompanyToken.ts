@@ -10,18 +10,20 @@ export const useGetCompanyToken = (companyCredentials: CompanyCredentialsType) =
   const [partnerToken, setPartnerToken] = useState('');
   const [isCredentialsMissing, setIsCredentialsMissing] = useState(false);
 
-  const partnerCredentials = useMemo(() => getPartnerCredentials(), [isCredentialsMissing]);
+  const partnerCredentials = useMemo(() => {
+    return getPartnerCredentials();
+  }, [isCredentialsMissing]);
+
   const updateAuthTokens = useCallback(async () => {
     try {
       setIsLoading(true);
       if (partnerCredentials && !partnerToken) {
         const { partnerId, partnerSecret } = partnerCredentials;
-        const partnerToken = await getPartnerToken(partnerId, partnerSecret);
-
-        setPartnerToken(partnerToken);
+        const requestedPartnerToken = await getPartnerToken(partnerId, partnerSecret);
+        setPartnerToken(requestedPartnerToken);
       }
 
-      if (partnerToken && companyCredentials?.company_id && companyCredentials?.user_id) {
+      if (partnerToken && companyCredentials) {
         const requestedCompanyToken = await requestCompanyToken(companyCredentials, partnerToken);
         setCompanyToken(requestedCompanyToken);
       }
@@ -33,12 +35,12 @@ export const useGetCompanyToken = (companyCredentials: CompanyCredentialsType) =
   }, [partnerToken, partnerCredentials, companyCredentials]);
 
   useEffect(() => {
-    if (partnerCredentials) {
+    if (partnerCredentials?.partnerId && partnerCredentials?.partnerSecret) {
       updateAuthTokens();
     } else {
       setIsCredentialsMissing(true);
     }
-  }, [updateAuthTokens, partnerCredentials]);
+  }, [updateAuthTokens, partnerCredentials?.partnerId, partnerCredentials?.partnerSecret]);
 
   return {
     isLoading,
