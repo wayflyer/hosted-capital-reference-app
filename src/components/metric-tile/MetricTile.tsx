@@ -1,7 +1,15 @@
-import { Badge, Card, Group, Text } from "@mantine/core";
-import type { KpiTile } from "./data";
+import { Badge, Card, Group, Text, useMantineTheme } from "@mantine/core";
 
-export const MetricTile = ({ label, value, delta }: KpiTile) => {
+type MetricTileProps = {
+  label: string;
+  value: string;
+  delta?: number;
+};
+
+export const MetricTile = ({ label, value, delta }: MetricTileProps) => {
+  const theme = useMantineTheme();
+  const { appBg } = theme.other.app;
+
   return (
     <Card radius="lg" p="lg">
       {delta !== undefined && (
@@ -10,7 +18,7 @@ export const MetricTile = ({ label, value, delta }: KpiTile) => {
             radius="xl"
             px="sm"
             variant="filled"
-            bg="#EAE9DE"
+            bg={appBg}
             c="var(--mantine-color-dark-9)"
             style={{ border: "none" }}
           >
