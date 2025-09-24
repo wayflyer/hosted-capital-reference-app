@@ -1,7 +1,7 @@
 import { useEffect, useState, useMemo, useCallback } from "react";
 
 import { getPartnerCredentials } from '../utils';
-import { getPartnerToken, getCompanyToken as requestCompanyToken } from "../services";
+import { getPartnerToken as requestPartnerToken, getCompanyToken as requestCompanyToken } from "../services";
 import type { CompanyCredentialsType } from "../types";
 
 export const useGetCompanyToken = (companyCredentials: CompanyCredentialsType) => {
@@ -14,14 +14,24 @@ export const useGetCompanyToken = (companyCredentials: CompanyCredentialsType) =
     return getPartnerCredentials();
   }, [isCredentialsMissing]);
 
-  const updateAuthTokens = useCallback(async () => {
+  const getPartnerToken = useCallback(async () => {
     try {
       setIsLoading(true);
-      if (partnerCredentials && !partnerToken) {
+      if (partnerCredentials) {
         const { partnerId, partnerSecret } = partnerCredentials;
-        const requestedPartnerToken = await getPartnerToken(partnerId, partnerSecret);
+        const requestedPartnerToken = await requestPartnerToken(partnerId, partnerSecret);
         setPartnerToken(requestedPartnerToken);
       }
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsLoading(false);
+    }
+  }, [partnerCredentials]);
+
+  const getCompanyToken = useCallback(async () => {
+    try {
+      setIsLoading(true);
 
       if (partnerToken && companyCredentials) {
         const requestedCompanyToken = await requestCompanyToken(companyCredentials, partnerToken);
@@ -32,15 +42,19 @@ export const useGetCompanyToken = (companyCredentials: CompanyCredentialsType) =
     } finally {
       setIsLoading(false);
     }
-  }, [partnerToken, partnerCredentials, companyCredentials]);
+  }, [partnerToken, companyCredentials]);
 
   useEffect(() => {
     if (partnerCredentials?.partnerId && partnerCredentials?.partnerSecret) {
-      updateAuthTokens();
+      getPartnerToken();
     } else {
       setIsCredentialsMissing(true);
     }
-  }, [updateAuthTokens, partnerCredentials?.partnerId, partnerCredentials?.partnerSecret]);
+  }, [partnerCredentials?.partnerId, partnerCredentials?.partnerSecret, getPartnerToken]);
+
+  useEffect(() => {
+    getCompanyToken();
+  }, [getCompanyToken])
 
   return {
     isLoading,
@@ -48,6 +62,6 @@ export const useGetCompanyToken = (companyCredentials: CompanyCredentialsType) =
     companyToken,
     isCredentialsMissing,
     setIsCredentialsMissing,
-    updateAuthTokens,
+    getCompanyToken,
   };
 };

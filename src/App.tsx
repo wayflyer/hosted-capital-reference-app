@@ -25,7 +25,7 @@ export const App = () => {
     partnerToken,
     isCredentialsMissing,
     setIsCredentialsMissing,
-    updateAuthTokens,
+    getCompanyToken,
   } = useGetCompanyToken(companyCredentials);
 
   const tokens: ThemeTokens = THEME_CONFIG[theme];
@@ -73,7 +73,7 @@ export const App = () => {
               isLoading={isLoading}
               partnerDesignId={theme}
               partnerToken={partnerToken}
-              updateAuthTokens={updateAuthTokens}
+              updateAuthTokens={getCompanyToken}
               companyCredentials={companyCredentials}
             />
           </AppShell.Main>
