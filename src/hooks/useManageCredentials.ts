@@ -34,7 +34,7 @@ export const useManageCredentials: ManageCredentialsType = (
   const [credentialsList, setCredentialsList] = useState<CredentialList>(null);
 
   useEffect(() => {
-    if (credentialsList) {
+    if (credentialsList?.length) {
       const companyId = credentials?.company_id;
       const userId = credentials?.user_id;
 
