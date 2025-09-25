@@ -24,8 +24,8 @@ importers:
         specifier: ^3.34.0
         version: 3.35.0(react@19.1.1)
       '@wf-financing/sandbox-ui':
-        specifier: 0.2.0
-        version: 0.2.0(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+        specifier: 0.2.1
+        version: 0.2.1(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@wf-financing/ui-sdk':
         specifier: 1.0.0
         version: 1.0.0
@@ -699,8 +699,8 @@ packages:
   '@wf-financing/embedded-types@0.4.0':
     resolution: {integrity: sha512-fKkjLhfoZ1VGlX87Xc5CY8eTEMkzcc/AM6a1gzIchj/RLKPyhatwVzeT1Jz7L2jTeYpVwqST/AxHixMLFzpW2g==}
 
-  '@wf-financing/sandbox-ui@0.2.0':
-    resolution: {integrity: sha512-ZrYwLoPuj2/v9QhuCrp8nOH1oRhFJ+KgflwJiMEfYomxSEbQJIrIuLMfUfgOX3aR95Op6Fk8NaoE7dMaE4HguA==}
+  '@wf-financing/sandbox-ui@0.2.1':
+    resolution: {integrity: sha512-FKri9izcsaIKUGx+3R5+ONNZGiyYfT1v9XCY74ozeEmxouAPDIrsN+Kf7z8lIl3lB1kOR4OTBQlJ9kpax/yf7A==}
 
   '@wf-financing/ui-sdk@1.0.0':
     resolution: {integrity: sha512-/jwucn+3rvUXgFIrZmcDCqBXU07ozXcT2eKy4ZGOjBvI0XIhyOuxdGQ+5DwVDuHM5a0pCdedeSICFYyfHau4MQ==}
@@ -2081,7 +2081,7 @@ snapshots:
 
   '@wf-financing/embedded-types@0.4.0': {}
 
-  '@wf-financing/sandbox-ui@0.2.0(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+  '@wf-financing/sandbox-ui@0.2.1(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
     dependencies:
       '@mantine/core': 8.3.1(@mantine/hooks@8.3.1(react@19.1.1))(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@mantine/form': 8.3.2(react@19.1.1)

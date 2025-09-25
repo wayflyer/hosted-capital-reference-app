@@ -17,7 +17,7 @@ export const useGetAuthTokens = (companyCredentials: CompanyCredentialsType) => 
   const getPartnerToken = useCallback(async () => {
     try {
       setIsLoading(true);
-      if (partnerCredentials) {
+      if (partnerCredentials?.partnerId && partnerCredentials?.partnerSecret) {
         const { partnerId, partnerSecret } = partnerCredentials;
         const requestedPartnerToken = await requestPartnerToken(partnerId, partnerSecret);
         setPartnerToken(requestedPartnerToken);
@@ -33,7 +33,7 @@ export const useGetAuthTokens = (companyCredentials: CompanyCredentialsType) => 
     try {
       setIsLoading(true);
 
-      if (partnerToken && companyCredentials) {
+      if (partnerToken && companyCredentials?.company_id && companyCredentials?.user_id) {
         const requestedCompanyToken = await requestCompanyToken(companyCredentials, partnerToken);
         setCompanyToken(requestedCompanyToken);
       }
