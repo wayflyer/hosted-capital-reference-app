@@ -1,4 +1,3 @@
-import type { Dispatch, SetStateAction } from "react";
 import { useDisclosure } from "@mantine/hooks";
 import { Burger, Group } from "@mantine/core";
 
@@ -11,7 +10,6 @@ import type { CompanyCredentialsType, SetAndCacheCompanyCredentials } from '../.
 
 type HeaderProps = {
   theme: Theme;
-  setTheme: Dispatch<SetStateAction<Theme>>;
   opened: boolean;
   toggle: () => void;
   companyCredentials: CompanyCredentialsType;

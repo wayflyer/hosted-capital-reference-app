@@ -47,6 +47,13 @@ export const useManageCredentials: ManageCredentialsType = (
       if (!companyId || !userId) {
         setFirstCredentialFromList();
       }
+    } else {
+      const newUserId = [crypto.randomUUID()];
+      // const newUserName = generateRandomName(newUserId, selectorType, credentials?.company_id);
+
+      const creds = buildCredentialsList(null, newUserId, selectorType, credentials?.company_id);
+
+      setCredentialsList(creds);
     }
   }, [credentialsList, selectorType]);
 

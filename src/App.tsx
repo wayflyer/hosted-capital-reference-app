@@ -1,11 +1,9 @@
-import { AppShell, MantineProvider } from "@mantine/core";
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { MantineProvider } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { ModalsProvider } from "@mantine/modals";
 import { useState } from "react";
 
-import { Header } from "./components/header/Header";
-import { Navigation } from "./components/navigation/Navigation";
-import { Dashboard } from "./pages/dashboard";
 import { useGetAuthTokens, useManageCompanyCredentials } from "./hooks";
 
 import {
@@ -13,24 +11,29 @@ import {
   type Theme,
   type ThemeTokens,
 } from "./components/select-theme/theme";
-import { PartnerCredentials } from "./components/partner-credentials/PartnerCredentials";
+import { MainContent } from "./components/main-content/MainContent";
+import { PreloadScreen } from "./components/preload-screen/PreloadScreen.tsx";
+import { ContentManager } from "./components/content-mananager/ContentManager.tsx";
+
+const queryClient = new QueryClient();
 
 export const App = () => {
-  const [theme, setTheme] = useState<Theme>("whiteLabel");
-  const { companyCredentials, setAndCacheCompanyCredentials } = useManageCompanyCredentials();
-  const [opened, { toggle }] = useDisclosure();
-  const {
-    isLoading,
-    companyToken,
-    partnerToken,
-    isCredentialsMissing,
-    setIsCredentialsMissing,
-    getCompanyToken,
-  } = useGetAuthTokens(companyCredentials);
+  // const [theme, setTheme] = useState<Theme>("whiteLabel");
+  // const { companyCredentials, setAndCacheCompanyCredentials } = useManageCompanyCredentials();
+  // const [opened, { toggle }] = useDisclosure();
+  // const {
+  //   isLoading,
+  //   companyToken,
+  //   partnerToken,
+  //   isCredentialsMissing,
+  //   setIsCredentialsMissing,
+  //   getCompanyToken,
+  // } = useGetAuthTokens(companyCredentials);
 
-  const tokens: ThemeTokens = THEME_CONFIG[theme];
+  const tokens: ThemeTokens = THEME_CONFIG["whiteLabel"];
 
   return (
+    <QueryClientProvider client={queryClient}>
     <MantineProvider
       theme={{
         defaultRadius: "md",
@@ -51,42 +54,9 @@ export const App = () => {
       }}
     >
       <ModalsProvider>
-        <AppShell
-          header={{ height: { base: 72, sm: 60 } }}
-          navbar={{
-            width: 200,
-            breakpoint: "sm",
-            collapsed: { mobile: !opened },
-          }}
-          padding="md"
-        >
-          <PartnerCredentials isCredentialsMissing={isCredentialsMissing} setIsCredentialsMissing={setIsCredentialsMissing} />
-          <AppShell.Header>
-            <Header
-              theme={theme}
-              setTheme={setTheme}
-              companyCredentials={companyCredentials}
-              setCompanyCredentials={setAndCacheCompanyCredentials}
-              partnerToken={partnerToken}
-              opened={opened}
-              toggle={toggle}
-            />
-          </AppShell.Header>
-          <AppShell.Navbar p="md">
-            <Navigation />
-          </AppShell.Navbar>
-          <AppShell.Main bg={tokens.appBg}>
-            <Dashboard
-              companyToken={companyToken}
-              isLoading={isLoading}
-              partnerDesignId={theme}
-              partnerToken={partnerToken}
-              updateAuthTokens={getCompanyToken}
-              companyCredentials={companyCredentials}
-            />
-          </AppShell.Main>
-        </AppShell>
+        <ContentManager />
       </ModalsProvider>
     </MantineProvider>
+    </QueryClientProvider>
   );
 };

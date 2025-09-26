@@ -42,7 +42,7 @@ export const extractPartnerCredentials: ExtractPartnerCredentialsType = (extract
 };
 
 export const getPartnerCredentials = (): PartnerCredentialsType | null => {
-  const extractors = [extractPartnerCredentialsFromLocalStorage, extractPartnerCredentialsFromSearchParams];
+  const extractors = [extractPartnerCredentialsFromSearchParams, extractPartnerCredentialsFromLocalStorage];
 
   return extractors.map((extractor) => extractPartnerCredentials(extractor))
     .find(Boolean) || null;

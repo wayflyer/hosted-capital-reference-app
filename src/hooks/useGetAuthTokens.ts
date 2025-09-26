@@ -52,9 +52,9 @@ export const useGetAuthTokens = (companyCredentials: CompanyCredentialsType) => 
     }
   }, [partnerCredentials?.partnerId, partnerCredentials?.partnerSecret, getPartnerToken]);
 
-  useEffect(() => {
-    getCompanyToken();
-  }, [getCompanyToken])
+  // useEffect(() => {
+  //   // getCompanyToken();
+  // }, [getCompanyToken])
 
   return {
     isLoading,

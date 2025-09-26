@@ -4,9 +4,7 @@ import {
   Paper,
   PasswordInput,
   TextInput,
-  Modal,
 } from '@mantine/core';
-import { useDisclosure } from '@mantine/hooks';
 
 import { PARTNER_TOKEN_CREDENTIALS_KEY } from '../../config';
 
@@ -17,7 +15,6 @@ type PartnerCredentialsProps = {
 
 export const PartnerCredentials = ({ setIsCredentialsMissing, isCredentialsMissing }: PartnerCredentialsProps) => {
   const [credentials, setCredentials] = useState({ partnerId: '', partnerSecret: '' });
-  const [opened, { open, close }] = useDisclosure(isCredentialsMissing);
 
   const isAddCredentialsDisabled = !credentials.partnerId || !credentials.partnerSecret;
 
@@ -41,7 +38,6 @@ export const PartnerCredentials = ({ setIsCredentialsMissing, isCredentialsMissi
   }
 
   return (
-    <Modal opened={opened} onClose={close} withCloseButton={false} title={'Credentials'}>
       <Paper withBorder shadow="sm" p={22} mt={30} radius="md">
         <TextInput
           onChange={(event) => handleInputChange(event, 'partnerId')}
@@ -68,6 +64,5 @@ export const PartnerCredentials = ({ setIsCredentialsMissing, isCredentialsMissi
           Add credentials
         </Button>
       </Paper>
-    </Modal>
   );
 };

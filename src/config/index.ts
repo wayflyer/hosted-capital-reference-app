@@ -13,3 +13,9 @@ export {
   COMPANY_TOKEN_CREDENTIALS_KEY,
 } from './const';
 export { adjectives, companyNouns, lastNames, firstNames } from './namesDictionaries';
+export {
+  PARTNER_TOKEN_KEY,
+  PARTNER_EXPIRES_KEY,
+  COMPANY_TOKEN_KEY,
+  COMPANY_EXPIRES_KEY,
+} from './authTokens.ts';
