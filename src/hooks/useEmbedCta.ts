@@ -7,14 +7,13 @@ import {
 } from "@wf-financing/ui-sdk";
 
 export const useEmbedCta = (
-  companyToken: string,
   targetId: string,
-  isLoading: boolean,
+  companyToken?: string | null,
 ) => {
   const options: SdkOptionsType = { isSandbox: true };
 
   const triggerCta = useCallback(async () => {
-    if (!isLoading && companyToken) {
+    if (companyToken) {
       const partnerCallback: PartnerCallbackType = () => {}; // TODO add correct link
 
       const sdk = (await WayflyerUiSdk.loadSdk(
@@ -26,7 +25,7 @@ export const useEmbedCta = (
 
       sdk.mountCta();
     }
-  }, [companyToken, targetId, isLoading, options]);
+  }, [companyToken, targetId, options]);
 
   useEffect(() => {
     triggerCta();

@@ -1,37 +1,32 @@
 import { SandboxController } from '@wf-financing/sandbox-ui';
 
-import { useEmbedCta } from '../../hooks';
+import { useEmbedCta, useCompanyToken, usePartnerToken } from '../../hooks';
+import { useLocalStorage } from "@mantine/hooks";
 import type { CompanyCredentialsType } from "../../types";
+import { COMPANY_TOKEN_CREDENTIALS_KEY } from "../../config";
 
-type BannerProps = {
-  targetId?: string;
-  companyToken: string;
-  partnerToken: string;
-  isLoading: boolean;
-  updateAuthTokens: () => Promise<void>;
-  companyCredentials: CompanyCredentialsType;
-};
+export const Banner = () => {
+  const targetId = 'wayflyer-sdk';
+  const [companyCredentials] = useLocalStorage<CompanyCredentialsType>({ key: COMPANY_TOKEN_CREDENTIALS_KEY });
+  // const partnerToken = usePartnerToken();
+  const companyToken = useCompanyToken();
+  useEmbedCta(targetId, companyToken?.data);
 
-export const Banner = ({
-  targetId = "ui-banner-container",
-  companyToken,
-  partnerToken,
-  isLoading,
-  updateAuthTokens,
-  companyCredentials,
-}: BannerProps) => {
-  useEmbedCta(companyToken, targetId, isLoading);
-  const companyId = companyCredentials?.company_id as string;
+  // const rerenderCta = async () => {
+  //   companyToken.refetch();
+  // }
 
   return (
     <>
       <div id={targetId} />
-      <SandboxController
-        companyToken={companyToken}
-        partnerToken={partnerToken}
-        rerenderCta={updateAuthTokens}
-        companyId={companyId}
-      />
+      {/*{companyCredentials?.company_id && partnerToken.data?.token && companyToken.data && (*/}
+      {/*  <SandboxController*/}
+      {/*    companyToken={companyToken?.data}*/}
+      {/*    partnerToken={partnerToken.data?.token}*/}
+      {/*    rerenderCta={rerenderCta}*/}
+      {/*    companyId={companyCredentials?.company_id}*/}
+      {/*  />*/}
+      {/*)}*/}
     </>
   );
 };

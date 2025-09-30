@@ -1,39 +1,14 @@
-import { PartnerCredentials } from "../partner-credentials/PartnerCredentials.tsx";
 import { AppShell } from "@mantine/core";
+import { useDisclosure } from "@mantine/hooks";
+
 import { Header } from "../header/Header.tsx";
 import { Navigation } from "../navigation/Navigation.tsx";
 import { Dashboard } from "../../pages/dashboard.tsx";
-import { THEME_CONFIG, type ThemeTokens, type Theme } from "../select-theme/theme.ts";
-import type { CompanyCredentialsType, SetAndCacheCompanyCredentials } from '../../types';
+import { THEME_CONFIG, type ThemeTokens } from "../select-theme/theme.ts";
 
-type MainContentProps = {
-  opened: boolean;
-  isCredentialsMissing: boolean;
-  setIsCredentialsMissing: (isCredentialsMissing: boolean) => void;
-  theme: Theme;
-  companyCredentials: CompanyCredentialsType;
-  setCompanyCredentials: SetAndCacheCompanyCredentials;
-  partnerToken: string;
-  toggle: () => void;
-  isLoading: boolean;
-  getCompanyToken: () => Promise<void>;
-  companyToken: string;
-};
-
-export const MainContent = ({
-  opened,
-  isCredentialsMissing,
-  theme,
-  companyCredentials,
-  setCompanyCredentials,
-  toggle,
-  partnerToken,
-  getCompanyToken,
-  companyToken,
-  isLoading,
-  setIsCredentialsMissing,
-}: MainContentProps) => {
-  const tokens: ThemeTokens = THEME_CONFIG[theme];
+export const MainContent = () => {
+  const tokens: ThemeTokens = THEME_CONFIG["whiteLabel"];
+  const [opened, { toggle }] = useDisclosure();
 
   return (
     <AppShell
@@ -47,10 +22,7 @@ export const MainContent = ({
     >
       <AppShell.Header>
         <Header
-          theme={theme}
-          companyCredentials={companyCredentials}
-          setCompanyCredentials={setCompanyCredentials}
-          partnerToken={partnerToken}
+          theme={"whiteLabel"}
           opened={opened}
           toggle={toggle}
         />
@@ -59,14 +31,7 @@ export const MainContent = ({
         <Navigation />
       </AppShell.Navbar>
       <AppShell.Main bg={tokens.appBg}>
-        <Dashboard
-          companyToken={companyToken}
-          isLoading={isLoading}
-          partnerDesignId={theme}
-          partnerToken={partnerToken}
-          updateAuthTokens={getCompanyToken}
-          companyCredentials={companyCredentials}
-        />
+        <Dashboard  />
       </AppShell.Main>
     </AppShell>
   );

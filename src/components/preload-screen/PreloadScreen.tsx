@@ -1,16 +1,21 @@
-import { Loader, Text, Center, Stack, Paper } from '@mantine/core';
+import {
+  Loader,
+  Text,
+  Center,
+  Stack,
+  Paper,
+} from "@mantine/core";
+import { useLocalStorage } from "@mantine/hooks";
 
-import { PartnerCredentials } from '../partner-credentials/PartnerCredentials';
+import type { PartnerCredentials } from "../../types";
+import { PARTNER_TOKEN_CREDENTIALS_KEY } from "../../config";
+import { PartnerCredentialsForm } from "../partner-credentials/PartnerCredentials";
 
-type PreloadScreenProps = {
-  setIsCredentialsMissing: (isCredentialsMissing: boolean) => void;
-  isPartnerCredentialsMissing: boolean;
-};
+export const PreloadScreen = () => {
+  const [partnerCredentials, setPartnerCredentials] = useLocalStorage<PartnerCredentials>({
+    key: PARTNER_TOKEN_CREDENTIALS_KEY,
+  });
 
-export const PreloadScreen = ({
-  isPartnerCredentialsMissing,
-  setIsCredentialsMissing,
-}: PreloadScreenProps) => {
 
   return (
     <Center h="100vh" w="100vw" bg="gray.0">
@@ -26,11 +31,8 @@ export const PreloadScreen = ({
           <Text size="xl">
             Welcome To Wayflyer Embedded Finance Sandbox!
           </Text>
-          {isPartnerCredentialsMissing
-            ? <PartnerCredentials
-                setIsCredentialsMissing={setIsCredentialsMissing}
-                isCredentialsMissing={isPartnerCredentialsMissing}
-              />
+          {!partnerCredentials
+            ? <PartnerCredentialsForm setPartnerCredentials={setPartnerCredentials} />
             : <Text size="sm">
               Preparing your content, please wait...
             </Text>

@@ -25,8 +25,6 @@ export const extractPartnerCredentialsFromSearchParams: ExtractPartnerCredential
   };
 
   if (Object.values(partnerCredentials).every(partnerCredential => partnerCredential !== null)) {
-    localStorage.setItem(PARTNER_TOKEN_CREDENTIALS_KEY, JSON.stringify(partnerCredentials));
-
     return partnerCredentials as PartnerCredentialsType;
   }
 
