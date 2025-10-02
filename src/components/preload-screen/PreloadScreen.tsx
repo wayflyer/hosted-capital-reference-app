@@ -11,11 +11,14 @@ import type { PartnerCredentials } from "../../types";
 import { PARTNER_TOKEN_CREDENTIALS_KEY } from "../../config";
 import { PartnerCredentialsForm } from "../partner-credentials/PartnerCredentials";
 
-export const PreloadScreen = () => {
+type PreloadScreenProps = {
+  isDataLoading: boolean;
+};
+
+export const PreloadScreen = ({ isDataLoading }: PreloadScreenProps) => {
   const [partnerCredentials, setPartnerCredentials] = useLocalStorage<PartnerCredentials>({
     key: PARTNER_TOKEN_CREDENTIALS_KEY,
   });
-
 
   return (
     <Center h="100vh" w="100vw" bg="gray.0">
@@ -27,7 +30,7 @@ export const PreloadScreen = () => {
         style={{ textAlign: 'center' }}
       >
         <Stack align="center">
-          <Loader size="lg" variant="oval" />
+          {isDataLoading && <Loader size="lg" variant="oval" />}
           <Text size="xl">
             Welcome To Wayflyer Embedded Finance Sandbox!
           </Text>

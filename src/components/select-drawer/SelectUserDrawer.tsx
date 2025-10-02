@@ -2,11 +2,7 @@ import { useEffect, useState } from "react";
 import { Drawer, NavLink, Stack } from "@mantine/core";
 import { CiCirclePlus } from "react-icons/ci";
 
-import {
-  usePartnerCompanies,
-  usePartnerToken,
-  useCompanyUsers,
-} from "../../hooks";
+import { useCompanyUsers } from "../../hooks";
 import { generateRandomName } from "../../utils";
 import type { CompanyCredentialsType } from "../../types";
 import { useLocalStorage } from "@mantine/hooks";
@@ -22,16 +18,12 @@ export const SelectUserDrawer = ({
   onClose,
 }: SelectCompanyDrawerProps) => {
   const [companyCredentials, setCompanyCredentials] = useLocalStorage<CompanyCredentialsType>({ key: COMPANY_TOKEN_CREDENTIALS_KEY });
-  const partnerToken = usePartnerToken();
-  const token = partnerToken.data?.token as string;
-  const companies = usePartnerCompanies(token);
-  const partnerCompanies = companies?.data as string[];
-  const users = useCompanyUsers(token, partnerCompanies);
+  const { data: users } = useCompanyUsers();
   const [credentialsList, setCredentialsList] = useState<string[]>([]);
-  console.log(users.data);
-  console.log(companyCredentials);
 
-  const handleAddCredential = () => {
+  const selectedUser = companyCredentials?.user_id ?? null;
+
+  const handleAddCredential = async () => {
     const newCredentialId = crypto.randomUUID();
 
     setCredentialsList(prevState => ([
@@ -41,19 +33,31 @@ export const SelectUserDrawer = ({
   };
 
   useEffect(() => {
-    if (users.data) {
-      setCredentialsList(prevState => {
-        const usersData = users.data as string[];
-        const fullList = [...prevState, ...usersData];
-
-        return Array.from(new Set(fullList));
-      });
+    if (users) {
+      setCredentialsList(users);
     }
-  }, [users.data]);
+  }, [users]);
 
-  // useEffect(() => {
-  //   setCredentialsList(users?.data);
-  // }, [companyCredentials?.company_id, users.data]);
+  useEffect(() => {
+    setCompanyCredentials(prevState => {
+      if (selectedUser) {
+        return { ...prevState };
+      }
+
+      if (users?.length) {
+
+        return {
+          ...prevState,
+          user_id: users[0],
+        }
+      }
+
+      return {
+        ...prevState,
+        user_id: crypto.randomUUID(),
+      };
+    });
+  }, [companyCredentials?.company_id]);
 
   const handleSelectCredential = (externalId: string) => {
     setCompanyCredentials(prevState => ({

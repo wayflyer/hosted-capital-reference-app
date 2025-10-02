@@ -1,28 +1,54 @@
-import { useQuery } from "@tanstack/react-query";
+import { useEffect } from "react";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useLocalStorage } from '@mantine/hooks';
 
-import { usePartnerToken } from "./usePartnerToken.ts";
+import {
+  usePartnerToken,
+  usePartnerCompanies,
+  useCompanyUsers,
+} from "./index";
 import { getCompanyToken } from "../services";
 import { COMPANY_TOKEN_CREDENTIALS_KEY, queryKeys } from "../config";
 import type { CompanyCredentialsType } from "../types";
 
 export const useCompanyToken = () => {
-  const partnerToken = usePartnerToken();
+  const { data: partnerToken } = usePartnerToken();
+  const { data: parnteCompanies } = usePartnerCompanies();
+  const { data: companyUsers } = useCompanyUsers();
+  const queryClient = useQueryClient();
   const [companyCredentials] = useLocalStorage<CompanyCredentialsType>({ key: COMPANY_TOKEN_CREDENTIALS_KEY });
-  const company = companyCredentials?.company_id;
-  const user = companyCredentials?.user_id;
 
-  return useQuery({
-    queryKey: queryKeys.companyToken(partnerToken.data?.token, company, user),
-    queryFn: async () => {
-      if (partnerToken.data?.token) {
-        return await getCompanyToken(companyCredentials, partnerToken.data?.token)
-      }
+  const token  = partnerToken?.token ?? null;
+  const company = companyCredentials?.company_id ?? null;
+  const user    = companyCredentials?.user_id ?? null;
+  const companies = parnteCompanies ?? null;
+  const users = companyUsers ?? null;
 
-      return null;
-    },
-    enabled: !!partnerToken && !!company && !!user,
+
+  const companyTokenQuery = useQuery({
+    queryKey: queryKeys.companyToken(token, company, user),
+    queryFn: async () => getCompanyToken({ company_id: company!, user_id: user! }, token!),
+    enabled: !!token && !!company && !!user,
     staleTime: Infinity,
     refetchOnWindowFocus: false,
   });
+
+  const { data: companyToken } = companyTokenQuery;
+
+  useEffect(() => {
+    if (companyToken && partnerToken && user && company && companies && users) {
+      const isNewCompany = !companies.includes(company);
+      const isNewUser = !users.includes(user);
+
+      if (isNewCompany) {
+        queryClient.refetchQueries({ queryKey: queryKeys.partnerCompanies(token), type: 'active', exact: true });
+      }
+
+      if (isNewUser) {
+        queryClient.refetchQueries({ queryKey: queryKeys.companyUsers(token, company), type: 'active', exact: true });
+      }
+    }
+  }, [companyToken]);
+
+  return companyTokenQuery;
 };

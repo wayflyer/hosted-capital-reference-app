@@ -2,10 +2,7 @@ import { useState, useEffect } from "react";
 import { Drawer, NavLink, Stack } from "@mantine/core";
 import { CiCirclePlus } from "react-icons/ci";
 
-import {
-  usePartnerCompanies,
-  usePartnerToken,
-} from "../../hooks";
+import { usePartnerCompanies } from "../../hooks";
 import { generateRandomName } from "../../utils";
 import type { CompanyCredentialsType } from "../../types";
 import { useLocalStorage } from "@mantine/hooks";
@@ -21,9 +18,7 @@ export const SelectCompanyDrawer = ({
   onClose,
 }: SelectCompanyDrawerProps) => {
   const [companyCredentials, setCompanyCredentials] = useLocalStorage<CompanyCredentialsType>({ key: COMPANY_TOKEN_CREDENTIALS_KEY });
-  const partnerToken = usePartnerToken();
-  const token = partnerToken.data?.token as string;
-  const companies = usePartnerCompanies(token);
+  const companies = usePartnerCompanies();
   const [credentialsList, setCredentialsList] = useState<string[]>([]);
 
   const handleAddCredential = () => {

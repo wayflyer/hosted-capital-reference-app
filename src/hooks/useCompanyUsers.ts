@@ -1,48 +1,57 @@
-import { useQuery } from "@tanstack/react-query";
+import { useEffect } from "react";
+import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { useLocalStorage } from '@mantine/hooks';
 
+import { usePartnerToken } from "./index";
 import { getPartnerCompanyUsers } from "../services";
 import { COMPANY_TOKEN_CREDENTIALS_KEY, queryKeys } from "../config";
 import type { CompanyCredentialsType } from "../types";
 
-export const useCompanyUsers = (
-  partnerToken: string,
-  companies?: string[] | null,
-)=> {
+export const useCompanyUsers = () => {
+  const { data: partnerTok } = usePartnerToken();
   const [companyCredentials, setCompanyCredentials] = useLocalStorage<CompanyCredentialsType>({ key: COMPANY_TOKEN_CREDENTIALS_KEY });
-  const companyId = companyCredentials?.company_id;
 
-  return useQuery({
-    queryKey: queryKeys.companyUsers(partnerToken, companies, companyId),
-    queryFn: async () => {
-      try {
-        if (partnerToken && companyId) {
-          const currentUser = companyCredentials?.user_id;
-          const users = await getPartnerCompanyUsers(partnerToken, companyId);
+  const token = partnerTok?.token ?? null;
+  const companyId = companyCredentials?.company_id ?? null;
+  const userId = companyCredentials?.user_id ?? null;
 
-          if (!currentUser) {
-            const preselectedUser = users.length ? users[0] : crypto.randomUUID();
-
-            setCompanyCredentials((prevState) => ({
-              ...prevState,
-              user_id: preselectedUser,
-            }))
-          }
-
-          return users;
-        }
-      } catch {
-        const newUser = crypto.randomUUID();
-        setCompanyCredentials((prevState) => ({
-          ...prevState,
-          user_id: newUser,
-        }));
-
-        return [newUser];
-      }
-    },
-    enabled: !!partnerToken && !!companies && !!companyId,
+  const companyUsersQuery = useQuery({
+    queryKey: queryKeys.companyUsers(token, companyId),
+    enabled: Boolean(token && companyId),
     staleTime: Infinity,
     refetchOnWindowFocus: false,
+    placeholderData: keepPreviousData,
+    queryFn: () => {
+      if (token && companyId) {
+        return getPartnerCompanyUsers(token, companyId);
+      }
+
+      return null;
+    },
   });
-}
+
+  const { data: users, isError, error } = companyUsersQuery;
+
+  useEffect(() => {
+    if (!companyId || !users) return;
+    if (userId) return;
+
+    const preselected = users.length ? users[0] : crypto.randomUUID();
+    setCompanyCredentials({ company_id: companyId, user_id: preselected });
+  }, [users, companyId, userId, setCompanyCredentials]);
+
+  useEffect(() => {
+    if (!isError || !companyId) return;
+
+    if (!userId) {
+      const fallback = crypto.randomUUID();
+      console.log(fallback, 'random 1');
+      setCompanyCredentials({
+        company_id: companyId,
+        user_id: fallback
+      });
+    }
+  }, [isError, error, companyId, userId, setCompanyCredentials]);
+
+  return companyUsersQuery;
+};

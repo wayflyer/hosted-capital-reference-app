@@ -4,17 +4,18 @@ import { MainContent } from '../main-content/MainContent.tsx';
 
 export const ContentManager = () => {
   const partnerToken = usePartnerToken();
-  const token = partnerToken.data?.token as string;
-  const partnerCompanies = usePartnerCompanies(token);
-  const companies = partnerCompanies?.data as string[];
-  const companyUsers = useCompanyUsers(token, companies);
+  const partnerCompanies = usePartnerCompanies();
+  const companyUsers = useCompanyUsers();
   const companyToken = useCompanyToken();
-  const isDataLoaded = [partnerToken, partnerCompanies, companyUsers, companyToken].some(({ data }) => !!data);
+
+  const requests = [partnerToken, partnerCompanies, companyUsers, companyToken];
+  const isDataLoaded = requests.some(({ data }) => !!data);
+  const isDataLoading = requests.some(({ isLoading }) => isLoading);
 
   return (
     <>
       {!isDataLoaded
-        ? <PreloadScreen />
+        ? <PreloadScreen isDataLoading={isDataLoading} />
         : <MainContent />
       }
     </>

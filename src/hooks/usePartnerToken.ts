@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, keepPreviousData } from "@tanstack/react-query";
 import { useLocalStorage } from "@mantine/hooks";
 
 import { getPartnerToken } from "../services";
@@ -74,5 +74,6 @@ export const usePartnerToken = () => {
     refetchOnWindowFocus: false,
     refetchOnReconnect: true,
     gcTime: 23 * 60 * 60 * 1000,
+    placeholderData: keepPreviousData,
   });
 };
