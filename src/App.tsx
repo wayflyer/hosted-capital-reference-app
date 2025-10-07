@@ -1,90 +1,14 @@
-import { AppShell, MantineProvider } from "@mantine/core";
-import { useDisclosure } from "@mantine/hooks";
-import { ModalsProvider } from "@mantine/modals";
-import { useState } from "react";
-
-import { Header } from "./components/header/Header";
-import { Navigation } from "./components/navigation/Navigation";
-import { Dashboard } from "./pages/dashboard";
-import { useGetAuthTokens, useManageCompanyCredentials } from "./hooks";
-
-import {
-  THEME_CONFIG,
-  type Theme,
-  type ThemeTokens,
-} from "./components/select-theme/theme";
-import { PartnerCredentials } from "./components/partner-credentials/PartnerCredentials";
+import { QueryProvider } from './components/query-provider/QueryProvider.tsx';
+import { ThemeProvider } from "./components/theme-provider/ThemeProvider.tsx";
+import { ContentManager } from "./components/content-manager/ContentManager.tsx";
 
 export const App = () => {
-  const [theme, setTheme] = useState<Theme>("whiteLabel");
-  const { companyCredentials, setAndCacheCompanyCredentials } = useManageCompanyCredentials();
-  const [opened, { toggle }] = useDisclosure();
-  const {
-    companyToken,
-    partnerToken,
-    isCredentialsMissing,
-    setIsCredentialsMissing,
-    getCompanyToken,
-  } = useGetAuthTokens(companyCredentials);
-
-  const tokens: ThemeTokens = THEME_CONFIG[theme];
 
   return (
-    <MantineProvider
-      theme={{
-        defaultRadius: "md",
-        primaryColor: "gray",
-        fontFamily: `${tokens.font.fontFamily}, sans-serif`,
-        headings: {
-          fontFamily: `${tokens.font.fontFamily}, sans-serif`,
-          fontWeight: "500",
-        },
-        other: {
-          app: {
-            tokens,
-            appBg: tokens.appBg,
-            lightColor: tokens.lightColor,
-            darkColor: tokens.darkColor,
-          },
-        },
-      }}
-    >
-      <ModalsProvider>
-        <AppShell
-          header={{ height: { base: 72, sm: 60 } }}
-          navbar={{
-            width: 200,
-            breakpoint: "sm",
-            collapsed: { mobile: !opened },
-          }}
-          padding="md"
-        >
-          <PartnerCredentials isCredentialsMissing={isCredentialsMissing} setIsCredentialsMissing={setIsCredentialsMissing} />
-          <AppShell.Header>
-            <Header
-              theme={theme}
-              setTheme={setTheme}
-              companyCredentials={companyCredentials}
-              setCompanyCredentials={setAndCacheCompanyCredentials}
-              partnerToken={partnerToken}
-              opened={opened}
-              toggle={toggle}
-            />
-          </AppShell.Header>
-          <AppShell.Navbar p="md">
-            <Navigation />
-          </AppShell.Navbar>
-          <AppShell.Main bg={tokens.appBg}>
-            <Dashboard
-              companyToken={companyToken}
-              partnerDesignId={theme}
-              partnerToken={partnerToken}
-              updateAuthTokens={getCompanyToken}
-              companyCredentials={companyCredentials}
-            />
-          </AppShell.Main>
-        </AppShell>
-      </ModalsProvider>
-    </MantineProvider>
+    <QueryProvider>
+      <ThemeProvider>
+        <ContentManager />
+      </ThemeProvider>
+    </QueryProvider>
   );
 };
