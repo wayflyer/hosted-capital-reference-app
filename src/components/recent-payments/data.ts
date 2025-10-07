@@ -23,8 +23,8 @@ export const RECENT_PAYMENTS_FIXTURES: PaymentRow[] = [
   },
   {
     date: "Mar 23",
-    name: "Elizabeth Windo",
-    avatar: { kind: "letter", value: "EW" },
+    name: "Novaki Kijotaka",
+    avatar: { kind: "letter", value: "NK" },
     amount: -500,
     account: "Operations",
     method: { type: "wire" },
