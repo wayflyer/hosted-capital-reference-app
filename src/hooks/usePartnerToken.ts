@@ -20,7 +20,7 @@ export const usePartnerToken = () => {
   });
   const partnerCredentialsFromSearchParams = extractPartnerCredentialsFromSearchParams();
 
-  const takeCredentialsFromSearchParams = () => {
+  const isCredentialsFromSearchParams = () => {
     if (!partnerCredentialsFromSearchParams) return false;
 
     if (!partnerCredentials) return true;
@@ -45,7 +45,7 @@ export const usePartnerToken = () => {
     window.history[method](null, '', url.toString());
   }
 
-  if (takeCredentialsFromSearchParams()) {
+  if (isCredentialsFromSearchParams()) {
     setPartnerCredentials(partnerCredentialsFromSearchParams);
     removeSearchParams(['partner_id', 'partner_secret']);
   }

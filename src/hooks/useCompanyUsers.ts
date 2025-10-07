@@ -19,6 +19,7 @@ export const useCompanyUsers = () => {
     queryKey: queryKeys.companyUsers(token, companyId),
     enabled: Boolean(token && companyId),
     staleTime: Infinity,
+    gcTime: Infinity,
     refetchOnWindowFocus: false,
     placeholderData: keepPreviousData,
     queryFn: () => {
@@ -33,8 +34,7 @@ export const useCompanyUsers = () => {
   const { data: users, isError, error } = companyUsersQuery;
 
   useEffect(() => {
-    if (!companyId || !users) return;
-    if (userId) return;
+    if (userId || !companyId || !users) return;
 
     const preselected = users.length ? users[0] : crypto.randomUUID();
     setCompanyCredentials({ company_id: companyId, user_id: preselected });

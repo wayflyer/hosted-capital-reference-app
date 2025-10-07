@@ -30,6 +30,7 @@ export const useCompanyToken = () => {
     queryFn: async () => getCompanyToken({ company_id: company!, user_id: user! }, token!),
     enabled: !!token && !!company && !!user,
     staleTime: Infinity,
+    gcTime: Infinity,
     refetchOnWindowFocus: false,
   });
 

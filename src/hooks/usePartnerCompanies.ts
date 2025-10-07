@@ -24,6 +24,7 @@ export const usePartnerCompanies = ()=> {
     },
     enabled: Boolean(partnerToken),
     staleTime: Infinity,
+    gcTime: Infinity,
     refetchOnWindowFocus: false,
     placeholderData: keepPreviousData,
   });
