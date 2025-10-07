@@ -45,7 +45,6 @@ export const useCompanyUsers = () => {
 
     if (!userId) {
       const fallback = crypto.randomUUID();
-      console.log(fallback, 'random 1');
       setCompanyCredentials({
         company_id: companyId,
         user_id: fallback

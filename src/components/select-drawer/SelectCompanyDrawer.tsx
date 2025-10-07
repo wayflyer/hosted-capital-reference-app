@@ -53,22 +53,30 @@ export const SelectCompanyDrawer = ({
   );
 
   return (
-    <Drawer
+    <Drawer.Root
       opened={opened}
-      onClose={onClose}
       position="right"
-      title={'Select Company'}
+      onClose={onClose}
     >
-      <Stack>
-        <NavLink label={addComponent} onClick={handleAddCredential} />
-        {credentialsList && credentialsList.map((externalId) => (
-          <NavLink
-            key={externalId}
-            label={generateRandomName(externalId, 'company_id')}
-            active={externalId === companyCredentials?.company_id}
-            onClick={() => handleSelectCredential(externalId)}
-          />))}
-      </Stack>
-    </Drawer>
+      <Drawer.Overlay />
+      <Drawer.Content style={{ zIndex: 201 }}>
+        <Drawer.Header>
+          <Drawer.Title>Select Company</Drawer.Title>
+          <Drawer.CloseButton />
+        </Drawer.Header>
+        <Drawer.Body>
+          <Stack>
+            <NavLink label={addComponent} onClick={handleAddCredential} />
+            {credentialsList && credentialsList.map((externalId) => (
+              <NavLink
+                key={externalId}
+                label={generateRandomName(externalId, 'company_id')}
+                active={externalId === companyCredentials?.company_id}
+                onClick={() => handleSelectCredential(externalId)}
+              />))}
+          </Stack>
+        </Drawer.Body>
+      </Drawer.Content>
+    </Drawer.Root>
   );
 }

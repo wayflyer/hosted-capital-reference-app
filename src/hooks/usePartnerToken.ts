@@ -36,22 +36,26 @@ export const usePartnerToken = () => {
     return isNewPartnerIdEqualsToCurrent || isNewPartnerSecretEqualsToCurrent;
   };
 
-  if (takeCredentialsFromSearchParams()) {
-    setPartnerCredentials(partnerCredentialsFromSearchParams);
+  const removeSearchParams = (
+    keys: string[],
+  )=> {
+    const url = new URL(window.location.href);
+    keys.forEach((k) => url.searchParams.delete(k)); // deletes all occurrences of k
+    const method = 'replaceState';
+    window.history[method](null, '', url.toString());
   }
 
-  const partnerId = partnerCredentials?.partnerId;
-  const partnerSecret = partnerCredentials?.partnerSecret;
+  if (takeCredentialsFromSearchParams()) {
+    setPartnerCredentials(partnerCredentialsFromSearchParams);
+    removeSearchParams(['partner_id', 'partner_secret']);
+  }
+
+  const partnerId = partnerCredentials?.partnerId as string;
+  const partnerSecret = partnerCredentials?.partnerSecret as string;
 
   return useQuery({
     queryKey: queryKeys.partnerToken(partnerId, partnerSecret),
-    queryFn: async () => {
-      if (partnerId && partnerSecret) {
-        return await getPartnerToken(partnerId, partnerSecret);
-      }
-
-      return null;
-    },
+    queryFn: () => getPartnerToken(partnerId, partnerSecret),
     staleTime: 24 * 60 * 60 * 1000,
     refetchOnMount: (query) => {
       const data = query.state.data as PartnerToken | undefined;
@@ -75,5 +79,6 @@ export const usePartnerToken = () => {
     refetchOnReconnect: true,
     gcTime: 23 * 60 * 60 * 1000,
     placeholderData: keepPreviousData,
+    enabled: !!partnerId && !!partnerSecret,
   });
 };

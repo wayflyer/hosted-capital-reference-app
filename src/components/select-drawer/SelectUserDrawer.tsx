@@ -45,7 +45,6 @@ export const SelectUserDrawer = ({
       }
 
       if (users?.length) {
-
         return {
           ...prevState,
           user_id: users[0],
@@ -54,7 +53,6 @@ export const SelectUserDrawer = ({
 
       return {
         ...prevState,
-        user_id: crypto.randomUUID(),
       };
     });
   }, [companyCredentials?.company_id]);
@@ -74,23 +72,31 @@ export const SelectUserDrawer = ({
   );
 
   return (
-    <Drawer
+    <Drawer.Root
       opened={opened}
-      onClose={onClose}
       position="right"
-      title={'Select User'}
+      onClose={onClose}
     >
-      <Stack>
-        <NavLink label={addComponent} onClick={handleAddCredential} />
-        {credentialsList && credentialsList.map((externalId) => (
-          <NavLink
-            key={externalId}
-            label={generateRandomName(externalId, 'user_id', companyCredentials?.company_id)}
-            active={externalId === companyCredentials?.user_id}
-            onClick={() => handleSelectCredential(externalId)}
-          />
-        ))}
-      </Stack>
-    </Drawer>
+      <Drawer.Overlay />
+      <Drawer.Content style={{ zIndex: 201 }}>
+        <Drawer.Header>
+          <Drawer.Title>Select User</Drawer.Title>
+          <Drawer.CloseButton />
+        </Drawer.Header>
+        <Drawer.Body>
+          <Stack>
+            <NavLink label={addComponent} onClick={handleAddCredential} />
+            {credentialsList && credentialsList.map((externalId) => (
+              <NavLink
+                key={externalId}
+                label={generateRandomName(externalId, 'user_id', companyCredentials?.company_id)}
+                active={externalId === companyCredentials?.user_id}
+                onClick={() => handleSelectCredential(externalId)}
+              />
+            ))}
+          </Stack>
+        </Drawer.Body>
+      </Drawer.Content>
+    </Drawer.Root>
   );
 }

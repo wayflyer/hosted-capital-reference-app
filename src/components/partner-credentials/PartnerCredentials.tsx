@@ -4,15 +4,26 @@ import {
   Paper,
   PasswordInput,
   TextInput,
-} from '@mantine/core';
+  Alert,
+} from "@mantine/core";
+import { IconInfoCircle } from '@tabler/icons-react';
 
 import type { PartnerCredentials } from "../../types";
 
 type PartnerCredentialsProps = {
   setPartnerCredentials: (val: (PartnerCredentials | ((prevState: PartnerCredentials) => PartnerCredentials))) => void;
+  isError: boolean;
 };
 
-export const PartnerCredentialsForm = ({ setPartnerCredentials }: PartnerCredentialsProps) => {
+const LoginAlert = () => {
+  const icon = <IconInfoCircle />;
+
+  return (
+    <Alert variant="light" color="red" title="Invalid Partner ID or Secret. Please check your credentials and try again." icon={icon} />
+  );
+};
+
+export const PartnerCredentialsForm = ({ setPartnerCredentials, isError }: PartnerCredentialsProps) => {
   const [credentials, setCredentials] = useState({ partnerId: '', partnerSecret: '' });
   const isAddCredentialsDisabled = !credentials.partnerId || !credentials.partnerSecret;
 
@@ -29,6 +40,7 @@ export const PartnerCredentialsForm = ({ setPartnerCredentials }: PartnerCredent
 
   return (
       <Paper withBorder shadow="sm" p={22} mt={30} radius="md" w="100%">
+        {isError && <LoginAlert />}
         <TextInput
           onChange={(event) => handleInputChange(event, 'partnerId')}
           value={credentials.partnerId}
@@ -51,7 +63,7 @@ export const PartnerCredentialsForm = ({ setPartnerCredentials }: PartnerCredent
           fullWidth mt="xl"
           radius="md"
         >
-          Add credentials
+          Connect
         </Button>
       </Paper>
   );

@@ -2,3 +2,4 @@ export type { CompanyCredentialsType, SetAndCacheCompanyCredentials } from './co
 export type { CredentialSelectorType } from './credentialSelectorType';
 export type { AuthToken } from './authToken.ts';
 export type { PartnerCredentials } from './partnerCredentials';
+export type { IdleSnapshot } from './idleSnapshot';

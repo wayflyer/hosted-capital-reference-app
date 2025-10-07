@@ -16,7 +16,7 @@ export const useCompanyToken = () => {
   const { data: parnteCompanies } = usePartnerCompanies();
   const { data: companyUsers } = useCompanyUsers();
   const queryClient = useQueryClient();
-  const [companyCredentials] = useLocalStorage<CompanyCredentialsType>({ key: COMPANY_TOKEN_CREDENTIALS_KEY });
+  const [ companyCredentials ] = useLocalStorage<CompanyCredentialsType>({ key: COMPANY_TOKEN_CREDENTIALS_KEY });
 
   const token  = partnerToken?.token ?? null;
   const company = companyCredentials?.company_id ?? null;
