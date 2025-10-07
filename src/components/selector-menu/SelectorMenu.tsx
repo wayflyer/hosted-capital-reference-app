@@ -1,19 +1,22 @@
 import { ActionIcon, Group, Menu } from "@mantine/core";
 import { IconDotsVertical } from "@tabler/icons-react";
+import { useLocalStorage } from "@mantine/hooks";
+
 import type { CompanyCredentialsType } from "../../types";
 import { generateRandomName } from "../../utils";
+import { COMPANY_TOKEN_CREDENTIALS_KEY } from "../../config";
 
 type SelectorMenuProps = {
-  toggleUserDrawer: () => void;
-  toggleCompanyDrawer: () => void;
-  companyCredentials: CompanyCredentialsType;
+  toggleUserDrawer: VoidFunction;
+  toggleCompanyDrawer: VoidFunction;
 }
 
 export const SelectorMenu = ({
   toggleUserDrawer,
   toggleCompanyDrawer,
-  companyCredentials,
 }: SelectorMenuProps) => {
+  const [companyCredentials] = useLocalStorage<CompanyCredentialsType>({ key: COMPANY_TOKEN_CREDENTIALS_KEY });
+
   const usersLabel = companyCredentials?.user_id
     ? generateRandomName(companyCredentials.user_id, "user_id", companyCredentials?.company_id)
     : "Select User";
