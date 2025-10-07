@@ -44,7 +44,7 @@ const persistOptions = {
   maxAge: 24 * 60 * 60 * 1000,
   buster: 'v1',
   dehydrateOptions: {
-    //@ts-ignore
+    //@ts-expect-error
     shouldDehydrateQuery: (q) => {
       const key = Array.isArray(q.queryKey) ? q.queryKey[0] : q.queryKey;
       const queryKeys = Object.values(QUERY_KEYS);

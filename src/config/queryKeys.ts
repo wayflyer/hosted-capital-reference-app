@@ -8,7 +8,7 @@ export enum QUERY_KEYS {
 }
 
 export const queryKeys = {
-  partnerToken: (partnerId?: string, partnerSecret?: string): QueryKey => [QUERY_KEYS.PARTNER_TOKEN, partnerId, partnerSecret],
+  partnerToken: (partnerId: string, partnerSecret: string): QueryKey => [QUERY_KEYS.PARTNER_TOKEN, partnerId, partnerSecret],
   partnerCompanies: (partnerToken?: string | null): QueryKey => [
     QUERY_KEYS.PARTNER_COMPANIES,
     partnerToken ?? null,
