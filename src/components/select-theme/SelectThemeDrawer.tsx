@@ -4,7 +4,7 @@ import { THEME_VALUES, getThemeLabel, type Theme } from "./theme";
 type SelectThemeDrawerProps = {
   theme: Theme;
   opened: boolean;
-  onClose: () => void;
+  onClose: VoidFunction;
   onSelect: (theme: Theme) => void;
 };
 

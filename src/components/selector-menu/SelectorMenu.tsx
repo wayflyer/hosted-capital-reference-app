@@ -7,8 +7,8 @@ import { generateRandomName } from "../../utils";
 import { COMPANY_TOKEN_CREDENTIALS_KEY } from "../../config";
 
 type SelectorMenuProps = {
-  toggleUserDrawer: () => void;
-  toggleCompanyDrawer: () => void;
+  toggleUserDrawer: VoidFunction;
+  toggleCompanyDrawer: VoidFunction;
 }
 
 export const SelectorMenu = ({

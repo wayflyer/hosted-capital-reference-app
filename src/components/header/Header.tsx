@@ -11,7 +11,7 @@ import { Logo } from "./logo/Logo";
 type HeaderProps = {
   theme: Theme;
   opened: boolean;
-  toggle: () => void;
+  toggle: VoidFunction;
 };
 
 export const Header = ({

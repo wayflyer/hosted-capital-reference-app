@@ -11,7 +11,7 @@ import { CustomDrawer } from "./CustomDrawer.tsx";
 
 type SelectCompanyDrawerProps = {
   opened: boolean;
-  onClose: () => void;
+  onClose: VoidFunction;
 };
 
 export const SelectCompanyDrawer = ({
@@ -20,7 +20,7 @@ export const SelectCompanyDrawer = ({
 }: SelectCompanyDrawerProps) => {
   const [companyCredentials, setCompanyCredentials] = useLocalStorage<CompanyCredentialsType>({ key: COMPANY_TOKEN_CREDENTIALS_KEY });
   const companies = usePartnerCompanies();
-  const [credentialsList, setCredentialsList] = useState<string[]>([]);
+  const [companyList, setCredentialsList] = useState<string[]>([]);
 
   const handleAddCredential = () => {
     const newCredentialId = crypto.randomUUID();
@@ -46,7 +46,7 @@ export const SelectCompanyDrawer = ({
     setCompanyCredentials({ company_id: externalId });
   }
 
-  const addComponent = (
+  const AddComponent = (
     <div style={{ alignItems: 'center', display: 'flex', gap: '5px' }}>
       <p>Add Company</p>
       <CiCirclePlus />
@@ -56,8 +56,8 @@ export const SelectCompanyDrawer = ({
   return (
     <CustomDrawer opened={opened} onClose={onClose} title="Select Company">
       <Stack>
-        <NavLink label={addComponent} onClick={handleAddCredential} />
-        {credentialsList && credentialsList.map((externalId) => (
+        <NavLink label={AddComponent} onClick={handleAddCredential} />
+        {companyList.length && companyList.map((externalId) => (
           <NavLink
             key={externalId}
             label={generateRandomName(externalId, 'company_id')}

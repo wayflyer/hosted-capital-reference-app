@@ -6,8 +6,8 @@ import { generateRandomName } from "../../utils";
 import { COMPANY_TOKEN_CREDENTIALS_KEY } from "../../config";
 
 type SelectTogglersProps = {
-  toggleCompanyDrawer: () => void;
-  toggleUserDrawer: () => void;
+  toggleCompanyDrawer: VoidFunction;
+  toggleUserDrawer: VoidFunction;
 };
 
 export const SelectTogglers = ({

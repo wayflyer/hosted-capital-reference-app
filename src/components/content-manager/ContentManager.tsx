@@ -14,9 +14,9 @@ export const ContentManager = () => {
 
   return (
     <>
-      {!isDataLoaded
-        ? <PreloadScreen isDataLoading={isDataLoading} isError={partnerToken.isError} />
-        : <MainContent />
+      {isDataLoaded
+        ? <MainContent />
+        : <PreloadScreen isDataLoading={isDataLoading} isError={partnerToken.isError} />
       }
     </>
   );

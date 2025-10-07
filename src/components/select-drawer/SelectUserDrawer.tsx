@@ -10,7 +10,7 @@ import { COMPANY_TOKEN_CREDENTIALS_KEY } from "../../config";
 
 type SelectCompanyDrawerProps = {
   opened: boolean;
-  onClose: () => void;
+  onClose: VoidFunction;
 };
 
 export const SelectUserDrawer = ({
@@ -19,7 +19,7 @@ export const SelectUserDrawer = ({
 }: SelectCompanyDrawerProps) => {
   const [companyCredentials, setCompanyCredentials] = useLocalStorage<CompanyCredentialsType>({ key: COMPANY_TOKEN_CREDENTIALS_KEY });
   const { data: users } = useCompanyUsers();
-  const [credentialsList, setCredentialsList] = useState<string[]>([]);
+  const [usersList, setCredentialsList] = useState<string[]>([]);
 
   const selectedUser = companyCredentials?.user_id ?? null;
 
@@ -64,7 +64,7 @@ export const SelectUserDrawer = ({
     }));
   }
 
-  const addComponent = (
+  const AddComponent = (
     <div style={{ alignItems: 'center', display: 'flex', gap: '5px' }}>
       <p>Add User</p>
       <CiCirclePlus />
@@ -85,8 +85,8 @@ export const SelectUserDrawer = ({
         </Drawer.Header>
         <Drawer.Body>
           <Stack>
-            <NavLink label={addComponent} onClick={handleAddCredential} />
-            {credentialsList && credentialsList.map((externalId) => (
+            <NavLink label={AddComponent} onClick={handleAddCredential} />
+            {usersList.length && usersList.map((externalId) => (
               <NavLink
                 key={externalId}
                 label={generateRandomName(externalId, 'user_id', companyCredentials?.company_id)}

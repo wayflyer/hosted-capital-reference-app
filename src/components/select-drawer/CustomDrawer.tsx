@@ -3,7 +3,7 @@ import { Drawer } from "@mantine/core";
 
 type CustomDrawerProps = {
   opened: boolean;
-  onClose: () => void;
+  onClose: VoidFunction;
   title: string;
   children: ReactNode;
 };
