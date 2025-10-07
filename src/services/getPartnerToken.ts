@@ -1,10 +1,11 @@
 import { apiClient } from "../api";
 import { PARTNER_TOKEN_URL } from "../config";
+import type { AuthToken } from "../types";
 
 type GetPartnerTokenType = (
   partnerId: string,
   partnerSecret: string,
-) => Promise<string>;
+) => Promise<AuthToken>;
 
 export const getPartnerToken: GetPartnerTokenType = async (
   partnerId,
@@ -15,5 +16,5 @@ export const getPartnerToken: GetPartnerTokenType = async (
     partner_secret: partnerSecret,
   });
 
-  return partnerTokenResponse.data.token;
+  return partnerTokenResponse.data;
 };
