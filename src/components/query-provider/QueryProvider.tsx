@@ -4,6 +4,7 @@ import { PersistQueryClientProvider } from "@tanstack/react-query-persist-client
 import { createAsyncStoragePersister } from '@tanstack/query-async-storage-persister';
 
 import { HydrationGate } from "./HydrationGate.tsx";
+import { QUERY_KEYS } from '../../config';
 
 type QueryProviderProps = {
   children: ReactNode;
@@ -46,13 +47,9 @@ const persistOptions = {
     //@ts-ignore
     shouldDehydrateQuery: (q) => {
       const key = Array.isArray(q.queryKey) ? q.queryKey[0] : q.queryKey;
-      return (
-        q.state.status === 'success' &&
-        (key === 'partnerToken' ||
-          key === 'partnerCompanies' ||
-          key === 'companyUsers' ||
-          key === 'companyToken')
-      );
+      const queryKeys = Object.values(QUERY_KEYS);
+
+      return q.state.status === 'success' && queryKeys.includes(key);
     },
   },
 };

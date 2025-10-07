@@ -13,3 +13,4 @@ export {
   COMPANY_TOKEN_CREDENTIALS_KEY,
 } from './const';
 export { adjectives, companyNouns, lastNames, firstNames } from './namesDictionaries';
+export { QUERY_KEYS, queryKeys } from './queryKeys';
