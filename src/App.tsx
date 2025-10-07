@@ -20,7 +20,6 @@ export const App = () => {
   const { companyCredentials, setAndCacheCompanyCredentials } = useManageCompanyCredentials();
   const [opened, { toggle }] = useDisclosure();
   const {
-    isLoading,
     companyToken,
     partnerToken,
     isCredentialsMissing,
@@ -78,7 +77,6 @@ export const App = () => {
           <AppShell.Main bg={tokens.appBg}>
             <Dashboard
               companyToken={companyToken}
-              isLoading={isLoading}
               partnerDesignId={theme}
               partnerToken={partnerToken}
               updateAuthTokens={getCompanyToken}
