@@ -73,7 +73,17 @@ export const StackedBarChart = ({
       bars,
       labelsY: height - 8,
     };
-  }, [containerWidth, data, height, barPx, minGapPx]);
+  }, [
+    containerWidth,
+    data,
+    height,
+    barPx,
+    minGapPx,
+    margin.top,
+    margin.right,
+    margin.bottom,
+    margin.left,
+  ]);
 
   return (
     <div ref={ref} style={{ width: "100%" }}>

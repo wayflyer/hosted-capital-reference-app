@@ -1,4 +1,4 @@
-import { useEffect, useState, useMemo, useCallback } from "react";
+import { useEffect, useState, useCallback } from "react";
 
 import { getPartnerCredentials } from '../utils';
 import { getPartnerToken as requestPartnerToken, getCompanyToken as requestCompanyToken } from "../services";
@@ -11,15 +11,14 @@ export const useGetAuthTokens = (companyCredentials: CompanyCredentialsType) => 
   const [partnerToken, setPartnerToken] = useState('');
   const [isCredentialsMissing, setIsCredentialsMissing] = useState(false);
 
-  const partnerCredentials = useMemo(() => {
-    return getPartnerCredentials();
-  }, [isCredentialsMissing]);
+  const partnerCredentials = getPartnerCredentials();
+  const partnerId = partnerCredentials?.partnerId;
+  const partnerSecret = partnerCredentials?.partnerSecret;
 
   const getPartnerToken = useCallback(async () => {
     try {
       setIsLoading(true);
-      if (partnerCredentials?.partnerId && partnerCredentials?.partnerSecret) {
-        const { partnerId, partnerSecret } = partnerCredentials;
+      if (partnerId && partnerSecret) {
         const requestedPartnerToken = await requestPartnerToken(partnerId, partnerSecret);
         setPartnerToken(requestedPartnerToken.token);
       }
@@ -28,7 +27,7 @@ export const useGetAuthTokens = (companyCredentials: CompanyCredentialsType) => 
     } finally {
       setIsLoading(false);
     }
-  }, [partnerCredentials]);
+  }, [partnerId, partnerSecret]);
 
   const getCompanyToken = useCallback(async () => {
     try {

@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useLocalStorage } from '@mantine/hooks';
 
@@ -25,7 +26,7 @@ export const useCompanyToken = () => {
 
   const isEnabled = Boolean(token && companyId && userId);
 
-  return useQuery({
+  const companyTokenQuery = useQuery({
     queryKey: queryKeys.companyToken(token, companyId, userId),
     queryFn: () => {
       const authToken = token as string;
@@ -40,16 +41,21 @@ export const useCompanyToken = () => {
     staleTime: Infinity,
     gcTime: Infinity,
     refetchOnWindowFocus: false,
-    onSuccess: () => {
-      if (!companyId || !userId) return;
-
-      if (Array.isArray(companies) && !companies.includes(companyId)) {
-        queryClient.invalidateQueries({ queryKey: queryKeys.partnerCompanies(token), exact: true });
-      }
-
-      if (Array.isArray(users) && !users.includes(userId)) {
-        queryClient.invalidateQueries({ queryKey: queryKeys.companyUsers(token, companyId), exact: true });
-      }
-    },
   });
+
+  const { data: companyToken } = companyTokenQuery;
+
+  useEffect(() => {
+    if (!companyToken || !token || !companyId || !userId) return;
+
+    if (Array.isArray(companies) && !companies.includes(companyId)) {
+      queryClient.invalidateQueries({ queryKey: queryKeys.partnerCompanies(token), exact: true });
+    }
+
+    if (Array.isArray(users) && !users.includes(userId)) {
+      queryClient.invalidateQueries({ queryKey: queryKeys.companyUsers(token, companyId), exact: true });
+    }
+  }, [companyToken, token, companyId, userId, companies, users, queryClient]);
+
+  return companyTokenQuery;
 };

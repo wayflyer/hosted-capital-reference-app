@@ -44,7 +44,7 @@ const persistOptions = {
   maxAge: 24 * 60 * 60 * 1000,
   buster: 'v1',
   dehydrateOptions: {
-    //@ts-expect-error
+    // @ts-expect-error - upstream types don't expose exact shape of Query
     shouldDehydrateQuery: (q) => {
       const key = Array.isArray(q.queryKey) ? q.queryKey[0] : q.queryKey;
       const queryKeys = Object.values(QUERY_KEYS);

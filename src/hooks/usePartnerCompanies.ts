@@ -12,7 +12,7 @@ export const usePartnerCompanies = () => {
   const [companyCredentials, setCompanyCredentials] = useLocalStorage<CompanyCredentialsType>({ key: COMPANY_TOKEN_CREDENTIALS_KEY });
   const companyId = companyCredentials?.company_id ?? null;
 
-  return useQuery({
+  const partnerCompaniesQuery = useQuery({
     queryKey: queryKeys.partnerCompanies(token),
     queryFn: () => getPartnerCompanies(token as string),
     enabled: Boolean(token),
@@ -20,10 +20,14 @@ export const usePartnerCompanies = () => {
     gcTime: Infinity,
     refetchOnWindowFocus: false,
     placeholderData: keepPreviousData,
-    onSuccess: (companies) => {
-      if (companyId || !companies || companies.length === 0) return;
-      const preselectedCompanyId = companies[0] ?? crypto.randomUUID();
-      setCompanyCredentials({ company_id: preselectedCompanyId });
-    },
   });
+
+  const { data: companies } = partnerCompaniesQuery;
+
+  if (!companyId && companies && companies.length > 0) {
+    const preselectedCompanyId = companies[0] ?? crypto.randomUUID();
+    setCompanyCredentials({ company_id: preselectedCompanyId });
+  }
+
+  return partnerCompaniesQuery;
 };

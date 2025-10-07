@@ -34,21 +34,22 @@ export const useManageCredentials: ManageCredentialsType = (
   const [credentialsList, setCredentialsList] = useState<CredentialList>(null);
 
   useEffect(() => {
-    if (credentialsList?.length) {
-      const companyId = credentials?.company_id;
-      const userId = credentials?.user_id;
+    if (!credentialsList?.length) return;
 
-      const setFirstCredentialFromList = () => {
-        const firstCredential = credentialsList[0];
+    const companyId = credentials?.company_id;
+    const userId = credentials?.user_id;
 
-        setCredentials(firstCredential.externalId, selectorType);
-      };
-
-      if (!companyId || !userId) {
-        setFirstCredentialFromList();
-      }
+    if (!companyId || !userId) {
+      const firstCredential = credentialsList[0];
+      setCredentials(firstCredential.externalId, selectorType);
     }
-  }, [credentialsList, selectorType]);
+  }, [
+    credentialsList,
+    selectorType,
+    credentials?.company_id,
+    credentials?.user_id,
+    setCredentials,
+  ]);
 
   useEffect(() => {
     const getCompanyUsersList = async () => {
@@ -100,7 +101,7 @@ export const useManageCredentials: ManageCredentialsType = (
     }
 
     getCredentialsList();
-  }, [authToken, selectorType]);
+  }, [authToken, selectorType, credentials?.company_id]);
 
   return [credentialsList, setCredentialsList];
 };

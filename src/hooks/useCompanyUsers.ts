@@ -14,7 +14,7 @@ export const useCompanyUsers = () => {
   const companyId = companyCredentials?.company_id ?? null;
   const userId = companyCredentials?.user_id ?? null;
 
-  return useQuery({
+  const companyUsersQuery = useQuery({
     queryKey: queryKeys.companyUsers(token, companyId),
     enabled: Boolean(token && companyId),
     staleTime: Infinity,
@@ -22,15 +22,18 @@ export const useCompanyUsers = () => {
     refetchOnWindowFocus: false,
     placeholderData: keepPreviousData,
     queryFn: () => getPartnerCompanyUsers(token as string, companyId as string),
-    onSuccess: (users) => {
-      if (userId || !companyId || !users) return;
-      const preselected = users[0] ?? crypto.randomUUID();
-      setCompanyCredentials({ company_id: companyId, user_id: preselected });
-    },
-    onError: () => {
-      if (!companyId || userId) return;
-      const fallback = crypto.randomUUID();
-      setCompanyCredentials({ company_id: companyId, user_id: fallback });
-    },
   });
+  const { data: users, isError } = companyUsersQuery;
+
+  if (!userId && companyId && users && users.length > 0) {
+    const preselected = users[0] ?? crypto.randomUUID();
+    setCompanyCredentials({ company_id: companyId, user_id: preselected });
+  }
+
+  if (isError && companyId && !userId) {
+    const fallback = crypto.randomUUID();
+    setCompanyCredentials({ company_id: companyId, user_id: fallback });
+  }
+
+  return companyUsersQuery;
 };

@@ -1,4 +1,4 @@
-import { useEffect, useCallback } from "react";
+import { useEffect, useCallback, useMemo } from "react";
 import {
   WayflyerUiSdk,
   type PartnerCallbackType,
@@ -9,7 +9,7 @@ export const useEmbedCta = (
   targetId: string,
   companyToken?: string | null,
 ) => {
-  const options: SdkOptionsType = { isSandbox: true };
+  const options: SdkOptionsType = useMemo(() => ({ isSandbox: true }), []);
 
   const triggerCta = useCallback(async () => {
     if (companyToken) {
@@ -19,7 +19,7 @@ export const useEmbedCta = (
 
       sdk.mountCta(targetId, partnerCallback);
     }
-  }, [companyToken, targetId]);
+  }, [companyToken, targetId, options]);
 
   useEffect(() => {
     triggerCta();

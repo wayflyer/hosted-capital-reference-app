@@ -25,7 +25,7 @@ export const PartnerCredentials = ({ setIsCredentialsMissing, isCredentialsMissi
     if (isCredentialsMissing) {
       open();
     }
-  }, [isCredentialsMissing]);
+  }, [isCredentialsMissing, open]);
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>, inputType: string) => {
     setCredentials((prevState) => ({
