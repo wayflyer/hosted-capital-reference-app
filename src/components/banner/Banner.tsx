@@ -7,20 +7,19 @@ type BannerProps = {
   targetId?: string;
   companyToken: string;
   partnerToken: string;
-  isLoading: boolean;
   updateAuthTokens: () => Promise<void>;
   companyCredentials: CompanyCredentialsType;
 };
 
 export const Banner = ({
-  targetId = "ui-banner-container",
   companyToken,
   partnerToken,
-  isLoading,
   updateAuthTokens,
   companyCredentials,
 }: BannerProps) => {
-  useEmbedCta(companyToken, targetId, isLoading);
+  const targetId = 'wayflyer-cta';
+
+  useEmbedCta(targetId, companyToken);
   const companyId = companyCredentials?.company_id as string;
 
   return (

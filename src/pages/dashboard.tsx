@@ -16,7 +16,6 @@ import type { Theme } from "../components/select-theme/theme";
 type DashboardProps = {
   partnerDesignId: Theme;
   companyToken: string;
-  isLoading: boolean;
   partnerToken: string;
   updateAuthTokens: () => Promise<void>;
   companyCredentials: CompanyCredentialsType;
@@ -24,7 +23,6 @@ type DashboardProps = {
 
 export const Dashboard = ({
   companyToken,
-  isLoading,
   partnerToken,
   updateAuthTokens,
   companyCredentials,
@@ -35,7 +33,6 @@ export const Dashboard = ({
         <Banner
           companyToken={companyToken}
           partnerToken={partnerToken}
-          isLoading={isLoading}
           updateAuthTokens={updateAuthTokens}
           companyCredentials={companyCredentials}
         />

@@ -27,8 +27,8 @@ importers:
         specifier: 0.2.3
         version: 0.2.3(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@wf-financing/ui-sdk':
-        specifier: 1.0.0
-        version: 1.0.0
+        specifier: 2.0.0
+        version: 2.0.0
       react:
         specifier: ^19.1.0
         version: 19.1.1
@@ -699,11 +699,14 @@ packages:
   '@wf-financing/embedded-types@0.4.0':
     resolution: {integrity: sha512-fKkjLhfoZ1VGlX87Xc5CY8eTEMkzcc/AM6a1gzIchj/RLKPyhatwVzeT1Jz7L2jTeYpVwqST/AxHixMLFzpW2g==}
 
+  '@wf-financing/embedded-types@0.4.1':
+    resolution: {integrity: sha512-idsoONHYvrT7CxXml0Ghwqa1eooz8A5Ard8hvuklPikLRwJi37OEJiKSWBRNeLlRACpPy9HUr3YrAgzfw//vQA==}
+
   '@wf-financing/sandbox-ui@0.2.3':
     resolution: {integrity: sha512-NU4unUm5zf8sLhMEfhKgUq6ikTWHonaoxJgOPR2hljL7Mpp625XsSpd0BdXUGNxcpXPYyi6zR0R7tAlk18Sz8A==}
 
-  '@wf-financing/ui-sdk@1.0.0':
-    resolution: {integrity: sha512-/jwucn+3rvUXgFIrZmcDCqBXU07ozXcT2eKy4ZGOjBvI0XIhyOuxdGQ+5DwVDuHM5a0pCdedeSICFYyfHau4MQ==}
+  '@wf-financing/ui-sdk@2.0.0':
+    resolution: {integrity: sha512-Ajj59dBte+HpnhJeUzen73TEX2kBes21xD/Xqm2zKUW505HRmoT8C/N0t45bnxNEnYmIiQjPPRRFxBwqtLN4xA==}
 
   acorn-jsx@5.3.2:
     resolution: {integrity: sha512-rq9s+JNhf0IChjtDXxllJ7g41oZk5SlXtp0LHwyA5cejwn7vKmKp4pPri6YEePv2PU65sAsegbXtIinmDFDXgQ==}
@@ -2081,6 +2084,8 @@ snapshots:
 
   '@wf-financing/embedded-types@0.4.0': {}
 
+  '@wf-financing/embedded-types@0.4.1': {}
+
   '@wf-financing/sandbox-ui@0.2.3(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
     dependencies:
       '@mantine/core': 8.3.1(@mantine/hooks@8.3.1(react@19.1.1))(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
@@ -2094,9 +2099,9 @@ snapshots:
       - react
       - react-dom
 
-  '@wf-financing/ui-sdk@1.0.0':
+  '@wf-financing/ui-sdk@2.0.0':
     dependencies:
-      '@wf-financing/embedded-types': 0.4.0
+      '@wf-financing/embedded-types': 0.4.1
 
   acorn-jsx@5.3.2(acorn@8.15.0):
     dependencies:
