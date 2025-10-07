@@ -3,6 +3,7 @@ import { useEffect, useState, useMemo } from "react";
 import { getPartnerCredentials } from '../utils';
 import { getPartnerToken as requestPartnerToken } from "../services";
 
+// TODO: delete after full migration to @tanstack/react-query
 export const useGetPartnerToken = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [partnerToken, setPartnerToken] = useState('');
@@ -19,7 +20,7 @@ export const useGetPartnerToken = () => {
           const { partnerId, partnerSecret } = partnerCredentials;
           const partnerToken = await requestPartnerToken(partnerId, partnerSecret);
 
-          setPartnerToken(partnerToken);
+          setPartnerToken(partnerToken.token);
         };
 
         getPartnerToken();

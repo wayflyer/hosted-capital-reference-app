@@ -4,6 +4,7 @@ import { getPartnerCredentials } from '../utils';
 import { getPartnerToken as requestPartnerToken, getCompanyToken as requestCompanyToken } from "../services";
 import type { CompanyCredentialsType } from "../types";
 
+// TODO: delete after full migration to @tanstack/react-query
 export const useGetAuthTokens = (companyCredentials: CompanyCredentialsType) => {
   const [isLoading, setIsLoading] = useState(false);
   const [companyToken, setCompanyToken] = useState('');
@@ -20,7 +21,7 @@ export const useGetAuthTokens = (companyCredentials: CompanyCredentialsType) => 
       if (partnerCredentials?.partnerId && partnerCredentials?.partnerSecret) {
         const { partnerId, partnerSecret } = partnerCredentials;
         const requestedPartnerToken = await requestPartnerToken(partnerId, partnerSecret);
-        setPartnerToken(requestedPartnerToken);
+        setPartnerToken(requestedPartnerToken.token);
       }
     } catch (error) {
       console.error(error);
