@@ -1,13 +1,20 @@
+import { useState } from "react";
 import { AppShell } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 
 import { Header } from "../header/Header.tsx";
 import { Navigation } from "../navigation/Navigation.tsx";
 import { Dashboard } from "../../pages/dashboard.tsx";
-import { THEME_CONFIG, type ThemeTokens } from "../select-theme/theme.ts";
+import { THEME_CONFIG, type ThemeTokens, type Theme } from "../select-theme/theme.ts";
 
-export const MainContent = () => {
-  const tokens: ThemeTokens = THEME_CONFIG["whiteLabel"];
+type MainContentProps = {
+  partnerDesignId: Theme;
+}
+
+export const MainContent = ({ partnerDesignId }: MainContentProps) => {
+  const [theme] = useState<Theme>(partnerDesignId);
+
+  const tokens: ThemeTokens = THEME_CONFIG[theme];
   const [opened, { toggle }] = useDisclosure();
 
   return (
@@ -22,7 +29,7 @@ export const MainContent = () => {
     >
       <AppShell.Header>
         <Header
-          theme={"whiteLabel"}
+          theme={theme}
           opened={opened}
           toggle={toggle}
         />
@@ -31,7 +38,7 @@ export const MainContent = () => {
         <Navigation />
       </AppShell.Navbar>
       <AppShell.Main bg={tokens.appBg}>
-        <Dashboard  />
+        <Dashboard />
       </AppShell.Main>
     </AppShell>
   );

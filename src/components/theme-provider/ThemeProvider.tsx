@@ -2,14 +2,17 @@ import type { ReactNode } from 'react'
 import { MantineProvider } from "@mantine/core";
 import { ModalsProvider } from "@mantine/modals";
 
-import { THEME_CONFIG, type ThemeTokens } from "../select-theme/theme";
+import { THEME_CONFIG, type ThemeTokens, type Theme } from "../select-theme/theme";
 
 type ThemeProviderProps = {
   children: ReactNode;
+  theme: Theme | null;
 };
 
-export const ThemeProvider = ({ children }: ThemeProviderProps) => {
-  const tokens: ThemeTokens = THEME_CONFIG["whiteLabel"];
+export const ThemeProvider = ({ children, theme }: ThemeProviderProps) => {
+  const defaultTheme = 'whiteLabel';
+  const selectedTheme = theme || defaultTheme;
+  const tokens: ThemeTokens = THEME_CONFIG[selectedTheme];
 
   return (
     <MantineProvider

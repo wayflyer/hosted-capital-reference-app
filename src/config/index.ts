@@ -14,3 +14,4 @@ export {
 } from './const';
 export { adjectives, companyNouns, lastNames, firstNames } from './namesDictionaries';
 export { QUERY_KEYS, queryKeys } from './queryKeys';
+export { PARTNER_THEMES } from './partnersThemes';
