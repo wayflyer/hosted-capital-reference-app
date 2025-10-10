@@ -14,6 +14,9 @@ importers:
       '@mantine/core':
         specifier: ^8.1.1
         version: 8.3.1(@mantine/hooks@8.3.1(react@19.1.1))(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@mantine/dates':
+        specifier: ^8.3.2
+        version: 8.3.4(@mantine/core@8.3.1(@mantine/hooks@8.3.1(react@19.1.1))(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(@mantine/hooks@8.3.1(react@19.1.1))(dayjs@1.11.18)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@mantine/hooks':
         specifier: ^8.1.1
         version: 8.3.1(react@19.1.1)
@@ -33,8 +36,8 @@ importers:
         specifier: ^5.90.2
         version: 5.90.2(@tanstack/react-query@5.81.5(react@19.1.1))(react@19.1.1)
       '@wf-financing/sandbox-ui':
-        specifier: 0.3.0
-        version: 0.3.0(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+        specifier: 0.4.0
+        version: 0.4.0(@types/react@19.1.13)(dayjs@1.11.18)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@wf-financing/ui-sdk':
         specifier: 2.0.0
         version: 2.0.0
@@ -450,6 +453,15 @@ packages:
       react: ^18.x || ^19.x
       react-dom: ^18.x || ^19.x
 
+  '@mantine/dates@8.3.4':
+    resolution: {integrity: sha512-Je7R86lIpU8gCMdSueCD5TZrIOEFPiRr3t+/uvgBGG4Om6KmU2FJw/8f8wbVDmj0KJAl2xzXy2UiKJGpnLdl1A==}
+    peerDependencies:
+      '@mantine/core': 8.3.4
+      '@mantine/hooks': 8.3.4
+      dayjs: '>=1.0.0'
+      react: ^18.x || ^19.x
+      react-dom: ^18.x || ^19.x
+
   '@mantine/form@8.3.2':
     resolution: {integrity: sha512-mhQYFA5JctLJly9ZLBdlbLlSxmPsJMIb73to7avIqSdxR+b8Z5KmCv2Ddf7Fwqqu1QDQuySZeysiee9jfbkrEg==}
     peerDependencies:
@@ -723,8 +735,8 @@ packages:
   '@wf-financing/embedded-types@0.4.1':
     resolution: {integrity: sha512-idsoONHYvrT7CxXml0Ghwqa1eooz8A5Ard8hvuklPikLRwJi37OEJiKSWBRNeLlRACpPy9HUr3YrAgzfw//vQA==}
 
-  '@wf-financing/sandbox-ui@0.3.0':
-    resolution: {integrity: sha512-SxP1+NfVDdPGmlnAKfkS97wsIPHPhfz47hZoqFTF81DdLEvpirhiXYRrvYGtJ8gxsYV4cWKIYtSuRZ/u4p8Clw==}
+  '@wf-financing/sandbox-ui@0.4.0':
+    resolution: {integrity: sha512-59FMPQLJgBdZsRzQ+Bc8vp9Ix7K86BJnwaf/1u78R8RV+pnH3UdLT9ThGyr/tIpuiFscAEa88Px1uHY1vVRvhg==}
 
   '@wf-financing/ui-sdk@2.0.0':
     resolution: {integrity: sha512-Ajj59dBte+HpnhJeUzen73TEX2kBes21xD/Xqm2zKUW505HRmoT8C/N0t45bnxNEnYmIiQjPPRRFxBwqtLN4xA==}
@@ -832,6 +844,9 @@ packages:
 
   csstype@3.1.3:
     resolution: {integrity: sha512-M1uQkMl8rQK/szD0LNhtqxIPLpimGm8sOBwU7lLnCpSbTyY3yeU1Vc7l4KT5zT4s/yOxHH5O7tIuuLOCnLADRw==}
+
+  dayjs@1.11.18:
+    resolution: {integrity: sha512-zFBQ7WFRvVRhKcWoUh+ZA1g2HVgUbsZm9sbddh8EC5iv93sui8DVVz1Npvz+r6meo9VKfa8NyLWBsQK1VvIKPA==}
 
   debug@4.4.3:
     resolution: {integrity: sha512-RGwwWnwQvkVfavKVt22FGLw+xYSdzARwm0ru6DhTVA3umU5hZc28V3kO4stgYryrTlLpuvgI9GiijltAjNbcqA==}
@@ -1851,6 +1866,15 @@ snapshots:
     transitivePeerDependencies:
       - '@types/react'
 
+  '@mantine/dates@8.3.4(@mantine/core@8.3.1(@mantine/hooks@8.3.1(react@19.1.1))(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(@mantine/hooks@8.3.1(react@19.1.1))(dayjs@1.11.18)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@mantine/core': 8.3.1(@mantine/hooks@8.3.1(react@19.1.1))(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@mantine/hooks': 8.3.1(react@19.1.1)
+      clsx: 2.1.1
+      dayjs: 1.11.18
+      react: 19.1.1
+      react-dom: 19.1.1(react@19.1.1)
+
   '@mantine/form@8.3.2(react@19.1.1)':
     dependencies:
       fast-deep-equal: 3.1.3
@@ -2122,9 +2146,10 @@ snapshots:
 
   '@wf-financing/embedded-types@0.4.1': {}
 
-  '@wf-financing/sandbox-ui@0.3.0(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+  '@wf-financing/sandbox-ui@0.4.0(@types/react@19.1.13)(dayjs@1.11.18)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
     dependencies:
       '@mantine/core': 8.3.1(@mantine/hooks@8.3.1(react@19.1.1))(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@mantine/dates': 8.3.4(@mantine/core@8.3.1(@mantine/hooks@8.3.1(react@19.1.1))(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(@mantine/hooks@8.3.1(react@19.1.1))(dayjs@1.11.18)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@mantine/form': 8.3.2(react@19.1.1)
       '@mantine/hooks': 8.3.1(react@19.1.1)
       '@mantine/modals': 8.3.1(@mantine/core@8.3.1(@mantine/hooks@8.3.1(react@19.1.1))(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(@mantine/hooks@8.3.1(react@19.1.1))(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
@@ -2132,6 +2157,7 @@ snapshots:
       '@wf-financing/embedded-types': 0.4.1
     transitivePeerDependencies:
       - '@types/react'
+      - dayjs
       - react
       - react-dom
 
@@ -2236,6 +2262,8 @@ snapshots:
   cssesc@3.0.0: {}
 
   csstype@3.1.3: {}
+
+  dayjs@1.11.18: {}
 
   debug@4.4.3:
     dependencies:
