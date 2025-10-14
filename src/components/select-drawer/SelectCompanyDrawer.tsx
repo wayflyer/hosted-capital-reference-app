@@ -1,12 +1,12 @@
-import { useState, useEffect } from "react";
-import { NavLink, Stack } from "@mantine/core";
+import { NavLink, Stack, TextInput } from "@mantine/core";
 import { useLocalStorage } from "@mantine/hooks";
-import { CiCirclePlus } from "react-icons/ci";
+import { useDeferredValue, useMemo, useState } from "react";
+import { CiCirclePlus, CiSearch } from "react-icons/ci";
 
-import { usePartnerCompanies } from "../../hooks";
-import { generateRandomName } from "../../utils";
-import type { CompanyCredentialsType } from "../../types";
 import { COMPANY_TOKEN_CREDENTIALS_KEY } from "../../config";
+import { usePartnerCompanies } from "../../hooks";
+import type { CompanyCredentialsType } from "../../types";
+import { generateRandomName } from "../../utils";
 import { CustomDrawer } from "./CustomDrawer.tsx";
 
 type SelectCompanyDrawerProps = {
@@ -14,57 +14,81 @@ type SelectCompanyDrawerProps = {
   onClose: VoidFunction;
 };
 
+const AddCompanyButton = (
+  <div style={{ alignItems: "center", display: "flex", gap: "5px" }}>
+    <p>Add Company</p>
+    <CiCirclePlus />
+  </div>
+);
+
 export const SelectCompanyDrawer = ({
   opened,
   onClose,
 }: SelectCompanyDrawerProps) => {
-  const [companyCredentials, setCompanyCredentials] = useLocalStorage<CompanyCredentialsType>({ key: COMPANY_TOKEN_CREDENTIALS_KEY });
-  const companies = usePartnerCompanies();
-  const [companyList, setCredentialsList] = useState<string[]>([]);
+  const [companyCredentials, setCompanyCredentials] =
+    useLocalStorage<CompanyCredentialsType>({
+      key: COMPANY_TOKEN_CREDENTIALS_KEY,
+    });
+
+  const { data: fetchedCompanies = [] } = usePartnerCompanies();
+  const [manuallyAddedIds, setManuallyAddedIds] = useState<string[]>([]);
+  const [query, setQuery] = useState("");
+  const deferredQuery = useDeferredValue(query);
 
   const handleAddCredential = () => {
     const newCredentialId = crypto.randomUUID();
-
-    setCredentialsList(prevState => ([
-      newCredentialId,
-      ...prevState,
-    ]));
+    setManuallyAddedIds((prevIds) => [newCredentialId, ...prevIds]);
   };
 
-  useEffect(() => {
-    if (companies.data) {
-      setCredentialsList(prevState => {
-        const companiesData = companies.data as string[];
-        const fullList = [...prevState, ...companiesData];
+  const allCompanyIds = useMemo(() => {
+    const combinedIds = [...manuallyAddedIds, ...(fetchedCompanies || [])];
 
-        return Array.from(new Set(fullList));
-      });
-    }
-  }, [companies.data]);
+    return Array.from(new Set(combinedIds));
+  }, [fetchedCompanies, manuallyAddedIds]);
 
   const handleSelectCredential = (externalId: string) => {
     setCompanyCredentials({ company_id: externalId });
-  }
+  };
 
-  const AddComponent = (
-    <div style={{ alignItems: 'center', display: 'flex', gap: '5px' }}>
-      <p>Add Company</p>
-      <CiCirclePlus />
-    </div>
-  );
+  const visibleCompanies = useMemo(() => {
+    const search = deferredQuery.toLowerCase();
+    const mappedCompanies = allCompanyIds.map((companyId) => ({
+      externalId: companyId,
+      label: generateRandomName(companyId, "company_id"),
+    }));
+
+    if (!search) {
+      return mappedCompanies;
+    }
+
+    return mappedCompanies.filter(
+      (company) =>
+        company.label.toLowerCase().includes(search) ||
+        company.externalId.toLowerCase().includes(search),
+    );
+  }, [allCompanyIds, deferredQuery]);
 
   return (
     <CustomDrawer opened={opened} onClose={onClose} title="Select Company">
       <Stack>
-        <NavLink label={AddComponent} onClick={handleAddCredential} />
-        {companyList.length && companyList.map((externalId) => (
+        <TextInput
+          placeholder="Search Company..."
+          value={query}
+          leftSection={<CiSearch />}
+          onChange={({ target }) => setQuery(target.value)}
+        />
+        {!query && (
+          <NavLink label={AddCompanyButton} onClick={handleAddCredential} />
+        )}
+        {visibleCompanies.map(({ externalId, label }) => (
           <NavLink
             key={externalId}
-            label={generateRandomName(externalId, 'company_id')}
+            label={label}
             active={externalId === companyCredentials?.company_id}
             onClick={() => handleSelectCredential(externalId)}
-          />))}
+          />
+        ))}
       </Stack>
     </CustomDrawer>
   );
-}
+};
