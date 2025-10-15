@@ -1,4 +1,4 @@
-import { NavLink, Stack, TextInput } from "@mantine/core";
+import { Button, Flex, NavLink, Stack, TextInput } from "@mantine/core";
 import { useLocalStorage } from "@mantine/hooks";
 import { useDeferredValue, useMemo, useState } from "react";
 import { CiCirclePlus, CiSearch } from "react-icons/ci";
@@ -13,13 +13,6 @@ type SelectCompanyDrawerProps = {
   opened: boolean;
   onClose: VoidFunction;
 };
-
-const AddCompanyButton = (
-  <div style={{ alignItems: "center", display: "flex", gap: "5px" }}>
-    <p>Add Company</p>
-    <CiCirclePlus />
-  </div>
-);
 
 export const SelectCompanyDrawer = ({
   opened,
@@ -78,7 +71,16 @@ export const SelectCompanyDrawer = ({
           onChange={({ target }) => setQuery(target.value)}
         />
         {!query && (
-          <NavLink label={AddCompanyButton} onClick={handleAddCredential} />
+          <Button
+            onClick={handleAddCredential}
+            variant="subtle"
+            color="#353A71"
+          >
+            <Flex align="center" gap={5}>
+              <CiCirclePlus />
+              Add Company
+            </Flex>
+          </Button>
         )}
         {visibleCompanies.map(({ externalId, label }) => (
           <NavLink
