@@ -1,4 +1,4 @@
-import { Button, Flex, NavLink, Stack, TextInput } from "@mantine/core";
+import { NavLink, Stack, TextInput } from "@mantine/core";
 import { useLocalStorage } from "@mantine/hooks";
 import { useDeferredValue, useMemo, useState } from "react";
 import { CiSearch } from "react-icons/ci";
@@ -7,6 +7,7 @@ import { COMPANY_TOKEN_CREDENTIALS_KEY } from "../../config";
 import { usePartnerCompanies } from "../../hooks";
 import type { CompanyCredentialsType } from "../../types";
 import { generateRandomName } from "../../utils";
+import { AddButton } from "./AddButton.tsx";
 import { CustomDrawer } from "./CustomDrawer.tsx";
 
 type SelectCompanyDrawerProps = {
@@ -44,7 +45,7 @@ export const SelectCompanyDrawer = ({
   };
 
   const visibleCompanies = useMemo(() => {
-    const search = deferredQuery.toLowerCase();
+    const search = deferredQuery.toLowerCase().trim();
     const mappedCompanies = allCompanyIds.map((companyId) => ({
       externalId: companyId,
       label: generateRandomName(companyId, "company_id"),
@@ -70,24 +71,8 @@ export const SelectCompanyDrawer = ({
           leftSection={<CiSearch />}
           onChange={({ target }) => setQuery(target.value)}
         />
-        {!query && (
-          <Button
-            onClick={handleAddCredential}
-            variant="subtle"
-            color="#353A71"
-            styles={{
-              root: {
-                paddingLeft: 12,
-              },
-              inner: {
-                justifyContent: "flex-start",
-              },
-            }}
-          >
-            <Flex align="center" gap={5}>
-              Add Company
-            </Flex>
-          </Button>
+        {!query.trim() && (
+          <AddButton onClick={handleAddCredential} label="Add Company" />
         )}
         {visibleCompanies.map(({ externalId, label }) => (
           <NavLink
