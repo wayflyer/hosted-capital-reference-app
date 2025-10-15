@@ -1,7 +1,7 @@
 import { Button, Flex, NavLink, Stack, TextInput } from "@mantine/core";
 import { useLocalStorage } from "@mantine/hooks";
 import { useDeferredValue, useMemo, useState } from "react";
-import { CiCirclePlus, CiSearch } from "react-icons/ci";
+import { CiSearch } from "react-icons/ci";
 
 import { COMPANY_TOKEN_CREDENTIALS_KEY } from "../../config";
 import { usePartnerCompanies } from "../../hooks";
@@ -75,9 +75,16 @@ export const SelectCompanyDrawer = ({
             onClick={handleAddCredential}
             variant="subtle"
             color="#353A71"
+            styles={{
+              root: {
+                paddingLeft: 12,
+              },
+              inner: {
+                justifyContent: "flex-start",
+              },
+            }}
           >
             <Flex align="center" gap={5}>
-              <CiCirclePlus />
               Add Company
             </Flex>
           </Button>
