@@ -1,12 +1,12 @@
-import { useEffect, useState } from "react";
 import { Drawer, NavLink, Stack } from "@mantine/core";
-import { CiCirclePlus } from "react-icons/ci";
+import { useEffect, useState } from "react";
 
-import { useCompanyUsers } from "../../hooks";
-import { generateRandomName } from "../../utils";
-import type { CompanyCredentialsType } from "../../types";
 import { useLocalStorage } from "@mantine/hooks";
 import { COMPANY_TOKEN_CREDENTIALS_KEY } from "../../config";
+import { useCompanyUsers } from "../../hooks";
+import type { CompanyCredentialsType } from "../../types";
+import { generateRandomName } from "../../utils";
+import { AddButton } from "./AddButton";
 
 type SelectCompanyDrawerProps = {
   opened: boolean;
@@ -17,7 +17,10 @@ export const SelectUserDrawer = ({
   opened,
   onClose,
 }: SelectCompanyDrawerProps) => {
-  const [companyCredentials, setCompanyCredentials] = useLocalStorage<CompanyCredentialsType>({ key: COMPANY_TOKEN_CREDENTIALS_KEY });
+  const [companyCredentials, setCompanyCredentials] =
+    useLocalStorage<CompanyCredentialsType>({
+      key: COMPANY_TOKEN_CREDENTIALS_KEY,
+    });
   const { data: users } = useCompanyUsers();
   const [usersList, setCredentialsList] = useState<string[]>([]);
 
@@ -26,10 +29,7 @@ export const SelectUserDrawer = ({
   const handleAddCredential = async () => {
     const newCredentialId = crypto.randomUUID();
 
-    setCredentialsList(prevState => ([
-      newCredentialId,
-      ...prevState,
-    ]));
+    setCredentialsList((prevState) => [newCredentialId, ...prevState]);
   };
 
   useEffect(() => {
@@ -39,7 +39,7 @@ export const SelectUserDrawer = ({
   }, [users]);
 
   useEffect(() => {
-    setCompanyCredentials(prevState => {
+    setCompanyCredentials((prevState) => {
       if (selectedUser) {
         return { ...prevState };
       }
@@ -48,7 +48,7 @@ export const SelectUserDrawer = ({
         return {
           ...prevState,
           user_id: users[0],
-        }
+        };
       }
 
       return {
@@ -58,25 +58,14 @@ export const SelectUserDrawer = ({
   }, [companyCredentials?.company_id]);
 
   const handleSelectCredential = (externalId: string) => {
-    setCompanyCredentials(prevState => ({
+    setCompanyCredentials((prevState) => ({
       ...prevState,
       user_id: externalId,
     }));
-  }
-
-  const AddComponent = (
-    <div style={{ alignItems: 'center', display: 'flex', gap: '5px' }}>
-      <p>Add User</p>
-      <CiCirclePlus />
-    </div>
-  );
+  };
 
   return (
-    <Drawer.Root
-      opened={opened}
-      position="right"
-      onClose={onClose}
-    >
+    <Drawer.Root opened={opened} position="right" onClose={onClose}>
       <Drawer.Overlay />
       <Drawer.Content style={{ zIndex: 201 }}>
         <Drawer.Header>
@@ -85,18 +74,23 @@ export const SelectUserDrawer = ({
         </Drawer.Header>
         <Drawer.Body>
           <Stack>
-            <NavLink label={AddComponent} onClick={handleAddCredential} />
-            {usersList.length && usersList.map((externalId) => (
-              <NavLink
-                key={externalId}
-                label={generateRandomName(externalId, 'user_id', companyCredentials?.company_id)}
-                active={externalId === companyCredentials?.user_id}
-                onClick={() => handleSelectCredential(externalId)}
-              />
-            ))}
+            <AddButton onClick={handleAddCredential} label="Add User" />
+            {usersList.length &&
+              usersList.map((externalId) => (
+                <NavLink
+                  key={externalId}
+                  label={generateRandomName(
+                    externalId,
+                    "user_id",
+                    companyCredentials?.company_id,
+                  )}
+                  active={externalId === companyCredentials?.user_id}
+                  onClick={() => handleSelectCredential(externalId)}
+                />
+              ))}
           </Stack>
         </Drawer.Body>
       </Drawer.Content>
     </Drawer.Root>
   );
-}
+};
