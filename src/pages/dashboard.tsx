@@ -1,6 +1,6 @@
-import { Container, Stack } from "@mantine/core";
-import { Grid } from "@mantine/core";
+import { Container, Grid, Stack } from "@mantine/core";
 
+import { useMediaQuery } from "@mantine/hooks";
 import { KeyMetricsCard } from "../components/ key-metrics-card/KeyMetricsCard";
 import { KEY_METRICS_FIXTURES } from "../components/ key-metrics-card/data";
 import { Banner } from "../components/banner/Banner";
@@ -12,9 +12,12 @@ import { RecentPaymentsCard } from "../components/recent-payments/RecentPayments
 import { RECENT_PAYMENTS_FIXTURES } from "../components/recent-payments/data";
 
 export const Dashboard = () => {
+  const isMobile = useMediaQuery("(max-width: 36em)");
+  const containerStyles = isMobile ? { mt: 0, p: 0 } : { mt: "xl" };
+
   return (
-    <Container size="xl" mt="xl">
-      <Stack gap="xl" style={{ marginBottom: 40 }}>
+    <Container size="xl" {...containerStyles}>
+      <Stack gap="xl" style={{ marginBottom: isMobile ? 16 : 40 }}>
         <Banner />
       </Stack>
       <Stack gap="lg">
