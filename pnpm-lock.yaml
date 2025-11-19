@@ -39,8 +39,8 @@ importers:
         specifier: 0.7.2
         version: 0.7.2(@types/react@19.2.2)(dayjs@1.11.18)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       '@wf-financing/ui-sdk':
-        specifier: 2.1.3
-        version: 2.1.3
+        specifier: 2.1.4
+        version: 2.1.4
       react:
         specifier: ^19.1.0
         version: 19.2.0
@@ -735,11 +735,14 @@ packages:
   '@wf-financing/embedded-types@0.6.0':
     resolution: {integrity: sha512-XR9slArFCV3OK+aBc4ifxIWETqANuuJidn7bkmfGW/CnJVgha8Ahwj/7xQQUrGisN4bpXTDdXrRzf3x0lNi76Q==}
 
+  '@wf-financing/logger@1.1.0':
+    resolution: {integrity: sha512-w564qr5ggPVsR4zamMQ2KF1NMnPy5IHmKbym9VomId/M5HOKd8CHprWivfukE5Vl+wXyUUGEk3qiWBdOeDNGzg==}
+
   '@wf-financing/sandbox-ui@0.7.2':
     resolution: {integrity: sha512-qv4P5UO231FdXk7tFlP9xM7ynvR7J/kG3GSdyP6Yz/loSk3bg4INKIMe3+DllfQ8ipVKenRttZHSYQz8rOqfuQ==}
 
-  '@wf-financing/ui-sdk@2.1.3':
-    resolution: {integrity: sha512-eZHoQVqK5OUxBucrKtg7EdMHMx07oYQfUOiICKP3EnlsU9MhmDuKT/BLSYkX0W18qR3Ymvo5Lrcuh1XqKnpi3A==}
+  '@wf-financing/ui-sdk@2.1.4':
+    resolution: {integrity: sha512-9TodQk37zhfpNIOh7uMmiu3iMSpzT22tmMk5LjAqOF4ZcDDeOmjcUhfeMq8TH2IGM2wmmlrdJMtjLlHXXfCohg==}
 
   acorn-jsx@5.3.2:
     resolution: {integrity: sha512-rq9s+JNhf0IChjtDXxllJ7g41oZk5SlXtp0LHwyA5cejwn7vKmKp4pPri6YEePv2PU65sAsegbXtIinmDFDXgQ==}
@@ -2148,6 +2151,10 @@ snapshots:
 
   '@wf-financing/embedded-types@0.6.0': {}
 
+  '@wf-financing/logger@1.1.0':
+    dependencies:
+      '@wf-financing/embedded-types': 0.6.0
+
   '@wf-financing/sandbox-ui@0.7.2(@types/react@19.2.2)(dayjs@1.11.18)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)':
     dependencies:
       '@mantine/core': 8.3.5(@mantine/hooks@8.3.5(react@19.2.0))(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
@@ -2163,9 +2170,10 @@ snapshots:
       - react
       - react-dom
 
-  '@wf-financing/ui-sdk@2.1.3':
+  '@wf-financing/ui-sdk@2.1.4':
     dependencies:
       '@wf-financing/embedded-types': 0.6.0
+      '@wf-financing/logger': 1.1.0
 
   acorn-jsx@5.3.2(acorn@8.15.0):
     dependencies:
