@@ -36,8 +36,8 @@ importers:
         specifier: ^5.90.2
         version: 5.90.12(@tanstack/react-query@5.81.5(react@19.2.0))(react@19.2.0)
       '@wf-financing/sandbox-ui':
-        specifier: 0.7.2
-        version: 0.7.2(@types/react@19.2.5)(dayjs@1.11.18)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+        specifier: 0.7.4
+        version: 0.7.4(@types/react@19.2.5)(dayjs@1.11.18)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       '@wf-financing/ui-sdk':
         specifier: 2.1.5
         version: 2.1.5
@@ -741,8 +741,8 @@ packages:
   '@wf-financing/logger@1.1.1':
     resolution: {integrity: sha512-UIpgtnl8qPgSsO5fTvK094XhaoPYYkyWuzu4X4S6BQgd/VD3bOWZUv3SH4yojVelzqvChXGdUK+Rjg9CpWg5jA==}
 
-  '@wf-financing/sandbox-ui@0.7.2':
-    resolution: {integrity: sha512-qv4P5UO231FdXk7tFlP9xM7ynvR7J/kG3GSdyP6Yz/loSk3bg4INKIMe3+DllfQ8ipVKenRttZHSYQz8rOqfuQ==}
+  '@wf-financing/sandbox-ui@0.7.4':
+    resolution: {integrity: sha512-2d1TOQzuGx/jg1lbPRAPuUvqIiMqaeY8nvKKlfrOO6ArpSQuVYHNUrwMyHOS6MzRDlmXIvUs37PwG/dhD3y7GQ==}
 
   '@wf-financing/ui-sdk@2.1.5':
     resolution: {integrity: sha512-E2uAlRrS44oUYgZGomji1yerbRxVwyJo29g8sFO2SCjVHxxlePyDuNEfruY4EdmPFn1HQ60YChBYgQLiQhZStA==}
@@ -2160,7 +2160,7 @@ snapshots:
     dependencies:
       '@wf-financing/embedded-types': 0.7.0
 
-  '@wf-financing/sandbox-ui@0.7.2(@types/react@19.2.5)(dayjs@1.11.18)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)':
+  '@wf-financing/sandbox-ui@0.7.4(@types/react@19.2.5)(dayjs@1.11.18)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)':
     dependencies:
       '@mantine/core': 8.3.8(@mantine/hooks@8.3.8(react@19.2.0))(@types/react@19.2.5)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       '@mantine/dates': 8.3.8(@mantine/core@8.3.8(@mantine/hooks@8.3.8(react@19.2.0))(@types/react@19.2.5)(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(@mantine/hooks@8.3.8(react@19.2.0))(dayjs@1.11.18)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
