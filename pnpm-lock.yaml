@@ -39,8 +39,8 @@ importers:
         specifier: 0.7.4
         version: 0.7.4(@types/react@19.2.5)(dayjs@1.11.18)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       '@wf-financing/ui-sdk':
-        specifier: 2.1.5
-        version: 2.1.5
+        specifier: 3.1.0
+        version: 3.1.0
       react:
         specifier: ^19.1.0
         version: 19.2.0
@@ -735,17 +735,17 @@ packages:
   '@wf-financing/embedded-types@0.6.0':
     resolution: {integrity: sha512-XR9slArFCV3OK+aBc4ifxIWETqANuuJidn7bkmfGW/CnJVgha8Ahwj/7xQQUrGisN4bpXTDdXrRzf3x0lNi76Q==}
 
-  '@wf-financing/embedded-types@0.7.0':
-    resolution: {integrity: sha512-sVSGCy6HDxD9VsJyjFd3+SVX2ZWDWvR/ELR83HDts2MAEGNabVSpvWRHLMy9iFpaRh0U83zG4mPweM9ZOT0zoA==}
+  '@wf-financing/embedded-types@1.1.0':
+    resolution: {integrity: sha512-Y70SlSBaDuP7doFb5kJISWGeUCY6eLT5YGV/5Ar8jfADbqXVg2Qzno3Nf+Or8kVyOdGDCD/hhpf711EeNCnmBQ==}
 
-  '@wf-financing/logger@1.1.1':
-    resolution: {integrity: sha512-UIpgtnl8qPgSsO5fTvK094XhaoPYYkyWuzu4X4S6BQgd/VD3bOWZUv3SH4yojVelzqvChXGdUK+Rjg9CpWg5jA==}
+  '@wf-financing/logger@2.1.0':
+    resolution: {integrity: sha512-cNKw8NsBXMU/ZoqeKW50bQE98U6Nb9TfMs2yXFypQhlTn7m8VzivYeAjdw5aQdCUYAxIKnQ0KmXqM48GpDEZ9A==}
 
   '@wf-financing/sandbox-ui@0.7.4':
     resolution: {integrity: sha512-2d1TOQzuGx/jg1lbPRAPuUvqIiMqaeY8nvKKlfrOO6ArpSQuVYHNUrwMyHOS6MzRDlmXIvUs37PwG/dhD3y7GQ==}
 
-  '@wf-financing/ui-sdk@2.1.5':
-    resolution: {integrity: sha512-E2uAlRrS44oUYgZGomji1yerbRxVwyJo29g8sFO2SCjVHxxlePyDuNEfruY4EdmPFn1HQ60YChBYgQLiQhZStA==}
+  '@wf-financing/ui-sdk@3.1.0':
+    resolution: {integrity: sha512-yvYpX/t4DT54CmarCdKThd0AUwqJk4dNkEOIq4uILfusS/8+tnLTT/cgixEYw1VtkkA2l3H0xTaPvPrC9yzfjw==}
 
   acorn-jsx@5.3.2:
     resolution: {integrity: sha512-rq9s+JNhf0IChjtDXxllJ7g41oZk5SlXtp0LHwyA5cejwn7vKmKp4pPri6YEePv2PU65sAsegbXtIinmDFDXgQ==}
@@ -2154,11 +2154,11 @@ snapshots:
 
   '@wf-financing/embedded-types@0.6.0': {}
 
-  '@wf-financing/embedded-types@0.7.0': {}
+  '@wf-financing/embedded-types@1.1.0': {}
 
-  '@wf-financing/logger@1.1.1':
+  '@wf-financing/logger@2.1.0':
     dependencies:
-      '@wf-financing/embedded-types': 0.7.0
+      '@wf-financing/embedded-types': 1.1.0
 
   '@wf-financing/sandbox-ui@0.7.4(@types/react@19.2.5)(dayjs@1.11.18)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)':
     dependencies:
@@ -2175,10 +2175,10 @@ snapshots:
       - react
       - react-dom
 
-  '@wf-financing/ui-sdk@2.1.5':
+  '@wf-financing/ui-sdk@3.1.0':
     dependencies:
-      '@wf-financing/embedded-types': 0.7.0
-      '@wf-financing/logger': 1.1.1
+      '@wf-financing/embedded-types': 1.1.0
+      '@wf-financing/logger': 2.1.0
 
   acorn-jsx@5.3.2(acorn@8.15.0):
     dependencies:
