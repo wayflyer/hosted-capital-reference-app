@@ -1,20 +1,31 @@
 import { Group, Text } from "@mantine/core";
+import { useNavigate } from "react-router";
+
 import { navigationItems } from "./navigationItems";
 
 export const Navigation = () => {
+  const navigate = useNavigate();
+
+  const handleNavigate = (path?: string) => {
+    if (path) {
+      navigate(path);
+    }
+  };
+
   return (
     <>
-      {navigationItems.map((item) => (
+      {navigationItems.map(({ label, path, Icon }) => (
         <Group
           px="md"
           justify="space-between"
-          key={item.label}
+          key={label}
           style={{ marginBottom: "24px" }}
+          onClick={() => handleNavigate(path)}
         >
-          <item.icon size={20} style={{ color: "#161517" }} />
+          <Icon size={20} style={{ color: "#161517" }} />
           <Group style={{ width: "70%" }}>
-            <Text key={item.label} style={{ color: "#161517", cursor: "auto" }}>
-              {item.label}
+            <Text key={label} style={{ color: "#161517", cursor: "pointer" }}>
+              {label}
             </Text>
           </Group>
         </Group>

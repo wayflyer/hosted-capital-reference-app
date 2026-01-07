@@ -13,15 +13,15 @@ import {
 } from "@tabler/icons-react";
 
 export const navigationItems = [
-  { label: "Home", icon: IconHome, active: true },
-  { label: "Products", icon: IconTag },
-  { label: "Orders", icon: IconPackage },
-  { label: "Customers", icon: IconUsers },
-  { label: "Marketing", icon: IconActivity },
-  { label: "Reports", icon: IconFileText },
-  { label: "Banking", icon: IconBuildingBank },
-  { label: "Payments", icon: IconCreditCard },
-  { label: "Financing", icon: IconCashBanknote },
-  { label: "Notifications", icon: IconBell },
-  { label: "Settings", icon: IconSettings },
+  { label: "Home", Icon: IconHome, active: true, path: "/" },
+  { label: "Products", Icon: IconTag, path: "/products" },
+  { label: "Orders", Icon: IconPackage },
+  { label: "Customers", Icon: IconUsers },
+  { label: "Marketing", Icon: IconActivity },
+  { label: "Reports", Icon: IconFileText },
+  { label: "Banking", Icon: IconBuildingBank },
+  { label: "Payments", Icon: IconCreditCard },
+  { label: "Financing", Icon: IconCashBanknote },
+  { label: "Notifications", Icon: IconBell },
+  { label: "Settings", Icon: IconSettings },
 ];
