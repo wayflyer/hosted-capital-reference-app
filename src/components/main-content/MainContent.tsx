@@ -29,7 +29,7 @@ export const MainContent = ({ partnerDesignId }: MainContentProps) => {
       padding="md"
     >
       <AppShell.Header>
-        <Header theme={theme} opened={opened} toggle={toggle} />
+        <Header opened={opened} toggle={toggle} />
       </AppShell.Header>
       <AppShell.Navbar p="md">
         <Navigation />
