@@ -5,17 +5,14 @@ import { SelectorMenu } from '../selector-menu/SelectorMenu';
 import { SelectTogglers } from '../select-togglers/SelectTogglers';
 import { SelectCompanyDrawer } from "../select-drawer/SelectCompanyDrawer";
 import { SelectUserDrawer } from "../select-drawer/SelectUserDrawer";
-import type { Theme } from "../select-theme/theme";
 import { Logo } from "./logo/Logo";
 
 type HeaderProps = {
-  theme: Theme;
   opened: boolean;
   toggle: VoidFunction;
 };
 
 export const Header = ({
-  theme,
   opened,
   toggle,
 }: HeaderProps) => {
@@ -30,7 +27,7 @@ export const Header = ({
     <Group h="100%" px="md" justify="space-between" wrap="nowrap">
       <Group gap="sm" wrap="nowrap">
         <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
-        <Logo theme={theme} />
+        <Logo />
       </Group>
       <Group gap="xs" wrap="nowrap">
         <SelectTogglers
