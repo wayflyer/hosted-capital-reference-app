@@ -36,8 +36,8 @@ importers:
         specifier: ^5.90.2
         version: 5.90.12(@tanstack/react-query@5.81.5(react@19.2.0))(react@19.2.0)
       '@wf-financing/sandbox-ui':
-        specifier: 0.7.4
-        version: 0.7.4(@types/react@19.2.5)(dayjs@1.11.18)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+        specifier: 0.7.10
+        version: 0.7.10(@types/react@19.2.5)(dayjs@1.11.18)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       '@wf-financing/ui-sdk':
         specifier: 3.2.0
         version: 3.2.0
@@ -735,17 +735,14 @@ packages:
     peerDependencies:
       vite: ^4.2.0 || ^5.0.0 || ^6.0.0 || ^7.0.0
 
-  '@wf-financing/embedded-types@0.6.0':
-    resolution: {integrity: sha512-XR9slArFCV3OK+aBc4ifxIWETqANuuJidn7bkmfGW/CnJVgha8Ahwj/7xQQUrGisN4bpXTDdXrRzf3x0lNi76Q==}
-
   '@wf-financing/embedded-types@1.1.0':
     resolution: {integrity: sha512-Y70SlSBaDuP7doFb5kJISWGeUCY6eLT5YGV/5Ar8jfADbqXVg2Qzno3Nf+Or8kVyOdGDCD/hhpf711EeNCnmBQ==}
 
   '@wf-financing/logger@2.1.0':
     resolution: {integrity: sha512-cNKw8NsBXMU/ZoqeKW50bQE98U6Nb9TfMs2yXFypQhlTn7m8VzivYeAjdw5aQdCUYAxIKnQ0KmXqM48GpDEZ9A==}
 
-  '@wf-financing/sandbox-ui@0.7.4':
-    resolution: {integrity: sha512-2d1TOQzuGx/jg1lbPRAPuUvqIiMqaeY8nvKKlfrOO6ArpSQuVYHNUrwMyHOS6MzRDlmXIvUs37PwG/dhD3y7GQ==}
+  '@wf-financing/sandbox-ui@0.7.10':
+    resolution: {integrity: sha512-+nPT/RgHDOJQvx2PYYfQ+NiDAQ4JjG1zFoDZWCBrmZS2rXlKrJwcSZXT+0iYIL6ekzv1YXKkhoX2yjI0MM4EHw==}
 
   '@wf-financing/ui-sdk@3.2.0':
     resolution: {integrity: sha512-EfthyzmmBRhIHgksalzyGU7XfTb7HaT0QBagq91FGfovfTdenNgRoB+HiomASIhNtPNx/bK5wUidKrMoX7R5jA==}
@@ -2172,15 +2169,13 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@wf-financing/embedded-types@0.6.0': {}
-
   '@wf-financing/embedded-types@1.1.0': {}
 
   '@wf-financing/logger@2.1.0':
     dependencies:
       '@wf-financing/embedded-types': 1.1.0
 
-  '@wf-financing/sandbox-ui@0.7.4(@types/react@19.2.5)(dayjs@1.11.18)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)':
+  '@wf-financing/sandbox-ui@0.7.10(@types/react@19.2.5)(dayjs@1.11.18)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)':
     dependencies:
       '@mantine/core': 8.3.8(@mantine/hooks@8.3.8(react@19.2.0))(@types/react@19.2.5)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       '@mantine/dates': 8.3.8(@mantine/core@8.3.8(@mantine/hooks@8.3.8(react@19.2.0))(@types/react@19.2.5)(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(@mantine/hooks@8.3.8(react@19.2.0))(dayjs@1.11.18)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
@@ -2188,7 +2183,7 @@ snapshots:
       '@mantine/hooks': 8.3.8(react@19.2.0)
       '@mantine/modals': 8.3.8(@mantine/core@8.3.8(@mantine/hooks@8.3.8(react@19.2.0))(@types/react@19.2.5)(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(@mantine/hooks@8.3.8(react@19.2.0))(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       '@tanstack/react-query': 5.81.5(react@19.2.0)
-      '@wf-financing/embedded-types': 0.6.0
+      '@wf-financing/embedded-types': 1.1.0
     transitivePeerDependencies:
       - '@types/react'
       - dayjs
