@@ -30,6 +30,10 @@ You should now be able to access the app at http://localhost:5173
 
 This is a Vite application, and the dev mode can be quite slow. You can build and preview the app by running `pnpm build && pnpm preview`. Just make sure to run `pnpm build` again after making any changes.
 
+### With local `embedded-finance` service
+
+In the `.env.development` file, specify the address of the local embedded-finance service. Then run `pnpm dev`.
+
 ## UI SDK Usage Examples
 
 ### UI SDK Initialization
