@@ -20,6 +20,10 @@ export const ContentManager = () => {
   const isDataLoaded = partnerDesignId && requests.some(({ data }) => !!data);
   const isDataLoading = requests.some(({ isLoading }) => isLoading);
 
+  if (import.meta.env.DEV) {
+    window.WayflyerHostedCapitalBaseUrl = import.meta.env.VITE_SANDBOX_BASE_URL;
+  }
+
   return (
     <ThemeProvider theme={partnerDesignId}>
       {isDataLoaded

@@ -1,9 +1,8 @@
 import { useEffect, useCallback } from "react";
 import {
-  WayflyerUiSdk,
-  type PartnerCallbackType,
+  WayflyerHeadlessSdk,
   type SdkOptionsType,
-} from "@wf-financing/ui-sdk";
+} from "@wf-financing/headless-sdk";
 
 export const useEmbedCta = (
   targetId: string,
@@ -13,11 +12,10 @@ export const useEmbedCta = (
 
   const triggerCta = useCallback(async () => {
     if (companyToken) {
-      const partnerCallback: PartnerCallbackType = () => {}; // TODO add correct link
+      const sdk = await WayflyerHeadlessSdk.loadSdk(companyToken, options);
+      const cta = await sdk.getCta();
 
-      const sdk = await WayflyerUiSdk.loadSdk(companyToken, options);
-
-      sdk.mountCta(targetId, partnerCallback);
+      console.log(cta);
     }
   }, [companyToken, targetId]);
 
