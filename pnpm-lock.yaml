@@ -35,6 +35,9 @@ importers:
       '@tanstack/react-query-persist-client':
         specifier: ^5.90.2
         version: 5.90.12(@tanstack/react-query@5.81.5(react@19.2.0))(react@19.2.0)
+      '@wf-financing/headless-sdk':
+        specifier: 4.2.0
+        version: 4.2.0
       '@wf-financing/sandbox-ui':
         specifier: 0.7.10
         version: 0.7.10(@types/react@19.2.5)(dayjs@1.11.18)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
@@ -737,6 +740,9 @@ packages:
 
   '@wf-financing/embedded-types@1.1.0':
     resolution: {integrity: sha512-Y70SlSBaDuP7doFb5kJISWGeUCY6eLT5YGV/5Ar8jfADbqXVg2Qzno3Nf+Or8kVyOdGDCD/hhpf711EeNCnmBQ==}
+
+  '@wf-financing/headless-sdk@4.2.0':
+    resolution: {integrity: sha512-xuSiJptVlmcTi01YVSfCrK6x4OHemBphLmCAEyha9qTVwJUFtfi6rwsPBcQ+gdLTEQueSiIuq9oBuGeNSA/vuw==}
 
   '@wf-financing/logger@2.2.0':
     resolution: {integrity: sha512-gOHmXOQDJNcYLTslKNLqY3DBUW1GX2iNlEH1RlOIVussx+dnWeZmOVyEezar/ZgoKqFF2K+aTdKE4uWcNlf4wg==}
@@ -2170,6 +2176,11 @@ snapshots:
       - supports-color
 
   '@wf-financing/embedded-types@1.1.0': {}
+
+  '@wf-financing/headless-sdk@4.2.0':
+    dependencies:
+      '@wf-financing/embedded-types': 1.1.0
+      '@wf-financing/logger': 2.2.0
 
   '@wf-financing/logger@2.2.0':
     dependencies:
