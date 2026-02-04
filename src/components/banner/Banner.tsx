@@ -11,7 +11,7 @@ export const Banner = () => {
   const partnerToken = usePartnerToken();
   const companyToken = useCompanyToken();
   const targetId = useMemo(() => crypto.randomUUID(), []);
-  useEmbedCta(targetId, companyToken?.data);
+  useEmbedCta(companyToken?.data);
 
   const rerenderCta = async () => {
     companyToken.refetch();

@@ -22,6 +22,7 @@
     "@tanstack/react-query-persist-client": "^5.90.2",
     "@wf-financing/sandbox-ui": "0.7.10",
     "@wf-financing/ui-sdk": "3.4.2",
+    "@wf-financing/headless-sdk": "file:wf-financing-headless-sdk-4.3.2.tgz",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-icons": "^5.5.0",
