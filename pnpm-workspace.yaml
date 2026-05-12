@@ -1,0 +1,4 @@
+allowBuilds:
+  esbuild: false
+overrides:
+  form-data@4: ^4.0.4
