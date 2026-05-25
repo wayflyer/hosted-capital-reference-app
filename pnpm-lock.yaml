@@ -36,11 +36,11 @@ importers:
         specifier: ^5.90.2
         version: 5.90.12(@tanstack/react-query@5.81.5(react@19.2.0))(react@19.2.0)
       '@wf-financing/sandbox-ui':
-        specifier: 0.7.10
-        version: 0.7.10(@types/react@19.2.5)(dayjs@1.11.18)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+        specifier: 0.7.12
+        version: 0.7.12(@types/react@19.2.5)(dayjs@1.11.18)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       '@wf-financing/ui-sdk':
-        specifier: 3.4.3
-        version: 3.4.3
+        specifier: 5.0.1
+        version: 5.0.1
       react:
         specifier: ^19.1.0
         version: 19.2.0
@@ -500,72 +500,130 @@ packages:
 
   '@rollup/rollup-android-arm-eabi@4.53.2':
     resolution: {integrity: sha512-yDPzwsgiFO26RJA4nZo8I+xqzh7sJTZIWQOxn+/XOdPE31lAvLIYCKqjV+lNH/vxE2L2iH3plKxDCRK6i+CwhA==}
+    cpu: [arm]
+    os: [android]
 
   '@rollup/rollup-android-arm64@4.53.2':
     resolution: {integrity: sha512-k8FontTxIE7b0/OGKeSN5B6j25EuppBcWM33Z19JoVT7UTXFSo3D9CdU39wGTeb29NO3XxpMNauh09B+Ibw+9g==}
+    cpu: [arm64]
+    os: [android]
 
   '@rollup/rollup-darwin-arm64@4.53.2':
     resolution: {integrity: sha512-A6s4gJpomNBtJ2yioj8bflM2oogDwzUiMl2yNJ2v9E7++sHrSrsQ29fOfn5DM/iCzpWcebNYEdXpaK4tr2RhfQ==}
+    cpu: [arm64]
+    os: [darwin]
 
   '@rollup/rollup-darwin-x64@4.53.2':
     resolution: {integrity: sha512-e6XqVmXlHrBlG56obu9gDRPW3O3hLxpwHpLsBJvuI8qqnsrtSZ9ERoWUXtPOkY8c78WghyPHZdmPhHLWNdAGEw==}
+    cpu: [x64]
+    os: [darwin]
 
   '@rollup/rollup-freebsd-arm64@4.53.2':
     resolution: {integrity: sha512-v0E9lJW8VsrwPux5Qe5CwmH/CF/2mQs6xU1MF3nmUxmZUCHazCjLgYvToOk+YuuUqLQBio1qkkREhxhc656ViA==}
+    cpu: [arm64]
+    os: [freebsd]
 
   '@rollup/rollup-freebsd-x64@4.53.2':
     resolution: {integrity: sha512-ClAmAPx3ZCHtp6ysl4XEhWU69GUB1D+s7G9YjHGhIGCSrsg00nEGRRZHmINYxkdoJehde8VIsDC5t9C0gb6yqA==}
+    cpu: [x64]
+    os: [freebsd]
 
   '@rollup/rollup-linux-arm-gnueabihf@4.53.2':
     resolution: {integrity: sha512-EPlb95nUsz6Dd9Qy13fI5kUPXNSljaG9FiJ4YUGU1O/Q77i5DYFW5KR8g1OzTcdZUqQQ1KdDqsTohdFVwCwjqg==}
+    cpu: [arm]
+    os: [linux]
+    libc: [glibc]
 
   '@rollup/rollup-linux-arm-musleabihf@4.53.2':
     resolution: {integrity: sha512-BOmnVW+khAUX+YZvNfa0tGTEMVVEerOxN0pDk2E6N6DsEIa2Ctj48FOMfNDdrwinocKaC7YXUZ1pHlKpnkja/Q==}
+    cpu: [arm]
+    os: [linux]
+    libc: [musl]
 
   '@rollup/rollup-linux-arm64-gnu@4.53.2':
     resolution: {integrity: sha512-Xt2byDZ+6OVNuREgBXr4+CZDJtrVso5woFtpKdGPhpTPHcNG7D8YXeQzpNbFRxzTVqJf7kvPMCub/pcGUWgBjA==}
+    cpu: [arm64]
+    os: [linux]
+    libc: [glibc]
 
   '@rollup/rollup-linux-arm64-musl@4.53.2':
     resolution: {integrity: sha512-+LdZSldy/I9N8+klim/Y1HsKbJ3BbInHav5qE9Iy77dtHC/pibw1SR/fXlWyAk0ThnpRKoODwnAuSjqxFRDHUQ==}
+    cpu: [arm64]
+    os: [linux]
+    libc: [musl]
 
   '@rollup/rollup-linux-loong64-gnu@4.53.2':
     resolution: {integrity: sha512-8ms8sjmyc1jWJS6WdNSA23rEfdjWB30LH8Wqj0Cqvv7qSHnvw6kgMMXRdop6hkmGPlyYBdRPkjJnj3KCUHV/uQ==}
+    cpu: [loong64]
+    os: [linux]
+    libc: [glibc]
 
   '@rollup/rollup-linux-ppc64-gnu@4.53.2':
     resolution: {integrity: sha512-3HRQLUQbpBDMmzoxPJYd3W6vrVHOo2cVW8RUo87Xz0JPJcBLBr5kZ1pGcQAhdZgX9VV7NbGNipah1omKKe23/g==}
+    cpu: [ppc64]
+    os: [linux]
+    libc: [glibc]
 
   '@rollup/rollup-linux-riscv64-gnu@4.53.2':
     resolution: {integrity: sha512-fMjKi+ojnmIvhk34gZP94vjogXNNUKMEYs+EDaB/5TG/wUkoeua7p7VCHnE6T2Tx+iaghAqQX8teQzcvrYpaQA==}
+    cpu: [riscv64]
+    os: [linux]
+    libc: [glibc]
 
   '@rollup/rollup-linux-riscv64-musl@4.53.2':
     resolution: {integrity: sha512-XuGFGU+VwUUV5kLvoAdi0Wz5Xbh2SrjIxCtZj6Wq8MDp4bflb/+ThZsVxokM7n0pcbkEr2h5/pzqzDYI7cCgLQ==}
+    cpu: [riscv64]
+    os: [linux]
+    libc: [musl]
 
   '@rollup/rollup-linux-s390x-gnu@4.53.2':
     resolution: {integrity: sha512-w6yjZF0P+NGzWR3AXWX9zc0DNEGdtvykB03uhonSHMRa+oWA6novflo2WaJr6JZakG2ucsyb+rvhrKac6NIy+w==}
+    cpu: [s390x]
+    os: [linux]
+    libc: [glibc]
 
   '@rollup/rollup-linux-x64-gnu@4.53.2':
     resolution: {integrity: sha512-yo8d6tdfdeBArzC7T/PnHd7OypfI9cbuZzPnzLJIyKYFhAQ8SvlkKtKBMbXDxe1h03Rcr7u++nFS7tqXz87Gtw==}
+    cpu: [x64]
+    os: [linux]
+    libc: [glibc]
 
   '@rollup/rollup-linux-x64-gnu@4.9.5':
     resolution: {integrity: sha512-Dq1bqBdLaZ1Gb/l2e5/+o3B18+8TI9ANlA1SkejZqDgdU/jK/ThYaMPMJpVMMXy2uRHvGKbkz9vheVGdq3cJfA==}
+    cpu: [x64]
+    os: [linux]
+    libc: [glibc]
 
   '@rollup/rollup-linux-x64-musl@4.53.2':
     resolution: {integrity: sha512-ah59c1YkCxKExPP8O9PwOvs+XRLKwh/mV+3YdKqQ5AMQ0r4M4ZDuOrpWkUaqO7fzAHdINzV9tEVu8vNw48z0lA==}
+    cpu: [x64]
+    os: [linux]
+    libc: [musl]
 
   '@rollup/rollup-openharmony-arm64@4.53.2':
     resolution: {integrity: sha512-4VEd19Wmhr+Zy7hbUsFZ6YXEiP48hE//KPLCSVNY5RMGX2/7HZ+QkN55a3atM1C/BZCGIgqN+xrVgtdak2S9+A==}
+    cpu: [arm64]
+    os: [openharmony]
 
   '@rollup/rollup-win32-arm64-msvc@4.53.2':
     resolution: {integrity: sha512-IlbHFYc/pQCgew/d5fslcy1KEaYVCJ44G8pajugd8VoOEI8ODhtb/j8XMhLpwHCMB3yk2J07ctup10gpw2nyMA==}
+    cpu: [arm64]
+    os: [win32]
 
   '@rollup/rollup-win32-ia32-msvc@4.53.2':
     resolution: {integrity: sha512-lNlPEGgdUfSzdCWU176ku/dQRnA7W+Gp8d+cWv73jYrb8uT7HTVVxq62DUYxjbaByuf1Yk0RIIAbDzp+CnOTFg==}
+    cpu: [ia32]
+    os: [win32]
 
   '@rollup/rollup-win32-x64-gnu@4.53.2':
     resolution: {integrity: sha512-S6YojNVrHybQis2lYov1sd+uj7K0Q05NxHcGktuMMdIQ2VixGwAfbJ23NnlvvVV1bdpR2m5MsNBViHJKcA4ADw==}
+    cpu: [x64]
+    os: [win32]
 
   '@rollup/rollup-win32-x64-msvc@4.53.2':
     resolution: {integrity: sha512-k+/Rkcyx//P6fetPoLMb8pBeqJBNGx81uuf7iljX9++yNBVRDQgD04L+SVXmXmh5ZP4/WOp4mWF0kmi06PW2tA==}
+    cpu: [x64]
+    os: [win32]
 
   '@tabler/icons-react@3.35.0':
     resolution: {integrity: sha512-XG7t2DYf3DyHT5jxFNp5xyLVbL4hMJYJhiSdHADzAjLRYfL7AnjlRfiHDHeXxkb2N103rEIvTsBRazxXtAUz2g==}
@@ -689,20 +747,20 @@ packages:
     peerDependencies:
       vite: ^4.2.0 || ^5.0.0 || ^6.0.0 || ^7.0.0
 
-  '@wf-financing/embedded-types@1.1.0':
-    resolution: {integrity: sha512-Y70SlSBaDuP7doFb5kJISWGeUCY6eLT5YGV/5Ar8jfADbqXVg2Qzno3Nf+Or8kVyOdGDCD/hhpf711EeNCnmBQ==}
-
   '@wf-financing/embedded-types@1.1.1':
     resolution: {integrity: sha512-ZCu9z/Gj0LmXaMVfL9JLxmzgDW7ig+5Q6SQq9slTwh2uD9C7bNL+rZjAX0wa5L1KmLDtgZxKM0oiV7gb7HvTEQ==}
 
-  '@wf-financing/logger@2.2.2':
-    resolution: {integrity: sha512-Mvy5utnKmCZP0nlawalk5Rkv3he7jkdY+ihKhr7DVXHoVdWDH40en5dfo7PE3ndaVi7TrxIKMPlY/Uzy5BTctQ==}
+  '@wf-financing/embedded-types@1.1.2':
+    resolution: {integrity: sha512-WocW/medg1YBKN29DG9S5i4tdjJcCxB7Bufp3vebkhnS3Y2rwDHUsQwboKKHRT5ocNOQTcMaWqV2pYYeW+ATsg==}
 
-  '@wf-financing/sandbox-ui@0.7.10':
-    resolution: {integrity: sha512-+nPT/RgHDOJQvx2PYYfQ+NiDAQ4JjG1zFoDZWCBrmZS2rXlKrJwcSZXT+0iYIL6ekzv1YXKkhoX2yjI0MM4EHw==}
+  '@wf-financing/logger@2.2.4':
+    resolution: {integrity: sha512-iqn7YKn9OkVgpG9E28vm+vh7ULBUUYDx6GvqoctHlZQl9KlaVWUiMwn8Zk7HmvrkkixwEymSssOcumQjnvIXLw==}
 
-  '@wf-financing/ui-sdk@3.4.3':
-    resolution: {integrity: sha512-Lu7r19FWV3bRsBR9QEOZPHBlz0+hgKuazNCiLzoxGklwMpw0PN7Q2hOH0rLO3OgMLQqWHhJ3Bi+wcWl5RkXH2g==}
+  '@wf-financing/sandbox-ui@0.7.12':
+    resolution: {integrity: sha512-31uANQLKC+jWQbhMeG0yxeeRKDpbz+tXu21xleHS+JODC6K/Su630qiKVVkD0Wj4k82gnNZemTLgFEHj0JbcAg==}
+
+  '@wf-financing/ui-sdk@5.0.1':
+    resolution: {integrity: sha512-iE7jimGMxIN3pNQt8keIKRIlhJys6xtlmaTMEZWgNPa912+gT+XLGN9C9mS+NZ5lGk3Wy334rKPfsJxoN+4liA==}
 
   acorn-jsx@5.3.2:
     resolution: {integrity: sha512-rq9s+JNhf0IChjtDXxllJ7g41oZk5SlXtp0LHwyA5cejwn7vKmKp4pPri6YEePv2PU65sAsegbXtIinmDFDXgQ==}
@@ -983,6 +1041,7 @@ packages:
   fsevents@2.3.3:
     resolution: {integrity: sha512-5xoDfX+fL7faATnagmWPpbFtwh/R77WmMMqqHGS65C3vvB0YHrgF+B1YmZ3441tMj5n63k0212XNoJwzlhffQw==}
     engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
+    os: [darwin]
 
   function-bind@1.1.2:
     resolution: {integrity: sha512-7XHNxH7qX9xG5mIwxkhumTox/MIRNcOgDrxWsMt2pAr23WHp6MrRlN7FBSFpCpr+oVO0F744iUgR82nJMfG2SA==}
@@ -2125,15 +2184,15 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@wf-financing/embedded-types@1.1.0': {}
-
   '@wf-financing/embedded-types@1.1.1': {}
 
-  '@wf-financing/logger@2.2.2':
+  '@wf-financing/embedded-types@1.1.2': {}
+
+  '@wf-financing/logger@2.2.4':
     dependencies:
       '@wf-financing/embedded-types': 1.1.1
 
-  '@wf-financing/sandbox-ui@0.7.10(@types/react@19.2.5)(dayjs@1.11.18)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)':
+  '@wf-financing/sandbox-ui@0.7.12(@types/react@19.2.5)(dayjs@1.11.18)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)':
     dependencies:
       '@mantine/core': 8.3.8(@mantine/hooks@8.3.8(react@19.2.0))(@types/react@19.2.5)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       '@mantine/dates': 8.3.8(@mantine/core@8.3.8(@mantine/hooks@8.3.8(react@19.2.0))(@types/react@19.2.5)(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(@mantine/hooks@8.3.8(react@19.2.0))(dayjs@1.11.18)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
@@ -2141,17 +2200,17 @@ snapshots:
       '@mantine/hooks': 8.3.8(react@19.2.0)
       '@mantine/modals': 8.3.8(@mantine/core@8.3.8(@mantine/hooks@8.3.8(react@19.2.0))(@types/react@19.2.5)(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(@mantine/hooks@8.3.8(react@19.2.0))(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       '@tanstack/react-query': 5.81.5(react@19.2.0)
-      '@wf-financing/embedded-types': 1.1.0
+      '@wf-financing/embedded-types': 1.1.2
     transitivePeerDependencies:
       - '@types/react'
       - dayjs
       - react
       - react-dom
 
-  '@wf-financing/ui-sdk@3.4.3':
+  '@wf-financing/ui-sdk@5.0.1':
     dependencies:
-      '@wf-financing/embedded-types': 1.1.1
-      '@wf-financing/logger': 2.2.2
+      '@wf-financing/embedded-types': 1.1.2
+      '@wf-financing/logger': 2.2.4
 
   acorn-jsx@5.3.2(acorn@8.15.0):
     dependencies:
