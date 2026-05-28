@@ -2,3 +2,7 @@ allowBuilds:
   esbuild: false
 overrides:
   form-data@4: ^4.0.4
+# TODO: Remove temporary per-repo registry config for the Cloudsmith migration.
+minimumReleaseAge: 0
+registries:
+  default: "https://npm.wayflyer.net/wayflyer/"
