@@ -39,8 +39,8 @@ importers:
         specifier: 0.7.10
         version: 0.7.10(@types/react@19.2.5)(dayjs@1.11.18)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       '@wf-financing/ui-sdk':
-        specifier: 3.4.3
-        version: 3.4.3
+        specifier: 5.0.2
+        version: 5.0.2
       react:
         specifier: ^19.1.0
         version: 19.2.0
@@ -750,17 +750,17 @@ packages:
   '@wf-financing/embedded-types@1.1.0':
     resolution: {integrity: sha512-Y70SlSBaDuP7doFb5kJISWGeUCY6eLT5YGV/5Ar8jfADbqXVg2Qzno3Nf+Or8kVyOdGDCD/hhpf711EeNCnmBQ==}
 
-  '@wf-financing/embedded-types@1.1.1':
-    resolution: {integrity: sha512-ZCu9z/Gj0LmXaMVfL9JLxmzgDW7ig+5Q6SQq9slTwh2uD9C7bNL+rZjAX0wa5L1KmLDtgZxKM0oiV7gb7HvTEQ==}
+  '@wf-financing/embedded-types@1.2.0':
+    resolution: {integrity: sha512-nMB/LoRs/4gmF4pDvmf2W/OSWDSmwMOAhS3+lJC6Yf7mG2vKh3iyXIYrT5J5MlQIRKVB3YX2cW7BoyZWJVj76w==}
 
-  '@wf-financing/logger@2.2.2':
-    resolution: {integrity: sha512-Mvy5utnKmCZP0nlawalk5Rkv3he7jkdY+ihKhr7DVXHoVdWDH40en5dfo7PE3ndaVi7TrxIKMPlY/Uzy5BTctQ==}
+  '@wf-financing/logger@2.2.5':
+    resolution: {integrity: sha512-qtKoZNoxI9o9Hh19ZbY7UwST1FLPlRifvfcY8YruN9j49eld/tyY3Owe4fTEqQe0FXoKKd9S9u3ZbhT3kp0Pcw==}
 
   '@wf-financing/sandbox-ui@0.7.10':
     resolution: {integrity: sha512-+nPT/RgHDOJQvx2PYYfQ+NiDAQ4JjG1zFoDZWCBrmZS2rXlKrJwcSZXT+0iYIL6ekzv1YXKkhoX2yjI0MM4EHw==}
 
-  '@wf-financing/ui-sdk@3.4.3':
-    resolution: {integrity: sha512-Lu7r19FWV3bRsBR9QEOZPHBlz0+hgKuazNCiLzoxGklwMpw0PN7Q2hOH0rLO3OgMLQqWHhJ3Bi+wcWl5RkXH2g==}
+  '@wf-financing/ui-sdk@5.0.2':
+    resolution: {integrity: sha512-LJAnqKwGCyADy3tH3wpHsodfSB+3hYBhPm3DSz10ZKVVRS3+sPTfWMGW/DxDXKCBhAs6hrHUxPXIb5OOpYJ29g==}
 
   acorn-jsx@5.3.2:
     resolution: {integrity: sha512-rq9s+JNhf0IChjtDXxllJ7g41oZk5SlXtp0LHwyA5cejwn7vKmKp4pPri6YEePv2PU65sAsegbXtIinmDFDXgQ==}
@@ -958,6 +958,7 @@ packages:
   eslint@9.39.1:
     resolution: {integrity: sha512-BhHmn2yNOFA9H9JmmIVKJmd288g9hrVRDkdoIgRCRuSySRUHH7r/DI6aAXW9T1WwUuY3DFgrcaqB+deURBLR5g==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+    deprecated: This version is no longer supported. Please see https://eslint.org/version-support for other options.
     hasBin: true
     peerDependencies:
       jiti: '*'
@@ -2195,11 +2196,11 @@ snapshots:
 
   '@wf-financing/embedded-types@1.1.0': {}
 
-  '@wf-financing/embedded-types@1.1.1': {}
+  '@wf-financing/embedded-types@1.2.0': {}
 
-  '@wf-financing/logger@2.2.2':
+  '@wf-financing/logger@2.2.5':
     dependencies:
-      '@wf-financing/embedded-types': 1.1.1
+      '@wf-financing/embedded-types': 1.2.0
 
   '@wf-financing/sandbox-ui@0.7.10(@types/react@19.2.5)(dayjs@1.11.18)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)':
     dependencies:
@@ -2216,10 +2217,10 @@ snapshots:
       - react
       - react-dom
 
-  '@wf-financing/ui-sdk@3.4.3':
+  '@wf-financing/ui-sdk@5.0.2':
     dependencies:
-      '@wf-financing/embedded-types': 1.1.1
-      '@wf-financing/logger': 2.2.2
+      '@wf-financing/embedded-types': 1.2.0
+      '@wf-financing/logger': 2.2.5
 
   acorn-jsx@5.3.2(acorn@8.15.0):
     dependencies:
